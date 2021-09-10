@@ -17,5 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         System.out.printf("tan");
     }
-    
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("ódjfsdojfsdf");
+    }
 }
