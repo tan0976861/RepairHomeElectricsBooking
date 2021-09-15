@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/abc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -15,92 +15,356 @@
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/test"
             app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"/>
+            app:civ_border_color="#EDECEC"/>
 
         <TextView
+            android:id="@+id/txtXinchao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="8dp"
-            android:text="Chào Liêm"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Xin chào ,"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/txtXinchao"
+            android:text="Liêm"/>
 
 
-    </LinearLayout>
+    </RelativeLayout>
+
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/abc"
+        android:layout_width="320dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_layout_search"
         android:drawableStart="@android:drawable/ic_menu_search"
         android:hint="Search" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="20dp"
-        android:text="Lịch sử tìm kiếm"/>
-    <com.wefika.flowlayout.FlowLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:paddingTop="10dp"
-            android:textColor="#FF5722"
-            android:background="@drawable/custom_layout_item"
-            android:paddingBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Quan 8"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:paddingTop="10dp"
-            android:textColor="#FF5722"
-            android:background="@drawable/custom_layout_item"
-            android:paddingBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Quan 6"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:paddingTop="10dp"
-            android:textColor="#FF5722"
-            android:background="@drawable/custom_layout_item"
-            android:paddingBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Quan 4"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:paddingTop="10dp"
-            android:textColor="#FF5722"
-            android:background="@drawable/custom_layout_item"
-            android:paddingBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Quan 3"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtHistorySearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="20dp"
+                    android:text="Lịch sử tìm kiếm"/>
+
+                <com.wefika.flowlayout.FlowLayout
+                    android:id="@+id/historySearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtHistorySearch">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/custom_layout_item"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="Quan 8"
+                        android:textColor="#FF5722" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/custom_layout_item"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="Quan 6"
+                        android:textColor="#FF5722" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/custom_layout_item"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="Quan 4"
+                        android:textColor="#FF5722" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/custom_layout_item"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="Quan 3"
+                        android:textColor="#FF5722" />
+
+                </com.wefika.flowlayout.FlowLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/historySearch"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:text="Được đánh giá cao"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/historySearch">
+
+                        <ImageView
+                            android:id="@+id/imgWoker1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            tools:srcCompat="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/txtWoker1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker1"
+                            android:text="Cửa hàng A"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:layout_width="167dp"
+                            android:layout_height="46dp"
+                            android:layout_below="@+id/txtWoker1"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker1"
+                            android:text="Cửa hàng Bbbbbbbbbbbbbbbbbbb" />
+
+
+                        <Button
+                            android:id="@+id/btnBooking1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/custom_layout_button"
+                            android:text="Thuê" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/historySearch">
+
+                        <ImageView
+                            android:id="@+id/imgWoker2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            tools:srcCompat="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/txtWoker2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker2"
+                            android:text="Cửa hàng A"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:layout_width="167dp"
+                            android:layout_height="46dp"
+                            android:layout_below="@+id/txtWoker2"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker2"
+                            android:text="Cửa hàng Bbbbbbbbbbbbbbbbbbb" />
+
+
+                        <Button
+                            android:id="@+id/btnBooking2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/custom_layout_button"
+                            android:text="Thuê" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/historySearch">
+
+                        <ImageView
+                            android:id="@+id/imgWoker3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            tools:srcCompat="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/txtWoker3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker3"
+                            android:text="Cửa hàng A"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:layout_width="167dp"
+                            android:layout_height="46dp"
+                            android:layout_below="@+id/txtWoker3"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker3"
+                            android:text="Cửa hàng Bbbbbbbbbbbbbbbbbbb" />
+
+
+                        <Button
+                            android:id="@+id/btnBooking3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/custom_layout_button"
+                            android:text="Thuê" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/historySearch">
+
+                        <ImageView
+                            android:id="@+id/imgWoker4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            tools:srcCompat="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/txtWoker4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker4"
+                            android:text="Cửa hàng A"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:layout_width="167dp"
+                            android:layout_height="46dp"
+                            android:layout_below="@+id/txtWoker4"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/imgWoker4"
+                            android:text="Cửa hàng Bbbbbbbbbbbbbbbbbbb" />
+
+
+                        <Button
+                            android:id="@+id/btnBooking4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/custom_layout_button"
+                            android:text="Thuê" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+        <LinearLayout
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#EDECEC"
+            android:layout_alignParentBottom="true"
+            android:weightSum="4"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#EDECEC"
+                app:srcCompat="@drawable/home" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#EDECEC"
+                app:srcCompat="@drawable/history" />
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#EDECEC"
+                app:srcCompat="@drawable/notification" />
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="#EDECEC"
+                app:srcCompat="@drawable/info" />
+        </LinearLayout>
+    </RelativeLayout>
 
 
 
-    </com.wefika.flowlayout.FlowLayout>
 
 </LinearLayout>
