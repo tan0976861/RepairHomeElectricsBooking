@@ -4,12 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_avatar_worker.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_button.xml" value="0.26666666666666666" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_header.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_item.xml" value="0.14375" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_search.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/scroll.xml" value="0.2703125" />
-        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
   </component>
@@ -22,7 +24,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.2" />
+        <option name="scale" value="0.264" />
       </ProjectState>
     </option>
   </component>
