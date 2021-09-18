@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_button.xml" value="0.22870370370370371" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_profile.xml" value="0.22870370370370371" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_search.xml" value="0.22870370370370371" />
         <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_avatar_worker.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_button.xml" value="0.26666666666666666" />
