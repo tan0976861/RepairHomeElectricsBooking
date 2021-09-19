@@ -4,73 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Profile">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="15dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/grad">
 
-        <TextView
-            android:id="@+id/viewUsername"
-            android:layout_width="196dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="30dp"
-            android:gravity="top"
-            android:text="Người dùng 1"
-            android:textSize="22dp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/viewPhone"
-            android:layout_width="151dp"
-            android:layout_height="25.21dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="130dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="60dp"
-            android:text="0946746576"
-            android:gravity="top" />
-        <TextView
-            android:id="@+id/viewEmail"
-            android:layout_width="151dp"
-            android:layout_height="25.21dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="130dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="90dp"
-            android:text="abc@gmail.com"
-            android:gravity="top" />
 
-        <ImageView
-            android:id="@+id/iconUpdate"
+        <RelativeLayout
+            android:id="@+id/imgUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/update"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="340dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="30dp" />
+            android:layout_centerHorizontal="true">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imgAvatar"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/avatar"
-            app:civ_border_color="#11C7E6"
-            app:civ_border_width="2dp"
-            android:layout_marginTop="28dp" />
-
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/avatar"
+                app:civ_border_color="#11C7E6"
+                app:civ_border_width="2dp"
+                />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgUser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-light"
+            android:text="Người dùng 1"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -91,7 +68,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="180dp"
+                        android:layout_marginTop="150dp"
                         android:gravity="top"
                         android:background="@drawable/custom_layout_profile"
                         android:paddingBottom="15dp"
@@ -105,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/direction"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="200dp"
+                        android:layout_marginTop="170dp"
                         android:layout_marginStart="300dp"/>
                 </RelativeLayout>
 
@@ -196,8 +173,6 @@
             </LinearLayout>
 
         </ScrollView>
-    </RelativeLayout>
-
 
     <LinearLayout
         android:id="@+id/scroll"
@@ -244,4 +219,20 @@
             android:background="#FFFFFF"
             app:srcCompat="@drawable/info" />
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Chỉnh sửa"
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="170dp"
+             android:textColor="#FF0000"
+             android:textSize="20dp"
+             android:textStyle="bold"
+             android:onClick="clickToUpdateProfile"/>
+    </RelativeLayout>
+</RelativeLayout>
 </RelativeLayout>
