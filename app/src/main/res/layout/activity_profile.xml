@@ -17,15 +17,14 @@
         <RelativeLayout
             android:id="@+id/imgUser"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
+            android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAvatar"
-                android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/avatar"
                 app:civ_border_color="#11C7E6"
                 app:civ_border_width="2dp"
@@ -33,15 +32,37 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgUser"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15sp"
+            android:layout_marginTop="40sp"
+            android:gravity="center"
+            android:layout_marginStart="30dp"
             android:fontFamily="sans-serif-light"
-            android:text="Người dùng 1"
+            android:text="Trần Nhật Tân"
             android:textColor="@color/white"
-            android:textSize="32sp" />
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:paddingBottom="100dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="85dp"
+                android:onClick="clickToUpdateProfile"
+                android:text="Chỉnh sửa tài khoản"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/direction"
+                android:layout_marginTop="88dp"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -67,22 +88,25 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="150dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="120dp"
+                        android:layout_marginEnd="20dp"
                         android:gravity="top"
-                        android:background="@drawable/custom_layout_profile"
+                        android:background="@drawable/custom_layout_listitem"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
                         android:paddingLeft="15dp"
                         android:textSize="20dp"
-                        android:text="Danh sách đơn hàng"/>
+                        android:text="Danh sách đơn hàng"
+                        android:fontFamily="sans-serif-light"
+                        />
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/direction"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="170dp"
+                        android:layout_marginTop="140dp"
                         android:layout_marginStart="300dp"/>
                 </RelativeLayout>
 
@@ -95,43 +119,17 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="30dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="20dp"
                         android:gravity="top"
-                        android:background="@drawable/custom_layout_profile"
+                        android:background="@drawable/custom_layout_listitem"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
                         android:paddingLeft="15dp"
                         android:textSize="20dp"
-                        android:text="Hỗ trợ khách hàng"/>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/direction"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="37dp"
-                        android:layout_marginStart="300dp"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="20dp"
-                        android:gravity="top"
-                        android:background="@drawable/custom_layout_profile"
-                        android:paddingBottom="15dp"
-                        android:paddingTop="15dp"
-                        android:paddingLeft="15dp"
-                        android:textSize="20dp"
-                        android:text="Thông tin người dùng"/>
+                        android:text="Hỗ trợ khách hàng"
+                        android:fontFamily="sans-serif-light"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -151,15 +149,47 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="30dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
                         android:gravity="top"
-                        android:background="@drawable/custom_layout_profile"
+                        android:background="@drawable/custom_layout_listitem"
                         android:paddingBottom="15dp"
                         android:paddingTop="15dp"
                         android:paddingLeft="15dp"
                         android:textSize="20dp"
-                        android:text="Thông báo"/>
+                        android:text="Thông tin người dùng"
+                        android:fontFamily="sans-serif-light"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/direction"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="37dp"
+                        android:layout_marginStart="300dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="top"
+                        android:background="@drawable/custom_layout_listitem"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingLeft="15dp"
+                        android:textSize="20dp"
+                        android:text="Thông báo"
+                        android:fontFamily="sans-serif-light"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -221,18 +251,12 @@
     </LinearLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Chỉnh sửa"
-             android:layout_marginTop="10dp"
-             android:layout_marginLeft="170dp"
-             android:textColor="#FF0000"
-             android:textSize="20dp"
-             android:textStyle="bold"
-             android:onClick="clickToUpdateProfile"/>
+
+
+
     </RelativeLayout>
 </RelativeLayout>
 </RelativeLayout>
