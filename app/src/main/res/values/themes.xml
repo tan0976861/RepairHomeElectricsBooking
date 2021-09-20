@@ -21,5 +21,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="colorControlNormal">#000000</item>
+        <item name="colorControlActivated">#28c99e</item>
+        <item name="colorControlHighlight">#d94ed0</item>
     </style>
 </resources>
