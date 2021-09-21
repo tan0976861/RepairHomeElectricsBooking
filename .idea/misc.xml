@@ -12,6 +12,8 @@
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_search.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/scroll.xml" value="0.2703125" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_dang_ky.xml" value="0.1" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_login.xml" value="0.25735294117647056" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
@@ -25,7 +27,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.264" />
+        <option name="scale" value="0.25735294117647056" />
       </ProjectState>
     </option>
   </component>
