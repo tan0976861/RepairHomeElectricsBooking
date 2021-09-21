@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="#0D11c7e6"
     tools:context=".Profile">
 
 
@@ -189,7 +189,8 @@
                         android:paddingLeft="15dp"
                         android:textSize="20dp"
                         android:text="Thông báo"
-                        android:fontFamily="sans-serif-light"/>
+                        android:fontFamily="sans-serif-light"
+                        />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -213,6 +214,7 @@
         android:weightSum="4"
         android:orientation="horizontal">
 
+
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="0dp"
@@ -221,7 +223,7 @@
             android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
-            app:srcCompat="@drawable/home" />
+            app:srcCompat="@drawable/homepage" />
 
         <ImageButton
             android:id="@+id/imageButton2"
@@ -253,9 +255,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
-
-
-
 
     </RelativeLayout>
 </RelativeLayout>
