@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricsBooking">
         <activity
+            android:name=".ProfileUpdateActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true" />
         <activity
@@ -23,9 +29,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
