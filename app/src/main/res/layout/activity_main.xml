@@ -429,7 +429,8 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:background="#FFFFFF"
-                app:srcCompat="@drawable/info" />
+                app:srcCompat="@drawable/info"
+                android:onClick="clickToViewInformation"/>
         </LinearLayout>
     </RelativeLayout>
 

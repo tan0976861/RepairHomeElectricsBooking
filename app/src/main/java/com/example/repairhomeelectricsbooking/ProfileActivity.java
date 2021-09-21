@@ -6,22 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        System.out.printf("tan");
-    }
-
-    public void clickToViewInformation(View view){
-        Intent intent= new Intent(this, ProfileActivity.class);
+    public void clickToUpdateProfile(View view){
+        Intent intent= new Intent(this, ProfileUpdateActivity.class);
         startActivity(intent);
     }
 }
