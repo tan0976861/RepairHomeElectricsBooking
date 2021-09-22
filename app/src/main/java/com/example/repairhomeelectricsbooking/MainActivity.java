@@ -15,12 +15,14 @@ import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
+    AHBottomNavigation bottomNavigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+        viewPager = findViewById(R.id.viewPager);
+        bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+        setUpViewPaper();
 
 // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab1, R.drawable.home, R.color.bluesky);
@@ -51,14 +53,16 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTabSelected(int position, boolean wasSelected) {
                 switch (position){
                     case 0:
+                        viewPager.setCurrentItem(0);
                         break;
                     case 1:
+                        viewPager.setCurrentItem(1);
                         break;
                     case 2:
+                        viewPager.setCurrentItem(2);
                         break;
                     case 3:
-                        Intent intent = new Intent(getApplicationContext(),ProfileUpdateActivity.class);
-                        startActivity(intent);
+                        viewPager.setCurrentItem(3);
                         break;
                 }
                 return true;
@@ -69,6 +73,26 @@ public class MainActivity extends AppCompatActivity {
     public void setUpViewPaper(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
+
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                switch (position){
+//                    case 0:
+//                        bottomNavigation.
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
     }
 
 }
