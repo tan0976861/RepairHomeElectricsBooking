@@ -14,7 +14,7 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         app:srcCompat="@drawable/logo"
-        android:layout_marginStart="130dp"
+        android:layout_centerHorizontal="true"
         />
 
 
@@ -39,7 +39,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/login_border"
-                android:drawableLeft="@drawable/info"
+                android:drawableLeft="@drawable/account"
                 android:drawablePadding="16dp"
                 android:hint="Tên đăng nhập"
                 android:padding="16dp" />
@@ -52,8 +52,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/login_border"
-                android:drawableStart="@drawable/icon_login"
+                android:drawableStart="@drawable/lock"
                 android:drawablePadding="16dp"
+                android:inputType="textPassword"
                 android:hint="Mật khẩu"
                 android:padding="16dp" />
 

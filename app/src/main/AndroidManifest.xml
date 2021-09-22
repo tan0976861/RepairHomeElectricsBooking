@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricsBooking">
         <activity
+            android:name=".OnboardingActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ProfileUpdateActivity"
             android:exported="true" />
         <activity
@@ -21,11 +30,6 @@
         <activity
             android:name=".DangKyActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

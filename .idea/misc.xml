@@ -5,21 +5,35 @@
       <map>
         <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/bg_circle_bluesky.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_avatar_worker.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_button.xml" value="0.26666666666666666" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_header.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_item.xml" value="0.14375" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_mainuser.xml" value="0.2703125" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_register.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_search.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/login_border.xml" value="0.19739583333333333" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/login_btnregister.xml" value="0.19739583333333333" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/register_bg.xml" value="0.19739583333333333" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/register_bg1.xml" value="0.19739583333333333" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/register_border.xml" value="0.19739583333333333" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/scroll.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_dang_ky.xml" value="0.1" />
-        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_login.xml" value="0.25735294117647056" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_onboarding.xml" value="0.264" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_profile_update.xml" value="0.1" />
-        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_main_user.xml" value="0.13020833333333334" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_main_user.xml" value="0.18596491228070175" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding1.xml" value="0.2" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding2.xml" value="0.2" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding3.xml" value="0.10300429184549356" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding4.xml" value="0.152" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_profile.xml" value="0.11614583333333334" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_profile_update.xml" value="0.1" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
       </map>
     </option>
   </component>
@@ -32,7 +46,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.176" />
+        <option name="scale" value="0.2" />
       </ProjectState>
     </option>
   </component>
