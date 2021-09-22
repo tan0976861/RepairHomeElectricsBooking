@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DangKyActivity"
-    android:background="#0D11c7e6">
+    android:background="#3311c7e6">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         android:layout_marginTop="65dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
@@ -57,7 +57,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/register_border"
-                android:hint="Nhập lại mật khẩu" />
+                android:hint="Nhập lại mật khẩu"
+                android:inputType="textPassword" />
             <Button
                 android:id="@+id/btnsignup"
                 android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="Đăng Ký"
-                android:textColor="#888888"/>
+                android:textColor="#000000"/>
 
         </LinearLayout>
 
