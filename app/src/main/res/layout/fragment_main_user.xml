@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9911C7E6"
     tools:context=".MainUserFragment">
 
 
@@ -11,495 +10,521 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/bluesky">
 
-            <EditText
-                android:id="@+id/search"
+
+            <Button
+                android:id="@+id/btnSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
                 android:background="@drawable/custom_layout_search"
                 android:drawableStart="@android:drawable/ic_menu_search"
-                android:hint="Bạn muốn tìm gì?"
-                />
+                android:hint="Bạn muốn tìm gì ?"
+                android:gravity="center|left"
+                android:textSize="18dp"
+                android:drawablePadding="10dp"
+                android:padding="10dp"/>
 
             <LinearLayout
+                android:id="@+id/layout_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/search"
-                android:weightSum="4"
+                android:layout_below="@+id/btnSearch"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/custom_layout_mainuser"
-                android:layout_margin="20dp">
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:weightSum="4">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/facebook">
-                    </ImageButton>
+                        android:background="@drawable/facebook" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Máy lạnh">
-                    </TextView>
+                        android:layout_width="74dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Máy lạnh" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginHorizontal="@dimen/bottom_navigation_padding_left">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/facebook">
-                    </ImageButton>
+                        android:background="@drawable/facebook" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quạt">
-                    </TextView>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Quạt" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginHorizontal="@dimen/bottom_navigation_padding_left">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/facebook">
-                    </ImageButton>
+                        android:background="@drawable/facebook" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quạt">
-                    </TextView>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Quạt" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginHorizontal="@dimen/bottom_navigation_padding_left">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/facebook">
-                    </ImageButton>
+                        android:background="@drawable/facebook" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Đèn">
-                    </TextView>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Đèn" />
                 </LinearLayout>
 
             </LinearLayout>
-        </RelativeLayout>
 
-    </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/custom_layout_mainuser">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_1"
+                android:background="@drawable/custom_layout_mainuser">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/layout_xemthem"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/txtHistorySearch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:padding="10dp"
-                        android:text="Lịch sử tìm kiếm"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:textColor="#E6000000"/>
+                        android:layout_marginStart="10dp"
+                        android:text="Xem thêm"
+                        android:textColor="#CC000000"
+                        android:textSize="25dp" />
 
-                    <com.wefika.flowlayout.FlowLayout
-                        android:id="@+id/historySearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtHistorySearch"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/custom_layout_item"
-                            android:paddingStart="30dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="30dp"
-                            android:paddingBottom="10dp"
-                            android:text="Quan 8"
-                            android:textColor="#000000" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/custom_layout_item"
-                            android:paddingStart="30dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="30dp"
-                            android:paddingBottom="10dp"
-                            android:text="Quan 6"
-                            android:textColor="#000000" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/custom_layout_item"
-                            android:paddingStart="30dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="30dp"
-                            android:paddingBottom="10dp"
-                            android:text="Quan 4"
-                            android:textColor="#000000" />
-
-                    </com.wefika.flowlayout.FlowLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/historySearch"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="Xem thêm"
-                            android:textSize="25dp"
-                            android:textColor="#CC000000"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp">
-
-                            <ImageView
-                                android:id="@+id/imgWoker1"
-                                android:layout_width="95dp"
-                                android:layout_height="95dp"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/avatar" />
-
-                            <TextView
-                                android:id="@+id/txtWoker1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker1"
-                                android:text="Nhân viên A"
-                                android:textColor="#D9000000"
-                                android:textSize="18dp" />
-
-                            <TextView
-                                android:id="@+id/diachi"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/txtWoker1"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker1"
-                                android:text="Địa chỉ" />
-                            <TextView
-                                android:id="@+id/phanloai"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/diachi"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker1"
-                                android:text="Sửa máy lạnh" />
-                            <TextView
-                                android:layout_width="167dp"
-                                android:layout_height="22dp"
-                                android:layout_above="@+id/phanloai"
-
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker1"
-                                android:text="~100,000VNĐ" />
-
-
-                            <ImageView
-                                android:id="@+id/imageStar1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="42dp"
-                                android:src="@drawable/star" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/imageStar1"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="35dp"
-                                android:text="5.0"
-                                android:textColor="#11C7E6"
-                                android:textSize="30dp" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp">
-
-
-                            <ImageView
-                                android:id="@+id/imgWoker2"
-                                android:layout_width="95dp"
-                                android:layout_height="95dp"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/avatar" />
-
-                            <TextView
-                                android:id="@+id/txtWoker2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker2"
-                                android:text="Nhân viên B"
-                                android:textColor="#D9000000"
-                                android:textSize="18dp" />
-
-                            <TextView
-                                android:id="@+id/diachi1"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/txtWoker2"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker2"
-                                android:text="Địa chỉ" />
-                            <TextView
-                                android:id="@+id/phanloai1"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/diachi1"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker2"
-                                android:text="Sửa máy lạnh" />
-                            <TextView
-                                android:layout_width="167dp"
-                                android:layout_height="22dp"
-                                android:layout_above="@+id/phanloai1"
-
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker2"
-                                android:text="~100,000VNĐ" />
-
-
-                            <ImageView
-                                android:id="@+id/imageStar2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="42dp"
-                                android:src="@drawable/star" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/imageStar2"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="35dp"
-                                android:text="5.0"
-                                android:textColor="#11c7e6"
-                                android:textSize="30dp"
-                                android:textStyle="bold" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp">
-
-
-                            <ImageView
-                                android:id="@+id/imgWoker3"
-                                android:layout_width="95dp"
-                                android:layout_height="95dp"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/avatar" />
-
-                            <TextView
-                                android:id="@+id/txtWoker3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker3"
-                                android:text="Nhân viên C"
-                                android:textColor="#D9000000"
-                                android:textSize="18dp" />
-
-                            <TextView
-                                android:id="@+id/diachi2"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/txtWoker3"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker3"
-                                android:text="Địa chỉ" />
-
-                            <TextView
-                                android:id="@+id/phanloai2"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/diachi2"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker3"
-                                android:text="Sửa máy lạnh" />
-                            <TextView
-                                android:layout_width="167dp"
-                                android:layout_height="22dp"
-                                android:layout_above="@+id/phanloai2"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker3"
-                                android:text="~100,000VNĐ" />
-
-
-                            <ImageView
-                                android:id="@+id/imageStar3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="42dp"
-                                android:src="@drawable/star" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/imageStar3"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="35dp"
-                                android:text="5.0"
-                                android:textColor="#11C7E6"
-                                android:textSize="30dp"
-                                android:textStyle="bold" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp">
-
-
-                           <ImageView
-                                android:id="@+id/imgWoker4"
-                                android:layout_width="95dp"
-                                android:layout_height="95dp"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/avatar" />
-
-                            <TextView
-                                android:id="@+id/txtWoker4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker4"
-                                android:text="Nhân viên D"
-                                android:textColor="#D9000000"
-                                android:textSize="18dp" />
-
-                            <TextView
-                                android:id="@+id/diachi3"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/txtWoker4"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker4"
-                                android:text="Địa chỉ" />
-                            <TextView
-                                android:id="@+id/phanloai3"
-                                android:layout_width="167dp"
-                                android:layout_height="46dp"
-                                android:layout_below="@+id/diachi3"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker4"
-                                android:text="Sửa máy lạnh" />
-                            <TextView
-                                android:layout_width="167dp"
-                                android:layout_height="22dp"
-                                android:layout_above="@+id/phanloai3"
-                                android:layout_marginStart="15dp"
-                                android:layout_toEndOf="@+id/imgWoker4"
-                                android:text="~100,000VNĐ" />
-
-
-                            <ImageView
-                                android:id="@+id/imageStar4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="42dp"
-                                android:src="@drawable/star" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/imageStar4"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="35dp"
-                                android:text="5.0"
-                                android:textColor="#11C7E6"
-                                android:textSize="30dp"
-                                android:textStyle="bold" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
                 </RelativeLayout>
-            </LinearLayout>
 
-        </ScrollView>
-    </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/Layout_firstWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layout_xemthem"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+
+                    <ImageView
+                        android:id="@+id/imgWoker2"
+                        android:layout_width="95dp"
+                        android:layout_height="95dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/avatar" />
+
+                    <TextView
+                        android:id="@+id/txtWoker2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker2"
+                        android:text="Nhân viên B"
+                        android:textColor="#D9000000"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/diachi1"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/txtWoker2"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker2"
+                        android:text="Địa chỉ" />
+
+                    <TextView
+                        android:id="@+id/phanloai1"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/diachi1"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker2"
+                        android:text="Sửa máy lạnh" />
+
+                    <TextView
+                        android:layout_width="167dp"
+                        android:layout_height="22dp"
+                        android:layout_above="@+id/phanloai1"
+
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker2"
+                        android:text="~100,000VNĐ" />
+
+
+                    <ImageView
+                        android:id="@+id/imageStar2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="42dp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageStar2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="35dp"
+                        android:text="5.0"
+                        android:textColor="@color/yellow"
+                        android:textSize="28dp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_SecondWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/Layout_firstWorker"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgWoker1"
+                        android:layout_width="95dp"
+                        android:layout_height="95dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/avatar" />
+
+                    <TextView
+                        android:id="@+id/txtWoker1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker1"
+                        android:text="Nhân viên A"
+                        android:textColor="#D9000000"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/diachi"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/txtWoker1"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker1"
+                        android:text="Địa chỉ" />
+
+                    <TextView
+                        android:id="@+id/phanloai"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/diachi"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker1"
+                        android:text="Sửa máy lạnh" />
+
+                    <TextView
+                        android:layout_width="167dp"
+                        android:layout_height="22dp"
+                        android:layout_above="@+id/phanloai"
+
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker1"
+                        android:text="~100,000VNĐ" />
+
+
+                    <ImageView
+                        android:id="@+id/imageStar1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="42dp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageStar1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="35dp"
+                        android:text="5.0"
+                        android:textColor="@color/yellow"
+                        android:textSize="28dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_ThirdWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layout_SecondWorker"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+
+                    <ImageView
+                        android:id="@+id/imgWoker3"
+                        android:layout_width="95dp"
+                        android:layout_height="95dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/avatar" />
+
+                    <TextView
+                        android:id="@+id/txtWoker3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker3"
+                        android:text="Nhân viên C"
+                        android:textColor="#D9000000"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/diachi2"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/txtWoker3"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker3"
+                        android:text="Địa chỉ" />
+
+                    <TextView
+                        android:id="@+id/phanloai2"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/diachi2"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker3"
+                        android:text="Sửa máy lạnh" />
+
+                    <TextView
+                        android:layout_width="167dp"
+                        android:layout_height="22dp"
+                        android:layout_above="@+id/phanloai2"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker3"
+                        android:text="~100,000VNĐ" />
+
+
+                    <ImageView
+                        android:id="@+id/imageStar3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="42dp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageStar3"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="35dp"
+                        android:text="5.0"
+                        android:textColor="@color/yellow"
+                        android:textSize="28dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_FourthWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layout_ThirdWorker"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+
+                    <ImageView
+                        android:id="@+id/imgWoker4"
+                        android:layout_width="95dp"
+                        android:layout_height="95dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/avatar" />
+
+                    <TextView
+                        android:id="@+id/txtWoker4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker4"
+                        android:text="Nhân viên D"
+                        android:textColor="#D9000000"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/diachi3"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/txtWoker4"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker4"
+                        android:text="Địa chỉ" />
+
+                    <TextView
+                        android:id="@+id/phanloai3"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/diachi3"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker4"
+                        android:text="Sửa máy lạnh" />
+
+                    <TextView
+                        android:layout_width="167dp"
+                        android:layout_height="22dp"
+                        android:layout_above="@+id/phanloai3"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker4"
+                        android:text="~100,000VNĐ" />
+
+
+                    <ImageView
+                        android:id="@+id/imageStar4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="42dp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageStar4"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="35dp"
+                        android:text="5.0"
+                        android:textColor="@color/yellow"
+                        android:textSize="28dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_FiveWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layout_FourthWorker"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+
+                    <ImageView
+                        android:id="@+id/imgWoker5"
+                        android:layout_width="95dp"
+                        android:layout_height="95dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/avatar" />
+
+                    <TextView
+                        android:id="@+id/txtWoker5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker5"
+                        android:text="Nhân viên E"
+                        android:textColor="#D9000000"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/diachi4"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/txtWoker5"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker5"
+                        android:text="Địa chỉ" />
+
+                    <TextView
+                        android:id="@+id/phanloai4"
+                        android:layout_width="167dp"
+                        android:layout_height="46dp"
+                        android:layout_below="@+id/diachi4"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker5"
+                        android:text="Sửa máy lạnh" />
+
+                    <TextView
+                        android:layout_width="167dp"
+                        android:layout_height="22dp"
+                        android:layout_above="@+id/phanloai4"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imgWoker5"
+                        android:text="~100,000VNĐ" />
+
+
+                    <ImageView
+                        android:id="@+id/imageStar5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="42dp"
+                        android:src="@drawable/star" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageStar5"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="35dp"
+                        android:text="5.0"
+                        android:textColor="@color/yellow"
+                        android:textSize="28dp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </ScrollView>
 
 </RelativeLayout>
