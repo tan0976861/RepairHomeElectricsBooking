@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Onboarding title 1"
+        android:text="Bạn có biết ?"
         android:textSize="20dp"
         android:gravity="center"
         android:textStyle="bold"
@@ -24,13 +24,12 @@
         android:layout_marginTop="30dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:text="Onboarding description 1 Onboarding description 1 Onboarding description 1 "
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginTop="20dp"
         android:gravity="center"
+        android:text="Chúng tôi luôn mang đến mọi sự tiện lợi cho khách hàng"
         android:textColor="@android:color/black"
-        android:layout_marginTop="20dp"/>
+        android:textSize="18sp" />
 
 </LinearLayout>

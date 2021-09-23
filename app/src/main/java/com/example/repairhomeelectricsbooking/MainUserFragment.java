@@ -1,5 +1,6 @@
 package com.example.repairhomeelectricsbooking;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +28,8 @@ public class MainUserFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private View view;
+    private Button btnSearch;
     public MainUserFragment() {
         // Required empty public constructor
     }
@@ -60,7 +64,17 @@ public class MainUserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        view = (View) inflater.inflate(R.layout.fragment_main_user, container, false);
+        btnSearch = (Button) view.findViewById(R.id.btnSearch);
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),SearchWorkerActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_user, container, false);
+        return view;
     }
 }
