@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a611c7e6"
+
+    tools:context=".HistoryFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imgBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="11dp"
+                android:onClick="clickToBackMainScreen"
+                android:backgroundTint="#66DDDDDD"
+                android:src="@drawable/back" />
+
+            <TextView
+
+                android:id="@+id/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Lịch sử "
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/custom_layout_history"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="17dp"
+                        android:text="09/09/2021" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView9"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:text="Hồ Minh Tuấn"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView11"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Giá Tiền : 500.000 vnđ" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView12"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:text="Thiết bị sửa: Máy Lạnh"
+                        android:drawableRight="@drawable/sell"
+                        android:textColor="@color/black"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/custom_layout_history"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="17dp"
+                        android:text="12/09/2021" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView14"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:text="Bùi Ngọc Mạnh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView15"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Giá Tiền : 500.000 vnđ" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView16"
+
+                        android:textSize="17dp"                        android:gravity="left"
+                        android:text="Thiết bị sửa: Máy Giặt"
+                        android:drawableRight="@drawable/sell"
+                        android:textColor="@color/black"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/custom_layout_history"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="17dp"
+                        android:text="22/09/2021"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView18"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:text="Cao Đại Thành"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView19"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Giá Tiền : 500.000 vnđ" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView20"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Thiết bị sửa: Tủ Lạnh"
+                        android:drawableRight="@drawable/sell"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/custom_layout_history"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="17dp"
+                        android:text="23/09/2021" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView22"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:text="Nguyễn Văn Minh"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView23"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Giá Tiền : 400.000 vnđ" />
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView24"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Thiết bị sửa: Máy Lạnh"
+                        android:drawableRight="@drawable/sell"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/custom_layout_history"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="17dp"
+                        android:text="29/08/2021" />
+
+                    <TextView
+                        android:id="@+id/textView27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView26"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView27"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Giá Tiền : 500.000 vnđ" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView28"
+                        android:gravity="left"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:text="Thiết bị sửa: Máy rửa chén "
+                        android:drawableRight="@drawable/sell"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <!--            </RelativeLayout>-->
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

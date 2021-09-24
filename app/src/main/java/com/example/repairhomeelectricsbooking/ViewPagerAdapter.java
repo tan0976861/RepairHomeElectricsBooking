@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new MainUserFragment();
             case 1:
-                return new ProfileFragment();
+                return new HistoryFragment();
             case 2:
                 return new ProfileFragment();
             case 3:

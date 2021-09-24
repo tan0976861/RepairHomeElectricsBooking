@@ -59,6 +59,19 @@
                 android:inputType="textPassword"
                 android:background="@drawable/register_border"
                 android:hint="Nhập lại mật khẩu" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/phone"
+                android:drawablePadding="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/register_border"
+                android:hint="Điện thoại" />
+
             <Button
                 android:id="@+id/btnsignup"
                 android:layout_width="match_parent"

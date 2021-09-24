@@ -9,9 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.repairhomeelectricsbooking.Database.MyDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -25,74 +25,60 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class DangKyActivity extends AppCompatActivity {
-    public static final String TAG = DangKyActivity.class.getName();
-    EditText username,password,repassword,phonenumber;
-    Button signup,signin;
-    MyDB db;
-    FirebaseAuth mAuth;
+public class EnterOTPActivity extends AppCompatActivity {
+    public static final String TAG = EnterOTPActivity.class.getName();
+    private FirebaseAuth mAuth;
+    EditText edtOTP;
+    Button btnSentOTP;
+    TextView tvResentOPT;
+    String strPhoneNumber,strVerificationID;
+    private PhoneAuthProvider.ForceResendingToken mForceResendingToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dang_ky);
+        setContentView(R.layout.activity_enter_otpactivity);
 
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        repassword = (EditText) findViewById(R.id.repassword);
-        phonenumber = (EditText) findViewById(R.id.phone);
-        signup = (Button) findViewById(R.id.btnsignup);
-        signin = (Button) findViewById(R.id.btnsignin);
-        db = new MyDB(this);
+        edtOTP = (EditText) findViewById(R.id.edtOTP);
+        btnSentOTP = (Button) findViewById(R.id.btnSentOTP);
+        tvResentOPT = (TextView) findViewById(R.id.tvResentOPT) ;
+        getDataIntent();
         mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
-        signup.setOnClickListener(new View.OnClickListener() {
+        btnSentOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
-                String repass = repassword.getText().toString();
-                String strPhone = phonenumber.getText().toString();
-                onClickVerifyPhoneNumber(strPhone);
-//                if(user.equals("") || pass.equals("") || repass.equals("")){
-//                    Toast.makeText(DangKyActivity.this,"Xin vui lòng điền hết thông tin",Toast.LENGTH_SHORT).show();
-//                }else{
-//                    if(pass.equals(repass)){
-//                        Boolean checkuser = db.checkUserName(user);
-//                        if(checkuser == false){
-//                            Boolean insert = db.insertData(user,pass);
-//                            if(insert == true){
-//                                onClickVerifyPhoneNumber(strPhone);
-//                            }else {
-//                                Toast.makeText(DangKyActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }else{
-//                            Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }else{
-//                        Toast.makeText(DangKyActivity.this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
+                String strOTP = edtOTP.getText().toString().trim();
+                onClickSendOTPCode(strOTP);
             }
-
 
         });
 
-
-
-        signin.setOnClickListener(new View.OnClickListener() {
+        tvResentOPT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                onClickSendOTPAgain();
             }
+
         });
     }
 
-    private void onClickVerifyPhoneNumber(String strPhone) {
+    private void getDataIntent (){
+        strPhoneNumber = getIntent().getStringExtra("phonenumber");
+        strVerificationID = getIntent().getStringExtra("verificationID");
+    }
+
+
+    private void onClickSendOTPCode(String strOTP) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(strVerificationID, strOTP);
+        signInWithPhoneAuthCredential(credential);
+    }
+
+    private void onClickSendOTPAgain() {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber(strPhone)       // Phone number to verify
+                        .setPhoneNumber(strPhoneNumber)       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
+                        .setForceResendingToken(mForceResendingToken)
                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             @Override
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -101,19 +87,19 @@ public class DangKyActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(DangKyActivity.this,"Xác thực OTP thất bại",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EnterOTPActivity.this,"Xác thực OTP thất bại",Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onCodeSent(@NonNull String verificationID, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 super.onCodeSent(verificationID, forceResendingToken);
-                                goToEnterOTPActivity(strPhone,verificationID);
+                                strVerificationID = verificationID;
+                                mForceResendingToken = forceResendingToken;
                             }
                         })
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
-
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -132,7 +118,7 @@ public class DangKyActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
-                                Toast.makeText(DangKyActivity.this,"Mã OTP của bạn không hợp lệ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EnterOTPActivity.this,"Mã OTP của bạn không hợp lệ",Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -145,12 +131,4 @@ public class DangKyActivity extends AppCompatActivity {
         intent.putExtra("phonenumber",phoneNumber);
         startActivity(intent);
     }
-
-    private void goToEnterOTPActivity(String strPhone, String verificationID) {
-        Intent intent = new Intent(this,EnterOTPActivity.class);
-        intent.putExtra("phonenumber",strPhone);
-        intent.putExtra("verificationID",verificationID);
-        startActivity(intent);
-    }
-
 }
