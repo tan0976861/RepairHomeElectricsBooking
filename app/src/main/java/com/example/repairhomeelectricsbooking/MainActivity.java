@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white))
                 .build();
         bottomNavigation.setNotification(notification, 2);
-
+        getDataIntent();
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
@@ -103,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void getDataIntent(){
+        String strPhone = getIntent().getStringExtra("phonenumber");
     }
 
 

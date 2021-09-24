@@ -1,26 +1,20 @@
 package com.example.repairhomeelectricsbooking;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ScrollView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MainUserFragment#newInstance} factory method to
+ * Use the {@link HistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainUserFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,11 +23,8 @@ public class MainUserFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private View view;
-    private Button btnSearch;
-    private Button btnSearch1;
-    private ScrollView scrollViewMainUser;
-    public MainUserFragment() {
+
+    public HistoryFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +34,11 @@ public class MainUserFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainUserFragment.
+     * @return A new instance of fragment HistoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainUserFragment newInstance(String param1, String param2) {
-        MainUserFragment fragment = new MainUserFragment();
+    public static HistoryFragment newInstance(String param1, String param2) {
+        HistoryFragment fragment = new HistoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,18 +58,7 @@ public class MainUserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = (View) inflater.inflate(R.layout.fragment_main_user, container, false);
-        btnSearch = (Button) view.findViewById(R.id.btnSearch);
-        scrollViewMainUser = (ScrollView) view.findViewById(R.id.scrollViewMainUser);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),SearchWorkerActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
-//        scrollViewMainUser.setOnTouchListener(new TranslateAnimationUtil(getActivity(),btnSearch));
         // Inflate the layout for this fragment
-        return view;
+        return inflater.inflate(R.layout.fragment_history, container, false);
     }
 }

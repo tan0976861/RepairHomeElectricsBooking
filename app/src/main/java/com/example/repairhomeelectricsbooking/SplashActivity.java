@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(sharedPreferencesUser.getBooleanValue(KEY_FIRST_INSTALL)){
                     //Main
-                    startActivity(MainActivity.class);
+                    startActivity(DangKyActivity.class);
                 }else{
                     //Onboarding
                     startActivity(OnboardingActivity.class);
