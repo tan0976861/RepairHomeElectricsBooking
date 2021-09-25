@@ -1,9 +1,11 @@
 package com.example.repairhomeelectricsbooking;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -12,6 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
+
+import com.example.repairhomeelectricsbooking.item.Item;
+import com.example.repairhomeelectricsbooking.item.ItemAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +41,9 @@ public class MainUserFragment extends Fragment {
     private Button btnSearch;
     private Button btnSearch1;
     private ScrollView scrollViewMainUser;
+    private RecyclerView rcv_item;
+    private ItemAdapter itemAdapter;
+    private Context mContext;
     public MainUserFragment() {
         // Required empty public constructor
     }
@@ -65,11 +76,23 @@ public class MainUserFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext=context;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = (View) inflater.inflate(R.layout.fragment_main_user, container, false);
         btnSearch = (Button) view.findViewById(R.id.btnSearch);
         scrollViewMainUser = (ScrollView) view.findViewById(R.id.scrollViewMainUser);
+//        rcv_item = (RecyclerView) view.findViewById(R.id.rcv_item);
+//        itemAdapter = new ItemAdapter(mContext);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext,RecyclerView.HORIZONTAL,false);
+//        rcv_item.setLayoutManager(linearLayoutManager);
+//        itemAdapter.setData(getListItem());
+//        rcv_item.setAdapter(itemAdapter);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,5 +103,12 @@ public class MainUserFragment extends Fragment {
 //        scrollViewMainUser.setOnTouchListener(new TranslateAnimationUtil(getActivity(),btnSearch));
         // Inflate the layout for this fragment
         return view;
+    }
+    private List<Item> getListItem(){
+        List<Item> list = new ArrayList<>();
+
+        list.add(new Item(R.drawable.maygiat,"Máy giặt"));
+        list.add(new Item(R.drawable.tivi,"Tivi"));
+        return list;
     }
 }

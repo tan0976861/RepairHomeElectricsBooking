@@ -15,6 +15,7 @@ import com.example.repairhomeelectricsbooking.Database.MyDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
+
 
 public class DangKyActivity extends AppCompatActivity {
     public static final String TAG = DangKyActivity.class.getName();
@@ -51,26 +53,27 @@ public class DangKyActivity extends AppCompatActivity {
                 String pass = password.getText().toString();
                 String repass = repassword.getText().toString();
                 String strPhone = phonenumber.getText().toString();
-                onClickVerifyPhoneNumber(strPhone);
-//                if(user.equals("") || pass.equals("") || repass.equals("")){
-//                    Toast.makeText(DangKyActivity.this,"Xin vui lòng điền hết thông tin",Toast.LENGTH_SHORT).show();
-//                }else{
-//                    if(pass.equals(repass)){
-//                        Boolean checkuser = db.checkUserName(user);
-//                        if(checkuser == false){
-//                            Boolean insert = db.insertData(user,pass);
-//                            if(insert == true){
-//                                onClickVerifyPhoneNumber(strPhone);
-//                            }else {
-//                                Toast.makeText(DangKyActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }else{
-//                            Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }else{
-//                        Toast.makeText(DangKyActivity.this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
+//                onClickVerifyPhoneNumber(strPhone);
+                if(user.equals("") || pass.equals("") || repass.equals("")){
+                    Toast.makeText(DangKyActivity.this,"Xin vui lòng điền hết thông tin",Toast.LENGTH_SHORT).show();
+                }else{
+                    if(pass.equals(repass)){
+                        Boolean checkuser = db.checkUserName(user);
+                        if(checkuser == false){
+                            Boolean insert = db.insertData(user,pass);
+                            if(insert == true){
+                                Intent intent = new Intent(DangKyActivity.this,MainActivity.class);
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(DangKyActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(DangKyActivity.this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
 
 

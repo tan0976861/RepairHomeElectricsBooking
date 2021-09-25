@@ -41,6 +41,8 @@ dependencies {
     implementation "com.wefika:flowlayout:0.4.1"
     implementation 'com.aurelhubert:ahbottomnavigation:2.3.4'
     implementation 'me.relex:circleindicator:2.1.6'
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "androidx.cardview:cardview:1.0.0"
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-auth'
 }
