@@ -50,8 +50,12 @@ public class DangKyActivity extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String repass = repassword.getText().toString();
-                String strPhone = phonenumber.getText().toString();
+                String strPhone = phonenumber.getText().toString().trim();
                 onClickVerifyPhoneNumber(strPhone);
+//                Intent intent = new Intent(getApplicationContext(), EnterOTPActivity.class);
+//                startActivity(intent);
+
+
 //                if(user.equals("") || pass.equals("") || repass.equals("")){
 //                    Toast.makeText(DangKyActivity.this,"Xin vui lòng điền hết thông tin",Toast.LENGTH_SHORT).show();
 //                }else{
