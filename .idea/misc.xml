@@ -3,7 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/bg_circle_bluesky.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_bg_splash.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_btnorder.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_input.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_btnout.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_detailworker.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_history.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_item.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_listitem.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_mainuser.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_register.xml" value="0.2703125" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/activity_enter_otpactivity.xml" value="0.1" />
         <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_deatil_search_worker.xml" value="0.1" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_history.xml" value="0.1" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_main_user.xml" value="0.264" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding1.xml" value="0.1" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding2.xml" value="0.1" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding3.xml" value="0.1" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding4.xml" value="0.1" />
+        <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/bg_circle_bluesky.xml" value="0.2703125" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_bg_splash.xml" value="0.2703125" />
