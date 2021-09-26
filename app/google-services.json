@@ -1,0 +1,84 @@
+{
+  "project_info": {
+    "project_number": "558054542664",
+    "project_id": "e-homebooking",
+    "storage_bucket": "e-homebooking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558054542664:android:2a87d2158ea57b6988377d",
+        "android_client_info": {
+          "package_name": "com.example.repairhomeelectricbooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558054542664-hq99o88n5l9trsmdn6nbsncahpqp3m4p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repairhomeelectricbooking",
+            "certificate_hash": "5fefab70111caa02f84fb2fa64953fbf03fad45c"
+          }
+        },
+        {
+          "client_id": "558054542664-7n2o7kbpnlcbug2e1eooslhl2pan8fgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH_nWgrMGODQetjcyrifB0nNyfCjdT2Vs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558054542664-7n2o7kbpnlcbug2e1eooslhl2pan8fgu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558054542664:android:05aa523de8c52d3588377d",
+        "android_client_info": {
+          "package_name": "com.example.repairhomeelectricsbooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558054542664-cve5pm9453reqcmiiv4ikhgbqlou64ba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repairhomeelectricsbooking",
+            "certificate_hash": "5fefab70111caa02f84fb2fa64953fbf03fad45c"
+          }
+        },
+        {
+          "client_id": "558054542664-7n2o7kbpnlcbug2e1eooslhl2pan8fgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH_nWgrMGODQetjcyrifB0nNyfCjdT2Vs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558054542664-7n2o7kbpnlcbug2e1eooslhl2pan8fgu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
