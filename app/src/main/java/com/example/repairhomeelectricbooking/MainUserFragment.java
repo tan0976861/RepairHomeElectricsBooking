@@ -124,8 +124,8 @@ public class MainUserFragment extends Fragment {
         list.add(new Item(R.drawable.lovisong,"Lò vi sóng"));
         list.add(new Item(R.drawable.quat,"Quạt"));
         list.add(new Item(R.drawable.binhnaunuoc,"Bình nấu nước"));
-
-
+        list.add(new Item(R.drawable.maynonglanh,"Máy nóng lạnh"));
+        list.add(new Item(R.drawable.ocam,"Ổ cắm"));
         return list;
     }
 }
