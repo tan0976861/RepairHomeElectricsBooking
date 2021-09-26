@@ -2,6 +2,8 @@ package com.example.repairhomeelectricsbooking.item;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.repairhomeelectricsbooking.R;
+import com.example.repairhomeelectricsbooking.SearchWorkerActivity;
 
 import java.util.List;
 
@@ -44,6 +48,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
         holder.imgItem.setImageResource(item.getResourceID());
         holder.tvItem.setText(item.getTitle());
+
+        holder.cardView_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickGoToSearch(item);
+            }
+        });
+    }
+
+    private void onClickGoToSearch(Item item){
+        Intent intent = new Intent(context, SearchWorkerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("obj_item",item);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     @Override
@@ -55,12 +74,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
+        private CardView cardView_item;
         private ImageView imgItem;
         private TextView tvItem;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            cardView_item = itemView.findViewById(R.id.cardView_item_diengiadung);
             imgItem = itemView.findViewById(R.id.img_Item);
             tvItem = itemView.findViewById(R.id.tv_Item);
         }

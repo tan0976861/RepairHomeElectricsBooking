@@ -19,7 +19,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAvatar"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
             android:gravity="center"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="42dp"
             android:fontFamily="sans-serif-light"
             android:text="Trần Nhật Tân"
             android:textColor="@color/white"
@@ -42,6 +42,7 @@
             android:textStyle="bold"
             android:paddingBottom="100dp"/>
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

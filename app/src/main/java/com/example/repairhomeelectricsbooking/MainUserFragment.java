@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.example.repairhomeelectricsbooking.item.Item;
@@ -44,6 +46,7 @@ public class MainUserFragment extends Fragment {
     private RecyclerView rcv_item;
     private ItemAdapter itemAdapter;
     private Context mContext;
+    private RelativeLayout layout_firstWorker;
     public MainUserFragment() {
         // Required empty public constructor
     }
@@ -86,17 +89,25 @@ public class MainUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = (View) inflater.inflate(R.layout.fragment_main_user, container, false);
         btnSearch = (Button) view.findViewById(R.id.btnSearch);
+        layout_firstWorker= (RelativeLayout) view.findViewById(R.id.layout_firstWorker);
         scrollViewMainUser = (ScrollView) view.findViewById(R.id.scrollViewMainUser);
-//        rcv_item = (RecyclerView) view.findViewById(R.id.rcv_item);
-//        itemAdapter = new ItemAdapter(mContext);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext,RecyclerView.HORIZONTAL,false);
-//        rcv_item.setLayoutManager(linearLayoutManager);
-//        itemAdapter.setData(getListItem());
-//        rcv_item.setAdapter(itemAdapter);
+        rcv_item = (RecyclerView) view.findViewById(R.id.rcv_item);
+        itemAdapter = new ItemAdapter(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false);
+        rcv_item.setLayoutManager(linearLayoutManager);
+        itemAdapter.setData(getListItem());
+        rcv_item.setAdapter(itemAdapter);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),SearchWorkerActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        layout_firstWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),DetailWorkerActivity.class);
                 getActivity().startActivity(intent);
             }
         });
@@ -109,6 +120,14 @@ public class MainUserFragment extends Fragment {
 
         list.add(new Item(R.drawable.maygiat,"Máy giặt"));
         list.add(new Item(R.drawable.tivi,"Tivi"));
+        list.add(new Item(R.drawable.den,"Đèn"));
+        list.add(new Item(R.drawable.loa,"Loa"));
+        list.add(new Item(R.drawable.maylanh,"Máy lạnh"));
+        list.add(new Item(R.drawable.lovisong,"Lò vi sóng"));
+        list.add(new Item(R.drawable.quat,"Quạt"));
+        list.add(new Item(R.drawable.binhnaunuoc,"Bình nấu nước"));
+
+
         return list;
     }
 }

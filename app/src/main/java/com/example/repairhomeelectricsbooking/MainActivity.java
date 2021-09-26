@@ -30,68 +30,53 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewPager);
-//        bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
-//        setUpViewPaper();
-        rcv_item = (RecyclerView) findViewById(R.id.rcv_item);
-        itemAdapter = new ItemAdapter(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
-        rcv_item.setLayoutManager(linearLayoutManager);
-        itemAdapter.setData(getListItem());
-// Create items
-//        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab1, R.drawable.home, R.color.bluesky);
-//        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab2, R.drawable.task, R.color.bluesky);
-//        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab3, R.drawable.notification, R.color.bluesky);
-//        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab4, R.drawable.info, R.color.bluesky);
-//
-//
-//// Add items
-//        bottomNavigation.addItem(item1);
-//        bottomNavigation.addItem(item2);
-//        bottomNavigation.addItem(item3);
-//        bottomNavigation.addItem(item4);
-//        bottomNavigation.setColored(false);
-//        bottomNavigation.setDefaultBackgroundColor(getResources().getColor(R.color.white));
-//        bottomNavigation.setAccentColor(getResources().getColor(R.color.bluesky));
-//        bottomNavigation.setInactiveColor(getResources().getColor(R.color.bluesky));
-//
-//        AHNotification notification = new AHNotification.Builder()
-//                .setText("10")
-//                .setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.red))
-//                .setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white))
-//                .build();
-//        bottomNavigation.setNotification(notification, 2);
-//        getDataIntent();
-//        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
-//            @Override
-//            public boolean onTabSelected(int position, boolean wasSelected) {
-//                switch (position){
-//                    case 0:
-//                        viewPager.setCurrentItem(0);
-//                        break;
-//                    case 1:
-//                        viewPager.setCurrentItem(1);
-//                        break;
-//                    case 2:
-//                        viewPager.setCurrentItem(2);
-//                        break;
-//                    case 3:
-//                        viewPager.setCurrentItem(3);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
-    }
-    private List<Item> getListItem(){
-        List<Item> list = new ArrayList<>();
+        bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+        setUpViewPaper();
 
-        list.add(new Item(R.drawable.maygiat,"Máy giặt"));
-        list.add(new Item(R.drawable.tivi,"Tivi"));
-        list.add(new Item(R.drawable.maygiat,"Máy giặt"));
-        list.add(new Item(R.drawable.tivi,"Tivi"));
-        list.add(new Item(R.drawable.maygiat,"Máy giặt"));
-        list.add(new Item(R.drawable.tivi,"Tivi"));
-        return list;
+// Create items
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab1, R.drawable.home, R.color.bluesky);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab2, R.drawable.task, R.color.bluesky);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab3, R.drawable.notification, R.color.bluesky);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab4, R.drawable.info, R.color.bluesky);
+
+
+// Add items
+        bottomNavigation.addItem(item1);
+        bottomNavigation.addItem(item2);
+        bottomNavigation.addItem(item3);
+        bottomNavigation.addItem(item4);
+        bottomNavigation.setColored(false);
+        bottomNavigation.setDefaultBackgroundColor(getResources().getColor(R.color.white));
+        bottomNavigation.setAccentColor(getResources().getColor(R.color.bluesky));
+        bottomNavigation.setInactiveColor(getResources().getColor(R.color.bluesky));
+
+        AHNotification notification = new AHNotification.Builder()
+                .setText("10")
+                .setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.red))
+                .setTextColor(ContextCompat.getColor(MainActivity.this, R.color.white))
+                .build();
+        bottomNavigation.setNotification(notification, 2);
+        getDataIntent();
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                switch (position){
+                    case 0:
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case 1:
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case 2:
+                        viewPager.setCurrentItem(2);
+                        break;
+                    case 3:
+                        viewPager.setCurrentItem(3);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     public void setUpViewPaper(){

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricsBooking">
         <activity
+            android:name=".DetailWorkerActivity"
+            android:exported="true" />
+        <activity
             android:name=".EnterOTPActivity"
             android:exported="true" />
         <activity

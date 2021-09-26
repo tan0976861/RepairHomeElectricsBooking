@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D11c7e6"
+    tools:context=".DetailWorkerActivity">
+
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="186dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/icon_bg_worker" />
+
+    <RelativeLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="11dp"
+            android:backgroundTint="#99DDDDDD"
+            android:onClick="clickToSearchScreen"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/img">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/layout_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/bottom_navigation_icon"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/custom_layout_detailworker"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/account"
+                    android:drawablePadding="10dp"
+                    android:text="Hồ Minh Tuấn"
+                    android:textColor="@color/black"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_fix"
+                    android:drawablePadding="5dp"
+                    android:text="Chuyên sửa máy lạnh" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_money"
+                    android:text="Công ~ 500,000 VNĐ" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_location"
+                    android:text="Quận 9, Hồ Chí Minh" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_contact"
+                    android:drawablePadding="10dp"
+                    android:paddingRight="30dp"
+                    android:text="0946746543" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtYeucau"
+                android:layout_below="@+id/layout_info"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả vấn đề "
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                />
+
+            <EditText
+                android:id="@+id/edtDescription"
+                android:layout_below="@+id/txtYeucau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_input"
+                android:paddingBottom="60dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:inputType="text"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đặt"
+                android:background="@drawable/custom_btnorder"
+                android:textColor="@color/white"
+                android:layout_gravity="right"
+                android:layout_below="@+id/edtDescription"
+                android:layout_marginTop="20dp"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"
+                />
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

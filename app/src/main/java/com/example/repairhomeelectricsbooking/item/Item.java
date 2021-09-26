@@ -1,6 +1,8 @@
 package com.example.repairhomeelectricsbooking.item;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private int resourceID;
     private String title;
 

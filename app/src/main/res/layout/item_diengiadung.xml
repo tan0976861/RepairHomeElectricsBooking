@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:id="@+id/cardView_item_diengiadung"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="@drawable/bg_custom_item">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
             android:background="@drawable/tulanh"/>
 
         <TextView
             android:id="@+id/tv_Item"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:text="Tủ lạnh"/>
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Tủ lạnh" />
 
     </LinearLayout>
 

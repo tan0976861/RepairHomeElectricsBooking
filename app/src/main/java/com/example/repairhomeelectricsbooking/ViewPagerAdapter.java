@@ -19,12 +19,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new HistoryFragment();
             case 2:
-                return new ProfileFragment();
+                return new NotificationFragment();
             case 3:
                 return new ProfileFragment();
             default:
+                return new MainUserFragment();
         }
-        return null;
     }
 
     @Override

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#a611c7e6"
+
 
     tools:context=".HistoryFragment">
 
@@ -13,34 +13,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imgBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="11dp"
-                android:onClick="clickToBackMainScreen"
-                android:backgroundTint="#66DDDDDD"
-                android:src="@drawable/back" />
-
+            android:background="@drawable/custom_layout_notify">
             <TextView
-
-                android:id="@+id/textview"
+                android:id="@+id/txtThongBao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="Lịch sử "
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Đơn Hàng"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-        </LinearLayout>
-
+                android:textSize="25dp" />
+        </RelativeLayout>
 
         <ScrollView
             android:layout_width="match_parent"

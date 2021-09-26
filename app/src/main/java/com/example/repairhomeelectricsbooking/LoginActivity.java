@@ -2,11 +2,16 @@ package com.example.repairhomeelectricsbooking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.repairhomeelectricsbooking.Database.MyDB;
@@ -32,15 +37,15 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = password.getText().toString();
 
                 if(user.equals("") || pass.equals("")){
-                    Toast.makeText(LoginActivity.this,"Xin vui lòng điền hết thông tin",Toast.LENGTH_SHORT).show();
+                    layout_toast("Xin vui lòng điền hết thông tin",LoginActivity.this);
                 }else{
                     Boolean checkuserpass = db.checkUserNamePassword(user,pass);
                     if(checkuserpass == true){
-                        Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
+                        layout_toast("Đăng nhập thành công",LoginActivity.this);
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(intent);
                     }else {
-                        Toast.makeText(LoginActivity.this,"Đăng nhập không thành công",Toast.LENGTH_SHORT).show();
+                        layout_toast("Đăng nhập không thành công",LoginActivity.this);
                     }
                 }
             }
@@ -53,5 +58,17 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void layout_toast(String text,Context context){
+        Toast toast = new Toast(context);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
+        TextView tvToast = view.findViewById(R.id.tv_Toast);
+        tvToast.setText(text);
+        toast.setView(view);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.show();
     }
 }
