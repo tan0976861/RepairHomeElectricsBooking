@@ -3,16 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#0D11c7e6"
     tools:context=".DetailWorkerActivity">
-
-
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="186dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/icon_bg_worker" />
 
     <RelativeLayout
         android:id="@+id/layout_header"
@@ -30,11 +23,24 @@
             android:src="@drawable/back" />
     </RelativeLayout>
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_photo_worker"
+        android:layout_width="match_parent"
+        android:layout_height="186dp" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/circle_indicator_photo_worker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_below="@+id/view_pager_photo_worker"
+        app:ci_drawable="@drawable/bg_circle_bluesky"
+        android:layout_centerHorizontal="true"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_below="@id/img">
+        android:layout_below="@id/circle_indicator_photo_worker">
 
         <RelativeLayout
             android:layout_width="match_parent"

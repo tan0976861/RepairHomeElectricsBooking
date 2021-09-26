@@ -3,10 +3,14 @@ package com.example.repairhomeelectricbooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -87,7 +91,7 @@ public class EnterOTPActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(EnterOTPActivity.this,"Xác thực OTP thất bại",Toast.LENGTH_SHORT).show();
+                                layout_toast("Xác thực OTP thất bại",EnterOTPActivity.this);
                             }
 
                             @Override
@@ -113,12 +117,13 @@ public class EnterOTPActivity extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             // Update UI
                             goToMainUserActivity(user.getPhoneNumber());
+                            layout_toast("Đăng ký thành công",EnterOTPActivity.this);
                         } else {
                             // Sign in failed, display a message and update the UI
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
-                                Toast.makeText(EnterOTPActivity.this,"Mã OTP của bạn không hợp lệ",Toast.LENGTH_SHORT).show();
+                                layout_toast("Mã OTP của bạn không hợp lệ",EnterOTPActivity.this);
                             }
                         }
                     }
@@ -130,5 +135,17 @@ public class EnterOTPActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("phonenumber",phoneNumber);
         startActivity(intent);
+    }
+
+    private void layout_toast(String text, Context context){
+        Toast toast = new Toast(context);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
+        TextView tvToast = view.findViewById(R.id.tv_Toast);
+        tvToast.setText(text);
+        toast.setView(view);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.show();
     }
 }

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".EnterOTPActivity">
+    tools:context=".EnterOTPActivity"
+    android:background="#0D11c7e6">
 
     <EditText
         android:id="@+id/edtOTP"
@@ -14,7 +15,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/lock"
-        android:drawablePadding="10dp"
+        android:drawablePadding="16dp"
+        android:padding="16dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/register_border"

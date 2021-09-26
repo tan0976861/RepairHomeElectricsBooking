@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "558054542664-5niig18mah4gj2mbn7qq59iuhee4luqf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repairhomeelectricbooking",
+            "certificate_hash": "5a5abec74ade293948059e68d81e8194aa5c766d"
+          }
+        },
+        {
           "client_id": "558054542664-hq99o88n5l9trsmdn6nbsncahpqp3m4p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileUpdateActivity"
+    android:background="#0D11c7e6"
     >
 
     <RelativeLayout
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:background="#D9DDDDDD">
+            android:background="@drawable/custom_nav_profileupdate">
 
             <ImageButton
                 android:id="@+id/imgBack"
@@ -35,10 +36,11 @@
                 android:layout_height="wrap_content"
                 android:text="Tài khoản"
                 android:textSize="25dp"
-                android:textColor="#000000"
-                android:layout_marginStart="30dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_gravity="center|left"
+                android:layout_marginStart="75dp"
                 android:paddingRight="80dp"
-                android:layout_marginTop="12dp"
                 android:fontFamily="sans-serif-light"/>
         </LinearLayout>
         <TextView
@@ -48,14 +50,13 @@
             android:layout_alignParentEnd="true"
             android:layout_marginVertical="40dp"
             android:layout_marginEnd="20dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#1A11c7e6">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -149,7 +150,7 @@
                     android:gravity="center"
                     android:inputType="text"
                     android:maxLength="50"
-                    android:drawableLeft="@drawable/nameicon"/>
+                    android:drawableLeft="@drawable/account"/>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -166,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:drawableLeft="@drawable/phoneicon"/>
+                    android:drawableLeft="@drawable/icon_contact"/>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -182,23 +183,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:drawableLeft="@drawable/emailicon"/>
+                    android:drawableLeft="@drawable/emailicon" />
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Password"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-light"/>
 
-                <EditText
-                    android:id="@+id/edtPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:drawableLeft="@drawable/passwordicon"/>
             </LinearLayout>
 
         </RelativeLayout>
@@ -210,19 +197,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:onClick="clickToLogout"
-            android:padding="10dp"
-            android:text="Đăng xuất"
-            android:textAllCaps="false"
-            android:textSize="20dp"
-            android:textColor="#FF0000"
-            android:background="@drawable/custom_layout_btnout"
-            android:fontFamily="sans-serif-light"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

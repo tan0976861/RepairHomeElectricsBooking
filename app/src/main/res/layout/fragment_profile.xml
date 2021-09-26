@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:background="#0D11c7e6">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAvatar"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
             android:gravity="center"
-            android:layout_marginStart="42dp"
+            android:layout_marginStart="30dp"
             android:fontFamily="sans-serif-light"
             android:text="Trần Nhật Tân"
             android:textColor="@color/white"
@@ -42,7 +43,6 @@
             android:textStyle="bold"
             android:paddingBottom="100dp"/>
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -97,7 +97,10 @@
                         android:paddingLeft="15dp"
                         android:textSize="20dp"
                         android:text="Danh sách đơn hàng"
+                        android:textColor="@color/black"
                         android:fontFamily="sans-serif-light"
+                        android:drawableLeft="@drawable/listorder_ic"
+                        android:drawablePadding="10dp"
                         />
 
                     <ImageView
@@ -114,6 +117,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -128,7 +132,9 @@
                         android:paddingLeft="15dp"
                         android:textSize="20dp"
                         android:text="Hỗ trợ khách hàng"
-                        android:fontFamily="sans-serif-light"/>
+                        android:fontFamily="sans-serif-light"
+                        android:drawableLeft="@drawable/contactsupport_ic"
+                        android:drawablePadding="10dp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -144,6 +150,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -158,7 +165,9 @@
                         android:paddingLeft="15dp"
                         android:textSize="20dp"
                         android:text="Thông tin người dùng"
-                        android:fontFamily="sans-serif-light"/>
+                        android:fontFamily="sans-serif-light"
+                        android:drawableLeft="@drawable/account"
+                        android:drawablePadding="10dp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -171,9 +180,11 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    >
 
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -189,7 +200,45 @@
                         android:textSize="20dp"
                         android:text="Thông báo"
                         android:fontFamily="sans-serif-light"
+                        android:drawableLeft="@drawable/notification_profile_ic"
+                        android:drawablePadding="10dp"
                         />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/direction"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="37dp"
+                        android:layout_marginStart="300dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/btnLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="clickToLogout"
+                        android:text="Đăng xuất"
+                        android:textAllCaps="false"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="top"
+                        android:background="@drawable/custom_layout_listitem"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingLeft="15dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:drawableLeft="@drawable/logout"
+                        android:drawablePadding="10dp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -203,7 +252,5 @@
             </LinearLayout>
 
         </ScrollView>
-
     </RelativeLayout>
-
 </RelativeLayout>

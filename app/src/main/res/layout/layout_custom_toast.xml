@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_custom_toast"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_comer_30"
-    android:padding="10dp"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/toast"/>
 
-    <TextView
-        android:id="@+id/tv_Toast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="16dp"
-        android:text="Test"/>
-</LinearLayout>
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:background="@drawable/register_bg"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/tv_Toast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="Test"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

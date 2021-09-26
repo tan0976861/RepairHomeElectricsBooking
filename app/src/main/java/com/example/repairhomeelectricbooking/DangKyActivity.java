@@ -62,8 +62,6 @@ public class DangKyActivity extends AppCompatActivity {
                             Boolean insert = db.insertData(user,pass);
                             if(insert == true){
                                 onClickVerifyPhoneNumber(strPhone);
-//                                Intent intent = new Intent(DangKyActivity.this,MainActivity.class);
-//                                startActivity(intent);
                             }else {
                                 Toast.makeText(DangKyActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
                             }
