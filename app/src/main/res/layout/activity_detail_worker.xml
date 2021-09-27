@@ -26,7 +26,8 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_photo_worker"
         android:layout_width="match_parent"
-        android:layout_height="186dp" />
+        android:layout_height="186dp"
+        android:layout_below="@+id/layout_header"/>
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/circle_indicator_photo_worker"

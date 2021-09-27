@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.example.repairhomeelectricbooking.photo.Photo;
@@ -19,6 +20,17 @@ public class DetailWorkerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private CircleIndicator mCircleIndicator;
     private List<Photo> mListPhoto;
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if(mViewPager.getCurrentItem() == mListPhoto.size() - 1){
+                mViewPager.setCurrentItem(0);
+            }else {
+                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +45,25 @@ public class DetailWorkerActivity extends AppCompatActivity {
         mViewPager.setAdapter(adapter);
 
         mCircleIndicator.setViewPager(mViewPager);
+
+        mHandler.postDelayed(mRunnable,3000);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mHandler.removeCallbacks(mRunnable);
+                mHandler.postDelayed(mRunnable,3000);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private List<Photo> getListPhotoWorker(){
@@ -47,5 +78,17 @@ public class DetailWorkerActivity extends AppCompatActivity {
 
     public void clickToSearchScreen(View view){
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHandler.postDelayed(mRunnable,3000);
     }
 }

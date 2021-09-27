@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "558054542664-1b4ebp60gopmdmcdh1rurjklrigps5u7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repairhomeelectricbooking",
+            "certificate_hash": "4ead28ef5209fcce372f391e2a7ce4524335f2b4"
+          }
+        },
+        {
           "client_id": "558054542664-5niig18mah4gj2mbn7qq59iuhee4luqf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -27,6 +35,22 @@
           "android_info": {
             "package_name": "com.example.repairhomeelectricbooking",
             "certificate_hash": "5fefab70111caa02f84fb2fa64953fbf03fad45c"
+          }
+        },
+        {
+          "client_id": "558054542664-tdgd18mgcg0m5geivckrmicp5ou2vlot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repairhomeelectricbooking",
+            "certificate_hash": "5f28bc98b4486de57a9e642464f8cf280c3cd026"
+          }
+        },
+        {
+          "client_id": "558054542664-vc80tc2qb68stnh0jcco9krdco0n3lnv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.repairhomeelectricbooking",
+            "certificate_hash": "2d26c4734542af5d1f9a434dfa91edd340fd44b3"
           }
         },
         {
