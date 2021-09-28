@@ -19,17 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_layout_notify">
-
             <TextView
-                android:id="@+id/tvDonHangCustomer"
+                android:id="@+id/tvDonHangWorker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="Đơn Hàng"
                 android:textColor="@color/white"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="25dp" />
         </RelativeLayout>
 
         <ScrollView
@@ -50,7 +49,7 @@
                     android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/tvDateHistory1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -58,30 +57,30 @@
                         android:text="09/09/2021" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/tvNameHistory1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView9"
+                        android:layout_below="@id/tvDonHangWorker"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:text="Hồ Minh Tuấn"
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/tvPriceHistory1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView11"
+                        android:layout_below="@id/tvNameHistory1"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"
                         android:text="Giá Tiền : 500.000 vnđ" />
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/tvThietBiSuaHistory1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView12"
+                        android:layout_below="@id/tvPriceHistory1"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:text="Thiết bị sửa: Máy Lạnh"
@@ -100,7 +99,7 @@
                     android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/textView14"
+                        android:id="@+id/tvDateDonHang2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -108,30 +107,30 @@
                         android:text="12/09/2021" />
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/tvNameHistory2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView14"
+                        android:layout_below="@id/tvDateDonHang2"
                         android:gravity="left"
-                        android:textSize="17dp"
                         android:text="Bùi Ngọc Mạnh"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="17dp" />
 
                     <TextView
-                        android:id="@+id/textView16"
+                        android:id="@+id/tvPriceHistory2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView15"
+                        android:layout_below="@id/tvNameHistory2"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"
                         android:text="Giá Tiền : 500.000 vnđ" />
 
                     <TextView
-                        android:id="@+id/textView17"
+                        android:id="@+id/tvThietBiSuaHistory2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView16"
+                        android:layout_below="@id/tvPriceHistory2"
 
                         android:textSize="17dp"                        android:gravity="left"
                         android:text="Thiết bị sửa: Máy Giặt"
@@ -150,7 +149,7 @@
                     android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/textView18"
+                        android:id="@+id/tvDateDonHang3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -159,30 +158,30 @@
                         />
 
                     <TextView
-                        android:id="@+id/textView19"
+                        android:id="@+id/tvNameHistory3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView18"
+                        android:layout_below="@id/tvDateDonHang3"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:text="Cao Đại Thành"
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/textView20"
+                        android:id="@+id/tvPriceHistory3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView19"
+                        android:layout_below="@id/tvNameHistory3"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"
                         android:text="Giá Tiền : 500.000 vnđ" />
 
                     <TextView
-                        android:id="@+id/textView21"
+                        android:id="@+id/tvThietBiSuaHistory3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView20"
+                        android:layout_below="@id/tvPriceHistory3"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"
@@ -202,7 +201,7 @@
 
 
                     <TextView
-                        android:id="@+id/textView22"
+                        android:id="@+id/tvDateDonHang4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -210,30 +209,30 @@
                         android:text="23/09/2021" />
 
                     <TextView
-                        android:id="@+id/textView23"
+                        android:id="@+id/tvNameHistory4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView22"
+                        android:layout_below="@id/tvDateDonHang4"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:text="Nguyễn Văn Minh"
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/textView24"
+                        android:id="@+id/tvPriceHistory4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView23"
+                        android:layout_below="@id/tvNameHistory4"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"
                         android:text="Giá Tiền : 400.000 vnđ" />
 
                     <TextView
-                        android:id="@+id/textView25"
+                        android:id="@+id/tvThietBiSuaHistory4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView24"
+                        android:layout_below="@id/tvPriceHistory4"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"
@@ -252,7 +251,7 @@
                     android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/textView26"
+                        android:id="@+id/tvDateDonHang5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -260,30 +259,31 @@
                         android:text="29/08/2021" />
 
                     <TextView
-                        android:id="@+id/textView27"
+                        android:id="@+id/tvNameHistory5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView26"
+                        android:layout_below="@id/tvDateDonHang5"
                         android:gravity="left"
                         android:textSize="17dp"
+                        android:text="Trần Công Liêm"
                         android:textColor="@color/black"
                         />
 
                     <TextView
-                        android:id="@+id/textView28"
+                        android:id="@+id/tvPriceHistory5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView27"
+                        android:layout_below="@id/tvNameHistory4"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"
                         android:text="Giá Tiền : 500.000 vnđ" />
 
                     <TextView
-                        android:id="@+id/textView29"
+                        android:id="@+id/tvThietBiSuaHistory5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/textView28"
+                        android:layout_below="@id/tvPriceHistory5"
                         android:gravity="left"
                         android:textSize="17dp"
                         android:textColor="@color/black"

@@ -10,13 +10,13 @@
 
 
     <RelativeLayout
-        android:id="@+id/rlThongBaoCustomer"
+        android:id="@+id/rlThongBaoWorker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_layout_notify">
 
         <TextView
-            android:id="@+id/tvThongBaoCustomer"
+            android:id="@+id/tvThongBaoWorker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -27,7 +27,7 @@
             android:textSize="25dp" />
 
         <ImageButton
-            android:id="@+id/imgbtnCustomerMarkAsRead"
+            android:id="@+id/imgbtnWorkerMarkAsRead"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
@@ -37,10 +37,10 @@
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/scrollViewCustomerNotification"
+        android:id="@+id/scrollViewWorkerNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rlThongBaoCustomer"
+        android:layout_below="@+id/rlThongBaoWorker"
         android:layout_marginTop="15dp">
 
 
@@ -50,13 +50,13 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/layout_Customer_Noti1"
+                android:id="@+id/layout_Worker_Noti1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
                 <ImageView
-                    android:id="@+id/imgNotify1"
+                    android:id="@+id/imgWorkerNotify1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerVertical="true"
@@ -68,14 +68,14 @@
 
 
                 <TextView
-                    android:id="@+id/tvCustomerTittleNoti1"
+                    android:id="@+id/tvTittleWorkerNoti1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@+id/imgNotify1"
+                    android:layout_toEndOf="@+id/imgWorkerNotify1"
                     android:gravity="left"
                     android:text="Đang đợi đánh giá"
                     android:textColor="#D9000000"
@@ -83,21 +83,21 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDetailNoti1"
+                    android:id="@+id/tvDetailWorkerNoti1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvCustomerTittleNoti1"
+                    android:layout_below="@+id/tvTittleWorkerNoti1"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_toEndOf="@+id/imgNotify1"
+                    android:layout_toEndOf="@+id/imgWorkerNotify1"
                     android:gravity="left"
                     android:text="Đơn hàng sửa máy lạnh"
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDayOfNoti1"
+                    android:id="@+id/tvWorkerDayOfNoti1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -114,7 +114,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layout_Customer_Noti2"
+                android:id="@+id/layout_Worker_Noti2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -132,7 +132,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvCustomerTittleNoti2"
+                    android:id="@+id/tvTittleWorkerNoti2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -147,10 +147,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDetailNoti2"
+                    android:id="@+id/tvWorkerDetailNoti2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvCustomerTittleNoti2"
+                    android:layout_below="@+id/tvTittleWorkerNoti2"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
@@ -161,7 +161,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDayOfNoti2"
+                    android:id="@+id/tvWorkerDayOfNoti2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -178,7 +178,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layout_Customer_Noti3"
+                android:id="@+id/layout_Worker_Noti3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -196,7 +196,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvCustomerTittleNoti3"
+                    android:id="@+id/tvWorkerTittleNoti3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -211,10 +211,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDetailNoti3"
+                    android:id="@+id/tvWorkerDetailNoti3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvCustomerTittleNoti3"
+                    android:layout_below="@+id/tvWorkerTittleNoti3"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
@@ -225,7 +225,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDayOfNoti3"
+                    android:id="@+id/tvWorkerDayOfNoti3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -242,7 +242,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layout_Customer_Noti4"
+                android:id="@+id/layout_Worker_Noti4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -260,7 +260,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvCustomerTittleNoti4"
+                    android:id="@+id/tvWorkerTittleNoti4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -275,10 +275,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDetailNoti4"
+                    android:id="@+id/tvWorkerDetailNoti4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvCustomerTittleNoti4"
+                    android:layout_below="@+id/tvWorkerTittleNoti4"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
@@ -289,7 +289,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDayOfNoti4"
+                    android:id="@+id/tvWorkerDayOfNoti4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -306,7 +306,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layout_Customer_Noti5"
+                android:id="@+id/layout_Worker_Noti5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -324,7 +324,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvCustomerTittleNoti5"
+                    android:id="@+id/tvWorkerTittleNoti5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -339,10 +339,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDetailNoti5"
+                    android:id="@+id/tvWorkerDetailNoti5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvCustomerTittleNoti5"
+                    android:layout_below="@+id/tvWorkerTittleNoti5"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
@@ -353,7 +353,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/tvCustomerDayOfNoti5"
+                    android:id="@+id/tvWorkerDayOfNoti5"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"

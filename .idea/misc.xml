@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/activity_detail_worker.xml" value="0.2" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.15217391304347827" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_history.xml" value="0.2" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_main_user.xml" value="0.264" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_notification.xml" value="0.15217391304347827" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_profile.xml" value="0.12360688956433637" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_history.xml" value="0.2" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_main.xml" value="0.264" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_notification.xml" value="0.25052083333333336" />
+        <entry key="..\:/HCIProject/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_profile.xml" value="0.264" />
         <entry key="..\:/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_mainuser.xml" value="0.36666666666666664" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_login.xml" value="0.28532608695652173" />
