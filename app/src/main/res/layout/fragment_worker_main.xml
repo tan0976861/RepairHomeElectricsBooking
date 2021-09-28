@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WorkerMainFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="11dp"
+            android:backgroundTint="#99DDDDDD"
+            android:onClick="clickToSearchScreen"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_photo_worker_main"
+        android:layout_width="match_parent"
+        android:layout_height="186dp"
+        android:layout_below="@+id/layout_header" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/circle_indicator_photo_worker_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_pager_photo_worker_main"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        app:ci_drawable="@drawable/bg_circle_bluesky" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/circle_indicator_photo_worker_main">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/layout_info_worker_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/bottom_navigation_icon"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/custom_layout_detailworker"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/account"
+                    android:drawablePadding="10dp"
+                    android:text="Hồ Minh Tuấn"
+                    android:textColor="@color/black"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_fix"
+                    android:drawablePadding="5dp"
+                    android:text="Chuyên sửa máy lạnh" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_money"
+                    android:text="Công ~ 500,000 VNĐ" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_location"
+                    android:text="Quận 9, Hồ Chí Minh" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/icon_contact"
+                    android:drawablePadding="10dp"
+                    android:paddingRight="30dp"
+                    android:text="0946746543" />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
