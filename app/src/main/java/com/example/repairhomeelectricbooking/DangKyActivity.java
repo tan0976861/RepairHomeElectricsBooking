@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.Database.MyDB;
+import com.example.repairhomeelectricbooking.dto.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -23,6 +24,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -86,8 +89,18 @@ public class DangKyActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            User user = new User(strEmail,strPass,"",strPhone,"");
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblUser");
+
+                            mDatabase.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    goToMainUserActivity(strPhone);
+                                }
+                            });
+
                             // Sign in success, update UI with the signed-in user's information
-                            goToMainUserActivity(strPhone);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại.",
