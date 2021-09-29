@@ -25,8 +25,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-
-            android:id="@+id/layout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -38,6 +36,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:imeOptions="actionNext"
                 android:background="@drawable/login_border"
                 android:drawableLeft="@drawable/account"
                 android:drawablePadding="16dp"
@@ -51,6 +50,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:imeOptions="actionDone"
                 android:background="@drawable/login_border"
                 android:drawableStart="@drawable/lock"
                 android:drawablePadding="16dp"
@@ -74,12 +74,38 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_below="@+id/layout1"
+        android:id="@+id/layout_sign_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:weightSum="2">
+        android:layout_below="@+id/layout1"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Chưa có tài khoản ?"
+            android:textColor="#999999" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:text="Đăng ký"
+            android:textColor="#999999" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_google_facebook"
+        android:layout_below="@+id/layout_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:weightSum="2">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,25 +128,5 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/facebook" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/layout1"
-        android:layout_marginTop="100dp">
-
-
-        <Button
-            android:id="@+id/btnsignup1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Bạn là người dùng mới? Đăng Ký"
-            android:textColor="#999999"
-            android:layout_marginTop="50dp"
-            android:layout_weight="1"
-            android:textAllCaps="false"
-            android:background="@drawable/login_btnregister"/>
     </LinearLayout>
 </RelativeLayout>
