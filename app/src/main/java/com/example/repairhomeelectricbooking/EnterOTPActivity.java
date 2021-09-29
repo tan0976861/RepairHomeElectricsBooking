@@ -135,6 +135,7 @@ public class EnterOTPActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("phonenumber",phoneNumber);
         startActivity(intent);
+        finishAffinity();
     }
 
     private void layout_toast(String text, Context context){

@@ -1,7 +1,9 @@
 package com.example.repairhomeelectricbooking;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,53 +13,75 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.Database.MyDB;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText username, password;
-    Button login, signup;
-    MyDB db;
+    EditText email, password;
+    Button login;
+    LinearLayout layoutSignUp;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = (EditText) findViewById(R.id.username1);
+        email = (EditText) findViewById(R.id.username1);
         password = (EditText) findViewById(R.id.password1);
         login = (Button) findViewById(R.id.btnlogin1);
-        signup = (Button) findViewById(R.id.btnsignup1);
-        db = new MyDB(this);
+        layoutSignUp = (LinearLayout) findViewById(R.id.layout_sign_up);
+        progressDialog = new ProgressDialog(this);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
+                String strEmail = email.getText().toString();
+                String strPassword = password.getText().toString();
 
-                if(user.equals("") || pass.equals("")){
+                if(strEmail.equals("") || strPassword.equals("")){
                     layout_toast("Xin vui lòng điền hết thông tin",LoginActivity.this);
                 }else{
-                    Boolean checkuserpass = db.checkUserNamePassword(user,pass);
-                    if(checkuserpass == true){
-                        layout_toast("Đăng nhập thành công",LoginActivity.this);
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
-                    }else {
-                        layout_toast("Đăng nhập không thành công",LoginActivity.this);
-                    }
+                    onCickSignIn(strEmail,strPassword);
                 }
             }
         });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        layoutSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DangKyActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    private void onCickSignIn(String email,String password){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        progressDialog.show();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            layout_toast("Đăng nhập thành công",LoginActivity.this);
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finishAffinity();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void layout_toast(String text,Context context){

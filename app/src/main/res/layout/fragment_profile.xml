@@ -12,47 +12,52 @@
         android:layout_height="wrap_content"
         android:background="@drawable/grad">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/avatar_default"
+            app:civ_border_color="#11C7E6"
+            app:civ_border_width="2dp" />
 
-        <RelativeLayout
-            android:id="@+id/imgUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgAvatar"
-                android:layout_width="110dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/avatar"
-                app:civ_border_color="#11C7E6"
-                app:civ_border_width="2dp"
-                />
-        </RelativeLayout>
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40sp"
-            android:gravity="center"
-            android:layout_marginStart="30dp"
             android:fontFamily="sans-serif-light"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@+id/img_avatar"
             android:text="Trần Nhật Tân"
             android:textColor="@color/white"
             android:textSize="32sp"
-            android:textStyle="bold"
-            android:paddingBottom="100dp"/>
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_toRightOf="@+id/img_avatar"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginStart="10dp"
+            android:text="test@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <LinearLayout
+            android:id="@+id/layout_chinhsuataikhoan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_email"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_chinhsuataikhoan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="125dp"
-                android:layout_marginTop="85dp"
                 android:text="Chỉnh sửa tài khoản"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
@@ -60,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/direction"
-                android:layout_marginTop="88dp"/>
+                android:layout_marginTop="3dp"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -218,27 +223,27 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/btnLogout"
+                        android:id="@+id/btn_Logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="clickToLogout"
-                        android:text="Đăng xuất"
-                        android:textAllCaps="false"
-                        android:fontFamily="sans-serif-light"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
-                        android:gravity="top"
                         android:background="@drawable/custom_layout_listitem"
-                        android:paddingBottom="15dp"
-                        android:paddingTop="15dp"
-                        android:paddingLeft="15dp"
-                        android:textSize="20dp"
-                        android:textColor="@color/black"
                         android:drawableLeft="@drawable/logout"
-                        android:drawablePadding="10dp"/>
+                        android:drawablePadding="10dp"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="top"
+                        android:onClick="clickToLogout"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="Đăng xuất"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
 
                     <ImageView
                         android:layout_width="match_parent"

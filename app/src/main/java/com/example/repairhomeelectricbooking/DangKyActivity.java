@@ -3,6 +3,7 @@ package com.example.repairhomeelectricbooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,46 +29,36 @@ import java.util.concurrent.TimeUnit;
 
 public class DangKyActivity extends AppCompatActivity {
     public static final String TAG = DangKyActivity.class.getName();
-    EditText username,password,repassword,phonenumber;
+    EditText email,password,repassword,phonenumber;
     Button signup,signin;
-    MyDB db;
     FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky);
 
-        username = (EditText) findViewById(R.id.username);
+        email = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         repassword = (EditText) findViewById(R.id.repassword);
         phonenumber = (EditText) findViewById(R.id.phone);
         signup = (Button) findViewById(R.id.btnsignup);
         signin = (Button) findViewById(R.id.btnsignin);
-        db = new MyDB(this);
         mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
-                String repass = repassword.getText().toString();
-                String strPhone = phonenumber.getText().toString();
+                String strEmail = email.getText().toString();
+                String strPass = password.getText().toString();
+                String strRepass = repassword.getText().toString();
+                String strPhone = "+84" + phonenumber.getText().toString();
 
-                if(user.equals("") || pass.equals("") || repass.equals("")){
+                if(strEmail.equals("") || strPass.equals("") || strRepass.equals("")){
                     Toast.makeText(DangKyActivity.this,"Xin vui lòng điền hết thông tin",Toast.LENGTH_SHORT).show();
                 }else{
-                    if(pass.equals(repass)){
-                        Boolean checkuser = db.checkUserName(user);
-                        if(checkuser == false){
-                            Boolean insert = db.insertData(user,pass);
-                            if(insert == true){
-                                onClickVerifyPhoneNumber(strPhone);
-                            }else {
-                                Toast.makeText(DangKyActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
-                            }
-                        }else{
-                            Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
-                        }
+                    if(strPass.equals(strRepass)){
+                        onClickSignUp2(strEmail,strPass,strPhone);
                     }else{
                         Toast.makeText(DangKyActivity.this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
                     }
@@ -86,6 +77,43 @@ public class DangKyActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void onClickSignUp2(String strEmail,String strPass,String strPhone){
+        progressDialog.show();
+        mAuth.createUserWithEmailAndPassword(strEmail, strPass)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            goToMainUserActivity(strPhone);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void onClickSignUp(String strEmail,String strPass,String strPhone){
+        progressDialog.show();
+        mAuth.createUserWithEmailAndPassword(strEmail, strPass)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            onClickVerifyPhoneNumber(strPhone);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void onClickVerifyPhoneNumber(String strPhone) {
