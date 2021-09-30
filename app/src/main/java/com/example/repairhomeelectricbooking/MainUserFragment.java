@@ -86,29 +86,29 @@ public class MainUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = (View) inflater.inflate(R.layout.fragment_main_user, container, false);
-        btnSearch = (Button) view.findViewById(R.id.btnSearch);
-        layout_firstWorker= (RelativeLayout) view.findViewById(R.id.layout_firstWorker);
-        scrollViewMainUser = (ScrollView) view.findViewById(R.id.scrollViewMainUser);
+//        btnSearch = (Button) view.findViewById(R.id.btnSearch);
+//        layout_firstWorker= (RelativeLayout) view.findViewById(R.id.layout_firstWorker);
+//        scrollViewMainUser = (ScrollView) view.findViewById(R.id.scrollViewMainUser);
         rcv_item = (RecyclerView) view.findViewById(R.id.rcv_item);
         itemAdapter = new ItemAdapter(getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false);
         rcv_item.setLayoutManager(linearLayoutManager);
         itemAdapter.setData(getListItem());
         rcv_item.setAdapter(itemAdapter);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),SearchWorkerActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
-        layout_firstWorker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),DetailWorkerActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
+//        btnSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(),SearchWorkerActivity.class);
+//                getActivity().startActivity(intent);
+//            }
+//        });
+//        layout_firstWorker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(),DetailWorkerActivity.class);
+//                getActivity().startActivity(intent);
+//            }
+//        });
 //        scrollViewMainUser.setOnTouchListener(new TranslateAnimationUtil(getActivity(),btnSearch));
         // Inflate the layout for this fragment
         return view;

@@ -51,11 +51,16 @@
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/register_bg1.xml" value="0.19739583333333333" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/register_border.xml" value="0.19739583333333333" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/drawable/scroll.xml" value="0.2703125" />
-        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_dang_ky.xml" value="0.1" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_change_form_register_worker_user.xml" value="0.25052083333333336" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_change_register.xml" value="0.25052083333333336" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_dang_ky.xml" value="0.25052083333333336" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_dang_ky_worker_activiry.xml" value="0.25052083333333336" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_detail_worker.xml" value="0.2" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_enter_otpactivity.xml" value="0.1" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_enter_otpworker.xml" value="0.23645833333333333" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_main_worker.xml" value="0.23645833333333333" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_onboarding.xml" value="0.264" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/activity_profile_update.xml" value="0.16" />
@@ -68,6 +73,9 @@
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_onboarding4.xml" value="0.152" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_profile_update.xml" value="0.1" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_history.xml" value="0.25052083333333336" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_main.xml" value="0.25052083333333336" />
+        <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_notification.xml" value="0.25052083333333336" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/fragment_worker_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/item_diengiadung.xml" value="0.4" />
         <entry key="..\:/TanTN/RepairHomeElectricsBooking/app/src/main/res/layout/item_photo_worker.xml" value="0.25052083333333336" />

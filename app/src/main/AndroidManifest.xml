@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricBooking">
         <activity
+            android:name=".EnterOTPWorkerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainWorkerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChangeRegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DangKyWorkerActiviry"
+            android:exported="true" />
+        <activity
             android:name=".DetailWorkerActivity"
             android:exported="true" />
         <activity

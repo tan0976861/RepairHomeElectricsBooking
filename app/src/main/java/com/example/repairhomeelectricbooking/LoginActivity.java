@@ -22,6 +22,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email, password;
@@ -55,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         layoutSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DangKyActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ChangeRegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,11 +73,22 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblUser");
+                            if(mDatabase.child(firebaseUser.getUid()).equals(firebaseUser.getUid())) {
+                                layout_toast("Đăng nhập thành công", LoginActivity.this);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finishAffinity();
+                            }else {
+                                layout_toast("Đăng nhập thành công", LoginActivity.this);
+                                Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
+                                startActivity(intent);
+                                finishAffinity();
+                            }
+                            ;
                             // Sign in success, update UI with the signed-in user's information
-                            layout_toast("Đăng nhập thành công",LoginActivity.this);
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            finishAffinity();
+                            ;
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác.",
