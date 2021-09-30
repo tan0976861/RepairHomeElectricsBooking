@@ -3,6 +3,9 @@ package com.example.repairhomeelectricbooking.dto;
 public class Worker {
     public String email,password,fullName,phone,adress;
 
+    public Worker() {
+    }
+
     public Worker(String email, String password, String fullName, String phone, String adress) {
         this.email = email;
         this.password = password;

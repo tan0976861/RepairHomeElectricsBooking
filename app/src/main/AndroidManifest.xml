@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricBooking">
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".EnterOTPWorkerActivity"
             android:exported="true" />
         <activity

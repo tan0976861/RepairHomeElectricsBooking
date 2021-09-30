@@ -18,16 +18,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.Database.MyDB;
+import com.example.repairhomeelectricbooking.dto.User;
+import com.example.repairhomeelectricbooking.dto.Worker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email, password;
+    TextView tvQuenMatKhau;
     Button login;
     LinearLayout layoutSignUp;
     private ProgressDialog progressDialog;
@@ -38,9 +44,17 @@ public class LoginActivity extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.username1);
         password = (EditText) findViewById(R.id.password1);
+        tvQuenMatKhau = (TextView) findViewById(R.id.tv_quenmatkhau);
         login = (Button) findViewById(R.id.btnlogin1);
         layoutSignUp = (LinearLayout) findViewById(R.id.layout_sign_up);
         progressDialog = new ProgressDialog(this);
+        tvQuenMatKhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,25 +85,56 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            FirebaseUser firebaseUser  = mAuth.getCurrentUser();
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblUser");
-                            if(mDatabase.child(firebaseUser.getUid()).equals(firebaseUser.getUid())) {
-                                layout_toast("Đăng nhập thành công", LoginActivity.this);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finishAffinity();
-                            }else {
-                                layout_toast("Đăng nhập thành công", LoginActivity.this);
-                                Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
-                                startActivity(intent);
-                                finishAffinity();
-                            }
-                            ;
-                            // Sign in success, update UI with the signed-in user's information
-                            ;
+                            mDatabase.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                                        // TODO: handle the post
+                                        User user = postSnapshot.getValue(User.class);
+                                        if(user.getEmail().equals(firebaseUser.getEmail())){
+                                            progressDialog.dismiss();
+                                            layout_toast("Đăng nhập thành công", LoginActivity.this);
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            finishAffinity();
+                                            return;
+                                        }
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    // Getting Post failed, log a message
+                                    // ...
+                                }
+                            });
+                            DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference("tblWorker");
+                            mDatabase2.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                                        // TODO: handle the post
+                                        Worker worker = postSnapshot.getValue(Worker.class);
+                                        if(worker.getEmail().equals(firebaseUser.getEmail())){
+                                            progressDialog.dismiss();
+                                            layout_toast("Đăng nhập thành công", LoginActivity.this);
+                                            Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
+                                            startActivity(intent);
+                                            finishAffinity();
+                                            return;
+                                        }
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    // Getting Post failed, log a message
+                                    // ...
+                                }
+                            });
                         } else {
+                            progressDialog.dismiss();
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác.",
                                     Toast.LENGTH_SHORT).show();
