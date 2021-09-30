@@ -56,7 +56,7 @@
                 android:layout_margin="10dp">
 
                 <ImageView
-                    android:id="@+id/imgNotify1"
+                    android:id="@+id/ImageService"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerVertical="true"
@@ -75,7 +75,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@+id/imgNotify1"
+                    android:layout_toEndOf="@+id/ImageService"
                     android:gravity="left"
                     android:text="Đang đợi đánh giá"
                     android:textColor="#D9000000"
@@ -91,7 +91,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_toEndOf="@+id/imgNotify1"
+                    android:layout_toEndOf="@+id/ImageService"
                     android:gravity="left"
                     android:text="Đơn hàng sửa máy lạnh"
                     android:textSize="18dp" />
