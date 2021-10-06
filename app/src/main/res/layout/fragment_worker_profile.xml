@@ -26,8 +26,7 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/avatar"
                 app:civ_border_color="#11C7E6"
-                app:civ_border_width="2dp"
-                />
+                app:civ_border_width="2dp" />
         </RelativeLayout>
         <TextView
             android:id="@+id/tv_name_worker"
@@ -217,27 +216,27 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/btnLogout"
+                        android:id="@+id/btnLogoutWorker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="clickToLogout"
-                        android:text="Đăng xuất"
-                        android:textAllCaps="false"
-                        android:fontFamily="sans-serif-light"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
-                        android:gravity="top"
                         android:background="@drawable/custom_layout_listitem"
-                        android:paddingBottom="15dp"
-                        android:paddingTop="15dp"
-                        android:paddingLeft="15dp"
-                        android:textSize="20dp"
-                        android:textColor="@color/black"
                         android:drawableLeft="@drawable/logout"
-                        android:drawablePadding="10dp"/>
+                        android:drawablePadding="10dp"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="top"
+                        android:onClick="clickToLogout"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="Đăng xuất"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
 
                     <ImageView
                         android:layout_width="match_parent"

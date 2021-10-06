@@ -2,15 +2,17 @@ package com.example.repairhomeelectricbooking.dto;
 
 public class User {
     public String email,password,fullName,phone,adress;
+    public LocationApp location;
 
     public User() { }
 
-    public User(String email, String password, String fullName, String phone, String adress) {
+    public User(String email, String password, String fullName, String phone, String adress,LocationApp location) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
         this.phone = phone;
         this.adress = adress;
+        this.location=location;
     }
 
     public String getEmail() {
@@ -51,5 +53,13 @@ public class User {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    public LocationApp getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationApp location) {
+        this.location = location;
     }
 }

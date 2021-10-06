@@ -12,11 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.repairhomeelectricbooking.item.Item;
 import com.example.repairhomeelectricbooking.item.ItemAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +43,16 @@ public class MainUserFragment extends Fragment {
     private String mParam2;
     private View view;
     private Button btnSearch;
-    private Button btnSearch1;
+    private Button btnBookingRepair;
     private ScrollView scrollViewMainUser;
     private RecyclerView rcv_item;
     private ItemAdapter itemAdapter;
     private Context mContext;
     private RelativeLayout layout_firstWorker;
+     private DatabaseReference mDatabase;
+     private EditText edtThietbi,edtProblem,edtFee;
+
+
     public MainUserFragment() {
         // Required empty public constructor
     }
@@ -95,6 +103,19 @@ public class MainUserFragment extends Fragment {
         rcv_item.setLayoutManager(linearLayoutManager);
         itemAdapter.setData(getListItem());
         rcv_item.setAdapter(itemAdapter);
+        edtThietbi=(EditText) view.findViewById(R.id.edtInputThietBi);
+        edtProblem=(EditText)  view.findViewById(R.id.edtInputVanDe);
+        edtFee= (EditText)  view.findViewById(R.id.edtInputGiaTien);
+        btnBookingRepair=(Button) view.findViewById(R.id.btn_BookingRepair);
+        btnBookingRepair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String strThietBi = edtThietbi.getText().toString();
+                String strVanDe = edtProblem.getText().toString();
+                String strFee = edtFee.getText().toString();
+                gotoSearchAnimation(strThietBi,strVanDe,strFee);
+            }
+        });
 //        btnSearch.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -128,4 +149,12 @@ public class MainUserFragment extends Fragment {
         list.add(new Item(R.drawable.ocam,"Ổ cắm"));
         return list;
     }
+    public void gotoSearchAnimation(String thietbi, String problem, String price ){
+        Intent intent = new Intent(getActivity(),AnimationSearchActivity.class);
+        intent.putExtra("thietbi",thietbi);
+        intent.putExtra("problem",problem);
+        intent.putExtra("price",price);
+        startActivity(intent);
+    }
+
 }
