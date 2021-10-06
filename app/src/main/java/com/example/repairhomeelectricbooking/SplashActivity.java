@@ -58,16 +58,13 @@ public class SplashActivity extends AppCompatActivity {
             mDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                         // TODO: handle the post
-                        User user = postSnapshot.getValue(User.class);
-                        if(user.getEmail().equals(firebaseUser.getEmail())){
+//                        if(dataSnapshot.child(firebaseUser.getUid()).exists()){
                             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                             startActivity(intent);
                             finishAffinity();
                             return;
-                        }
-                    }
+//                        }
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -79,16 +76,13 @@ public class SplashActivity extends AppCompatActivity {
             mDatabase2.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                         // TODO: handle the post
-                        Worker worker = postSnapshot.getValue(Worker.class);
-                        if(worker.getEmail().equals(firebaseUser.getEmail())){
+                        if(dataSnapshot.child(firebaseUser.getUid()).exists()){
                             Intent intent = new Intent(SplashActivity.this, MainWorkerActivity.class);
                             startActivity(intent);
                             finishAffinity();
                             return;
                         }
-                    }
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {

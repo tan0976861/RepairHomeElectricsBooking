@@ -1,17 +1,29 @@
 package com.example.repairhomeelectricbooking.dto;
 
 public class Worker {
-    public String email,password,fullName,phone,adress;
+    public String email, password, fullName, phone, address, type, image;
+    public boolean status, active;
+     public double fee,distance=0;
+     public LocationApp location;
+
+
 
     public Worker() {
     }
 
-    public Worker(String email, String password, String fullName, String phone, String adress) {
+    public Worker(String email, String password, String fullName, String phone, String address, String type, String image, boolean status, boolean active, double fee, LocationApp location, double distance) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
         this.phone = phone;
-        this.adress = adress;
+        this.address = address;
+        this.type = type;
+        this.image = image;
+        this.status = status;
+        this.active = active;
+        this.fee = fee;
+        this.location=location;
+        this.distance=distance;
     }
 
     public String getEmail() {
@@ -46,11 +58,84 @@ public class Worker {
         this.phone = phone;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public void setFee(double fee) {
+        this.fee = fee;
+    }
+
+    public LocationApp getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationApp location) {
+        this.location = location;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", type='" + type + '\'' +
+                ", image='" + image + '\'' +
+                ", status=" + status +
+                ", active=" + active +
+                ", fee=" + fee +
+                ", location=" + location +
+                '}';
     }
 }

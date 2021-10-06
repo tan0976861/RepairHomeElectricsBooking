@@ -91,10 +91,8 @@ public class LoginActivity extends AppCompatActivity {
                             mDatabase.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                                         // TODO: handle the post
-                                        User user = postSnapshot.getValue(User.class);
-                                        if(user.getEmail().equals(firebaseUser.getEmail())){
+                                        if(dataSnapshot.child(firebaseUser.getUid()).exists()){
                                             progressDialog.dismiss();
                                             layout_toast("Đăng nhập thành công", LoginActivity.this);
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -102,10 +100,10 @@ public class LoginActivity extends AppCompatActivity {
                                             finishAffinity();
                                             return;
                                         }
-                                    }
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
+                                    layout_toast("Đăng nhập thành công1213", LoginActivity.this);
                                     // Getting Post failed, log a message
                                     // ...
                                 }
@@ -114,10 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                             mDatabase2.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                                         // TODO: handle the post
-                                        Worker worker = postSnapshot.getValue(Worker.class);
-                                        if(worker.getEmail().equals(firebaseUser.getEmail())){
+                                        if(dataSnapshot.child(firebaseUser.getUid()).exists()){
                                             progressDialog.dismiss();
                                             layout_toast("Đăng nhập thành công", LoginActivity.this);
                                             Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
@@ -125,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                                             finishAffinity();
                                             return;
                                         }
-                                    }
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {

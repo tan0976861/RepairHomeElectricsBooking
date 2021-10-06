@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.repairhomeelectricbooking.dto.LocationApp;
 import com.example.repairhomeelectricbooking.dto.User;
 import com.example.repairhomeelectricbooking.dto.Worker;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -89,7 +91,8 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                            Worker worker = new Worker(strEmail,strPass,"",strPhone,"");
+                            LocationApp location= new LocationApp("10.13121212","103.12312313");
+                            Worker worker = new Worker(strEmail,strPass,"",strPhone,"","","",false,false,0, location,0);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
 
                             mDatabase.child(firebaseUser.getUid()).setValue(worker).addOnCompleteListener(new OnCompleteListener<Void>() {

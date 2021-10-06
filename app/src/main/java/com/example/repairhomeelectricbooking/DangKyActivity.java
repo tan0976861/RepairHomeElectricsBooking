@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.Database.MyDB;
+import com.example.repairhomeelectricbooking.dto.LocationApp;
 import com.example.repairhomeelectricbooking.dto.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -90,7 +91,8 @@ public class DangKyActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                            User user = new User(strEmail,strPass,"",strPhone,"");
+                            LocationApp location= new LocationApp("9.13121212","100.12312313");
+                            User user = new User(strEmail,strPass,"",strPhone,"",location);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblUser");
 
                             mDatabase.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -117,9 +119,20 @@ public class DangKyActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
+
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            onClickVerifyPhoneNumber(strPhone);
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            LocationApp location= new LocationApp("9.13121212","100.12312313");
+                            User user = new User(strEmail,strPass,"",strPhone,"",location);
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblUser");
+
+                            mDatabase.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    onClickVerifyPhoneNumber(strPhone);
+                                }
+                            });
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(DangKyActivity.this, "Tài khoản đã tồn tại.",
