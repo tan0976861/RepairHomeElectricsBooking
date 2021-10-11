@@ -1,9 +1,14 @@
-package com.example.repairhomeelectricbooking;
+package com.example.repairhomeelectricbooking.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.example.repairhomeelectricbooking.HistoryFragment;
+import com.example.repairhomeelectricbooking.MainUserFragment;
+import com.example.repairhomeelectricbooking.NotificationFragment;
+import com.example.repairhomeelectricbooking.ProfileFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {

@@ -11,16 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="#FFD700"-->
-<!--            android:gravity="center"-->
-<!--            android:padding="10dp"-->
-<!--            android:text="Repair Electronic"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="25dp"-->
-<!--            android:textStyle="bold" />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#FFD700"-->
+        <!--            android:gravity="center"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:text="Repair Electronic"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="25dp"-->
+        <!--            android:textStyle="bold" />-->
 
     </RelativeLayout>
 
@@ -41,7 +41,7 @@
                 android:id="@+id/rlSearchTaskbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/bluesky">
+                android:background="#ffd700">
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -81,14 +81,14 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/edtInputThietBi"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_below="@+id/tvThietBi"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:inputType="text" />
+                    android:layout_marginEnd="20dp" />
 
                 <TextView
                     android:id="@+id/tvMoTaVanDe"
@@ -111,46 +111,13 @@
                     android:layout_marginEnd="20dp"
                     android:inputType="text" />
 
-                <TextView
-                    android:id="@+id/tvGiaTien"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/edtInputVanDe"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Giá Tiền"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/edtInputGiaTien"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvGiaTien"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:inputType="text" />
-
-                <com.wefika.flowlayout.FlowLayout
-                    android:id="@+id/flGiatien"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvGiaTien"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp">
-
-
-
-                </com.wefika.flowlayout.FlowLayout>
 
 
                 <Button
                     android:id="@+id/btn_BookingRepair"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/flGiatien"
+                    android:layout_below="@+id/edtInputVanDe"
                     android:layout_marginStart="100dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="100dp"

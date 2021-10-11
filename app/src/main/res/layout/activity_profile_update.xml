@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileUpdateActivity"
-    android:background="#0D11c7e6"
     >
 
     <RelativeLayout
@@ -18,7 +17,7 @@
             android:id="@+id/tvCustomerDetailAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="@font/font5"
             android:gravity="center"
             android:padding="10dp"
             android:text="Tài khoản"
@@ -35,7 +34,7 @@
             android:layout_centerVertical="true"
             android:backgroundTint="#66DDDDDD"
             android:onClick="clickToBackProfile"
-            android:src="@drawable/back" />
+            android:src="@drawable/back2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +45,8 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="23dp"
-            android:text="Lưu"/>
+            android:text="Lưu"
+            android:fontFamily="@font/font5"/>
     </RelativeLayout>
 
 
@@ -86,7 +86,8 @@
                     android:layout_weight="1"
                     android:padding="4dp"
                     android:text="Cập nhật hình ảnh"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/font5"/>
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -100,8 +101,8 @@
                     android:gravity="left"
                     android:padding="5dp"
                     android:text="Chia sẻ hình ảnh của bạn! Mọi người sẽ thấy nó"
-                    android:textColor="@color/black"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:fontFamily="@font/font5"/>
 
             </RelativeLayout>
 
@@ -118,10 +119,10 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="Tên Nguời Dùng"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/font5"/>
 
                 <EditText
                     android:id="@+id/edtCustomerName"
@@ -144,7 +145,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/font5"
                     android:layout_marginTop="20dp"
                     android:text="Số điện thoại"
                     android:textSize="20dp"
@@ -169,7 +170,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/font5"
                     android:layout_marginTop="20dp"
                     android:text="Địa chỉ email"
                     android:textSize="20dp"

@@ -34,20 +34,22 @@
 
     <Button
         android:id="@+id/get_login"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="@color/bluesky"
+        android:background="@drawable/custom_btn_onboarding4"
         android:text="Đăng nhập"
         android:textColor="@color/denmo"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/font5" />
 
     <Button
         android:id="@+id/get_register"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="@color/bluesky"
+        android:background="@drawable/custom_btn_onboarding4"
         android:text="đăng ký"
         android:textColor="@color/denmo"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/font5"/>
 
 </LinearLayout>

@@ -91,8 +91,8 @@ public class DangKyActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                            LocationApp location= new LocationApp("9.13121212","100.12312313");
-                            User user = new User(strEmail,strPass,"",strPhone,"",location);
+                            LocationApp location= new LocationApp(9.13121212,100.12312313);
+                            User user = new User(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"",location);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblUser");
 
                             mDatabase.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -123,8 +123,8 @@ public class DangKyActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                            LocationApp location= new LocationApp("9.13121212","100.12312313");
-                            User user = new User(strEmail,strPass,"",strPhone,"",location);
+                            LocationApp location= new LocationApp(9.13121212,100.12312313);
+                            User user = new User(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"",location);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblUser");
 
                             mDatabase.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

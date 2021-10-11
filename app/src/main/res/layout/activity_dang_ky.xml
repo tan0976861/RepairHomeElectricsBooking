@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DangKyActivity"
-    android:background="#0D11c7e6">
+    android:background="#ffd700">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/custom_layout_register">
 
         <LinearLayout
@@ -22,91 +22,105 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/font5"
+                android:text="ĐĂNG KÝ"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="50dp"
-                android:drawableLeft="@drawable/account"
-                android:drawablePadding="16dp"
-                android:padding="16dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/register_border"
-                android:hint="Tên đăng nhập" />
+                android:drawableLeft="@drawable/account"
+                android:drawablePadding="16dp"
+                android:hint="Tên đăng nhập"
+                android:padding="16dp" />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/register_border"
                 android:drawableLeft="@drawable/lock"
                 android:drawablePadding="16dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:padding="16dp"
-                android:background="@drawable/register_border"
                 android:hint="Mật khẩu"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:padding="16dp" />
 
             <EditText
                 android:id="@+id/repassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/register_border"
                 android:drawableLeft="@drawable/checkpassword"
                 android:drawablePadding="16dp"
-                android:padding="16dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:hint="Nhập lại mật khẩu"
                 android:inputType="textPassword"
-                android:background="@drawable/register_border"
-                android:hint="Nhập lại mật khẩu" />
+                android:padding="16dp" />
 
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/phone"
-                android:drawablePadding="16dp"
-                android:padding="16dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/register_border"
-                android:hint="Điện thoại" />
+                android:drawableLeft="@drawable/phone"
+                android:drawablePadding="16dp"
+                android:hint="Điện thoại"
+                android:padding="16dp" />
 
             <Button
                 android:id="@+id/btnsignup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/register_bg"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="20dp"
+                android:background="@drawable/register_bg"
+                android:fontFamily="@font/font5"
                 android:text="Đăng Ký"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#33000000"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="20dp"
+                />
 
             <Button
                 android:id="@+id/btnsignin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:text="Bạn đã có tài khoản? Đăng Nhập"
                 android:background="@drawable/register_bg1"
-                android:textAllCaps="false"
-                android:textColor="#8011c7e6"/>
+                android:fontFamily="@font/font5"
+                android:text="Bạn đã có tài khoản? Đăng Nhập"
+                android:textAllCaps="false" />
+
         </LinearLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>

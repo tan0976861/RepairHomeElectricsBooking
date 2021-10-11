@@ -3,36 +3,40 @@ package com.example.repairhomeelectricbooking.dto;
 import java.util.Date;
 
 public class Order {
-    public String costomerId,workerId, problem;
+    Worker worker;
+    User user;
+    public String problem;
     public Double fee;
-    public Date createDate;
+    public String createDate;
 
-    public Order() {
-    }
-
-    public Order(String costomerId, String workerId, String problem, Double fee, Date createDate) {
-        this.costomerId = costomerId;
-        this.workerId = workerId;
+    public Order(Worker worker, User user, String problem, Double fee, String createDate) {
+        this.worker = worker;
+        this.user = user;
         this.problem = problem;
         this.fee = fee;
         this.createDate = createDate;
     }
 
-    public String getCostomerId() {
-        return costomerId;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setCostomerId(String costomerId) {
-        this.costomerId = costomerId;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
-    public String getWorkerId() {
-        return workerId;
+    public User getUser() {
+        return user;
     }
 
-    public void setWorkerId(String workerId) {
-        this.workerId = workerId;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+    public Order() {
+    }
+
+
 
     public String getProblem() {
         return problem;
@@ -50,11 +54,11 @@ public class Order {
         this.fee = fee;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 }

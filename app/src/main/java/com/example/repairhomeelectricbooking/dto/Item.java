@@ -1,4 +1,4 @@
-package com.example.repairhomeelectricbooking.item;
+package com.example.repairhomeelectricbooking.dto;
 
 import java.io.Serializable;
 

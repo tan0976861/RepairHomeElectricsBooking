@@ -11,7 +11,8 @@ import android.os.Bundle;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
-import com.example.repairhomeelectricbooking.item.ItemAdapter;
+import com.example.repairhomeelectricbooking.adapter.ViewPagerAdapter;
+import com.example.repairhomeelectricbooking.adapter.ItemAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;

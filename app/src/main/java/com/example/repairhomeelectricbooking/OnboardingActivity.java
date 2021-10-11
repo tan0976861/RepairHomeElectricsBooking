@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.repairhomeelectricbooking.adapter.ViewPagerAdapterOnBoarding;
+
 import me.relex.circleindicator.CircleIndicator;
 
 public class OnboardingActivity extends AppCompatActivity {

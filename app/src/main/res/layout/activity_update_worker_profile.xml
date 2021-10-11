@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateWorkerProfileActivity"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rlEditProfileWorker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_nav_profileupdate">
+
+        <TextView
+            android:id="@+id/tvWorkerDetailAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font5"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Tài khoản"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imgBackToMainWorker"
+            android:layout_width="70dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="#66DDDDDD"
+            android:onClick="clickToBackProfile"
+            android:src="@drawable/back2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="23dp"
+            android:text="Lưu"
+            android:fontFamily="@font/font5"/>
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlEditProfileWorker"
+        android:layout_marginTop="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlDetailProfileHeaderWorker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/avatar"
+                    app:civ_border_color="#11C7E6"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgAvatar"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/font5"
+                    android:padding="4dp"
+                    android:text="Cập nhật hình ảnh"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@+id/imgAvatar"
+                    android:gravity="left"
+                    android:padding="5dp"
+                    android:text="Chia sẻ hình ảnh của bạn! Mọi người sẽ thấy nó"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/font5"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp" >
+
+
+                <TextView
+                    android:id="@+id/tvCustomerWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Tên Nguời Dùng"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/font5"/>
+
+                <EditText
+                    android:id="@+id/edtWorkerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/tvCustomerWorker"
+                    android:drawableLeft="@drawable/account"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:maxLength="50" />
+
+
+                <TextView
+                    android:id="@+id/tvWorkerPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtWorkerName"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/font5"
+                    android:layout_marginTop="20dp"
+                    android:text="Số điện thoại"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtCustomerPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/tvWorkerPhone"
+                    android:drawableLeft="@drawable/icon_contact"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:inputType="phone" />
+
+
+                <TextView
+                    android:id="@+id/tvWorkerAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtCustomerPhone"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/font5"
+                    android:layout_marginTop="20dp"
+                    android:text="Địa chỉ email"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:drawableLeft="@drawable/emailicon"
+                    android:layout_below="@+id/tvWorkerAddress"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:inputType="textEmailAddress" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

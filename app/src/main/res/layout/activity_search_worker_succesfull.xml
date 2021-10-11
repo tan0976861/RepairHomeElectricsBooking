@@ -5,46 +5,124 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SearchWorkerSuccesfullActivity">
+    tools:context=".SearchWorkerSuccesfullActivity"
+    android:background="@color/yellow">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_avatar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:src="@drawable/avatar_default"
-        app:civ_border_color="#11C7E6"
-        app:civ_border_width="2dp" />
-    <TextView
-        android:id="@+id/tv_search_worker_fullName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ho ten"
-        />
-    <TextView
-        android:id="@+id/tv_search_worker_sdt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="So dien thoai"
-        />
-    <TextView
-        android:id="@+id/tv_search_worker_giaTien"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gia tien"
-        />
-    <TextView
-        android:id="@+id/tv_search_worker_longtitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Longtitude"
-        />
-    <TextView
-        android:id="@+id/tv_search_worker_latitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Latitude"
-        />
+        android:layout_height="500dp"
+        android:background="@drawable/custom_layout_searchworkersuccess"
+        android:layout_marginTop="120dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        >
+        <TextView
+            android:id="@+id/txtNoti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đã tìm được thợ cho bạn!"
+            android:layout_marginTop="50dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/avatar_default"
+            android:layout_below="@+id/txtNoti"/>
+        <!--            app:civ_border_color="#11C7E6"-->
+        <TextView
+            android:id="@+id/tv_search_worker_fullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hồ Văn Tuấn"
+            android:textSize="22dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/img_avatar"
+            android:textColor="@color/black"
+            />
+        <LinearLayout
+            android:id="@+id/layoutPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/tv_search_worker_fullName"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại: "
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tv_search_worker_sdt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0946746584"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/layoutPhone"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giá tiền "
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tv_search_worker_giaTien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300.000 VND"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/layoutPrice"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thợ chuyên sửa "
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/tv_search_worker_loai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="máy lạnh"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:textSize="20dp"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

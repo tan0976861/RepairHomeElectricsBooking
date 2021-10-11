@@ -91,8 +91,8 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                            LocationApp location= new LocationApp("10.13121212","103.12312313");
-                            Worker worker = new Worker(strEmail,strPass,"",strPhone,"","","",false,false,0, location,0);
+                            LocationApp location= new LocationApp(10.13121212,103.12312313);
+                            Worker worker = new Worker(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"","","",false,false,0, location);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
 
                             mDatabase.child(firebaseUser.getUid()).setValue(worker).addOnCompleteListener(new OnCompleteListener<Void>() {
