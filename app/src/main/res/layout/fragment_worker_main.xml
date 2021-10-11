@@ -4,107 +4,281 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WorkerMainFragment"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:id="@+id/layout_info_worker_main"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginHorizontal="@dimen/bottom_navigation_icon"-->
+    <!--                android:layout_marginTop="30dp"-->
+    <!--                android:background="@drawable/custom_layout_detailworker"-->
+    <!--                android:orientation="vertical"-->
+    <!--                android:paddingBottom="15dp">-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/account"-->
+    <!--                    android:drawablePadding="10dp"-->
+    <!--                    android:text="Hồ Minh Tuấn"-->
+    <!--                    android:textColor="@color/black"-->
+    <!--                    android:textSize="30dp" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_fix"-->
+    <!--                    android:drawablePadding="5dp"-->
+    <!--                    android:text="Chuyên sửa máy lạnh" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_money"-->
+    <!--                    android:text="Công ~ 500,000 VNĐ" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_location"-->
+    <!--                    android:text="Quận 9, Hồ Chí Minh" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_contact"-->
+    <!--                    android:drawablePadding="10dp"-->
+    <!--                    android:paddingRight="30dp"-->
+    <!--                    android:text="0946746543" />-->
+    <!--            </LinearLayout>-->
+    <!--        </RelativeLayout>-->
+    <!--        -->
+    <!--    </ScrollView>-->
+
     <RelativeLayout
-        android:id="@+id/layout_header"
+        android:id="@+id/layout_header_profile_customer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/imgBack"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/avatar_default"
+            app:civ_border_color="#80ffd700"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="11dp"
-            android:backgroundTint="#99DDDDDD"
-            android:onClick="clickToSearchScreen"
-            android:src="@drawable/back" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_toEndOf="@+id/img_avatar"
+            android:fontFamily="sans-serif-light"
+            android:text="Trần Nhật Tân"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_numberOfStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/img_avatar"
+            android:layout_marginTop="10dp"
+            android:text="4.5"
+            android:textSize="25dp" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tv_numberOfStar"
+            android:src="@drawable/star" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_toEndOf="@id/tv_name"
+            android:src="@drawable/direction" />
+
+
     </RelativeLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_photo_worker_main"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="186dp"
-        android:layout_below="@+id/layout_header" />
+        android:layout_height="1dp"
+        android:background="#33000000"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/layout_header_profile_customer"/>
 
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/circle_indicator_photo_worker_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_pager_photo_worker_main"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        app:ci_drawable="@drawable/bg_circle_bluesky" />
-
-    <ScrollView
+    <RelativeLayout
+        android:layout_below="@+id/layout_header_profile_customer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/circle_indicator_photo_worker_main">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/layout_info_worker_main"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/bottom_navigation_icon"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/custom_layout_detailworker"
-                android:orientation="vertical"
-                android:paddingBottom="15dp">
+                android:layout_marginTop="20dp">
+
 
                 <TextView
+                    android:id="@+id/tv_TrangThaiHoatDong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/custom_layout_listitem"
+                    android:fontFamily="@font/font5"
+                    android:padding="15dp"
+                    android:text="Trạng thái hoạt động"
+                    android:textSize="20dp" />
+
+                <Switch
+                    android:id="@+id/switch_on_off"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/account"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="30dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/custom_layout_listitem"
+                    android:drawableLeft="@drawable/orderhistory"
                     android:drawablePadding="10dp"
-                    android:text="Hồ Minh Tuấn"
-                    android:textColor="@color/black"
-                    android:textSize="30dp" />
+                    android:fontFamily="@font/font5"
+                    android:gravity="top"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Lịch sử đơn hàng"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="300dp"
+
+                    android:src="@drawable/direction" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutHotrokhachhang"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/icon_fix"
-                    android:drawablePadding="5dp"
-                    android:text="Chuyên sửa máy lạnh" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/icon_money"
-                    android:text="Công ~ 500,000 VNĐ" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/icon_location"
-                    android:text="Quận 9, Hồ Chí Minh" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/icon_contact"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/custom_layout_listitem"
+                    android:drawableLeft="@drawable/contactsupport_ic"
                     android:drawablePadding="10dp"
-                    android:paddingRight="30dp"
-                    android:text="0946746543" />
+                    android:fontFamily="@font/font5"
 
-            </LinearLayout>
+                    android:paddingLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Trung tâm trợ giúp"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="300dp"
+                    android:src="@drawable/direction" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+
+                <Button
+                    android:id="@+id/btn_Logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/custom_layout_listitem"
+                    android:drawableLeft="@drawable/logout"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/font5"
+                    android:gravity="top"
+                    android:onClick="clickToLogout"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Đăng xuất"
+                    android:textAllCaps="false"
+                    android:textColor="#99FB0000"
+                    android:textSize="20dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 
 
-
-
-        </RelativeLayout>
-    </ScrollView>
 
 </RelativeLayout>

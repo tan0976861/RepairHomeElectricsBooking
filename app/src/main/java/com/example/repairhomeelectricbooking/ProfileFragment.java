@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
  */
 public class ProfileFragment extends Fragment {
 
-    private LinearLayout layoutChinhSuaTaiKhoan;
+    private TextView layoutChinhSuaTaiKhoan;
     private ImageView imgAvatar;
     private TextView tvName,tvEmail;
     private Button btnLogOut;
@@ -35,7 +36,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= (View) inflater.inflate(R.layout.fragment_profile, container, false);
-        layoutChinhSuaTaiKhoan = (LinearLayout) view.findViewById(R.id.layout_chinhsuataikhoan);
+        layoutChinhSuaTaiKhoan = (TextView) view.findViewById(R.id.tv_chinhsuataikhoan);
         tvName = (TextView) view.findViewById(R.id.tv_name);
         tvEmail = (TextView) view.findViewById(R.id.tv_email);
         imgAvatar = (ImageView) view.findViewById(R.id.imgAvatar);
@@ -52,9 +53,11 @@ public class ProfileFragment extends Fragment {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
                 FirebaseAuth.getInstance().signOut();
                 Intent intent= new Intent(getActivity(),LoginActivity.class);
                 getActivity().startActivity(intent);
+                getActivity().finishAffinity();
             }
         });
 

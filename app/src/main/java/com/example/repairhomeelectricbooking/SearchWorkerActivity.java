@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.repairhomeelectricbooking.item.Item;
+import com.example.repairhomeelectricbooking.dto.Item;
 
 public class SearchWorkerActivity extends AppCompatActivity {
 

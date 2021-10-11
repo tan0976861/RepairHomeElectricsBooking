@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NotificationFragment"
-    android:background="#0D11c7e6"
     >
 
 
@@ -22,9 +21,10 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="Thông Báo"
+            android:fontFamily="@font/font5"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/imgbtnWorkerMarkAsRead"

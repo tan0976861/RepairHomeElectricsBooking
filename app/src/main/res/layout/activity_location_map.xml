@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LocationMapActivity">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MainActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <ImageButton
+        android:id="@+id/imgBackToMainCustomer"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:backgroundTint="#80ffffff"
+        android:src="@drawable/back" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/custom_layout_locationmap">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAvatarWorker"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/avatar_default"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/txtNameWorker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/imgAvatarWorker"
+            android:text="Hồ Văn Tuấn"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/txtPointStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="3dp"
+            android:layout_toRightOf="@+id/txtNameWorker"
+            android:text="5.0"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/imgStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/txtPointStar"
+            android:src="@drawable/starsmall" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtNameWorker"
+            android:layout_toRightOf="@+id/imgAvatarWorker"
+            android:text="3,5 km"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/imgPhone"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/imgAvatarWorker"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/phoneicon" />
+
+        <Button
+            android:id="@+id/btnCallWorker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgAvatarWorker"
+            android:layout_toRightOf="@id/imgPhone"
+            android:backgroundTint="@color/white"
+            android:text="0967789567" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/txtNoti"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/imgPhone"-->
+        <!--            android:text="Tôi đang trên đường đến"-->
+        <!--            android:layout_marginStart="25dp"-->
+        <!--            android:textSize="20dp" />-->
+
+
+    </RelativeLayout>
+</RelativeLayout>

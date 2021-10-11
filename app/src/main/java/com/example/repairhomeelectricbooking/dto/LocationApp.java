@@ -1,29 +1,29 @@
 package com.example.repairhomeelectricbooking.dto;
 
 public class LocationApp {
-    public String  latitude,longtitude;
+    public double  latitude,longtitude;
 
     public LocationApp() {
     }
 
-    public LocationApp(String latitude, String longtitude) {
+    public LocationApp(double latitude, double longtitude) {
         this.latitude = latitude;
         this.longtitude = longtitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongtitude() {
+    public double getLongtitude() {
         return longtitude;
     }
 
-    public void setLongtitude(String longtitude) {
+    public void setLongtitude(double longtitude) {
         this.longtitude = longtitude;
     }
 

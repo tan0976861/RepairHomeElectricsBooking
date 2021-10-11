@@ -1,4 +1,4 @@
-package com.example.repairhomeelectricbooking.item;
+package com.example.repairhomeelectricbooking.adapter;
 
 
 import android.content.Context;
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.repairhomeelectricbooking.R;
 import com.example.repairhomeelectricbooking.SearchWorkerActivity;
+import com.example.repairhomeelectricbooking.dto.Item;
 
 import java.util.List;
 

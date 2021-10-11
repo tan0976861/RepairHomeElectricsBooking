@@ -59,12 +59,12 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                         // TODO: handle the post
-//                        if(dataSnapshot.child(firebaseUser.getUid()).exists()){
+                        if(dataSnapshot.child(firebaseUser.getUid()).exists()){
                             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                             startActivity(intent);
                             finishAffinity();
                             return;
-//                        }
+                        }
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {

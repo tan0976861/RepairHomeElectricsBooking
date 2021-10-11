@@ -3,7 +3,6 @@ package com.example.repairhomeelectricbooking;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -11,10 +10,13 @@ import android.os.Bundle;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
+import com.example.repairhomeelectricbooking.adapter.ViewPagerWorkerAdapter;
+import com.example.repairhomeelectricbooking.fcm.FcmNotificationsSender;
 
 public class MainWorkerActivity extends AppCompatActivity {
     private ViewPager viewPagerWorker;
     AHBottomNavigation bottomNavigationWorker;
+    public static final String TAG = MainWorkerActivity.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,10 @@ public class MainWorkerActivity extends AppCompatActivity {
                 return true;
             }
         });
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("e6i_q8J8Tg6CuXQTAURAJt:APA91bHkHiILL48bz_B9Vti2ILxW1w59rV56XGlPz_XGvZ2QZsZC-R137muAmMJFQs_Csoova1YLwOJ35Vv5W2vQLURhNBFq_lSK6uhkB3mANF3cff-0WI4Du9b2vQw4R6ILv-MBXOIU",
+                "TNT",
+                "Notification",getApplicationContext(),MainWorkerActivity.this);
+        notificationsSender.SendNotifications();
     }
 
     public void setUpViewPaper(){

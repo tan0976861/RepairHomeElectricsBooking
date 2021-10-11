@@ -1,17 +1,21 @@
 package com.example.repairhomeelectricbooking.dto;
 
-public class Worker {
-    public String email, password, fullName, phone, address, type, image;
+import java.io.Serializable;
+
+public class Worker implements Serializable, Comparable<Worker> {
+    public String workerID,email, password, fullName, phone, address, type, image;
     public boolean status, active;
-     public double fee,distance=0;
+     public double fee,distance,ratingPoint;
      public LocationApp location;
+
 
 
 
     public Worker() {
     }
 
-    public Worker(String email, String password, String fullName, String phone, String address, String type, String image, boolean status, boolean active, double fee, LocationApp location, double distance) {
+    public Worker(String workerID,String email, String password, String fullName, String phone, String address, String type, String image, boolean status, boolean active, double fee, LocationApp location) {
+        this.workerID=workerID;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -23,7 +27,15 @@ public class Worker {
         this.active = active;
         this.fee = fee;
         this.location=location;
-        this.distance=distance;
+
+    }
+
+    public String getWorkerID() {
+        return workerID;
+    }
+
+    public void setWorkerID(String workerID) {
+        this.workerID = workerID;
     }
 
     public String getEmail() {
@@ -122,9 +134,18 @@ public class Worker {
         this.distance = distance;
     }
 
+    public double getRatingPoint() {
+        return ratingPoint;
+    }
+
+    public void setRatingPoint(double ratingPoint) {
+        this.ratingPoint = ratingPoint;
+    }
+
     @Override
     public String toString() {
         return "Worker{" +
+                "workerId='" + workerID + '\'' +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", fullName='" + fullName + '\'' +
@@ -136,6 +157,22 @@ public class Worker {
                 ", active=" + active +
                 ", fee=" + fee +
                 ", location=" + location +
+                ", Distance=" + distance +
+                ", Rating=" + ratingPoint +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Worker worker) {
+        if (this.distance < worker.distance) {
+            return -1;
+        } else {
+            if (this.distance == worker.distance) {
+                return 0;
+
+            } else {
+                return 1;
+            }
+        }
     }
 }
