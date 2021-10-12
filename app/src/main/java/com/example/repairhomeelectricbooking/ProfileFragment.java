@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
  */
 public class ProfileFragment extends Fragment {
 
-    private LinearLayout layoutChinhSuaTaiKhoan;
+    private TextView tvChinhSuaTaiKhoan;
     private ImageView imgAvatar;
     private TextView tvName,tvEmail;
     private Button btnLogOut;
@@ -35,13 +35,13 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= (View) inflater.inflate(R.layout.fragment_profile, container, false);
-        layoutChinhSuaTaiKhoan = (LinearLayout) view.findViewById(R.id.layout_chinhsuataikhoan);
+        tvChinhSuaTaiKhoan = (TextView) view.findViewById(R.id.tv_chinhsuataikhoan);
         tvName = (TextView) view.findViewById(R.id.tv_name);
         tvEmail = (TextView) view.findViewById(R.id.tv_email);
         imgAvatar = (ImageView) view.findViewById(R.id.imgAvatar);
         btnLogOut = (Button) view.findViewById(R.id.btn_Logout);
         showUserInformation(view);
-        layoutChinhSuaTaiKhoan.setOnClickListener(new View.OnClickListener() {
+        tvChinhSuaTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(),ProfileUpdateActivity.class);

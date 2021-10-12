@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0D11c7e6"
-
     tools:context=".HistoryFragment">
 
     <LinearLayout
@@ -19,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_layout_notify">
+
             <TextView
                 android:id="@+id/tvDonHangWorker"
                 android:layout_width="match_parent"
@@ -26,9 +25,10 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="Đơn Hàng"
+                android:fontFamily="@font/font5"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <ScrollView
@@ -44,7 +44,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:background="@drawable/custom_layout_history"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -94,7 +93,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:background="@drawable/custom_layout_history"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -144,7 +142,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:background="@drawable/custom_layout_history"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -195,7 +192,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:background="@drawable/custom_layout_history"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -246,7 +242,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:background="@drawable/custom_layout_history"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -289,7 +284,6 @@
                         android:textColor="@color/black"
                         android:text="Thiết bị sửa: Máy rửa chén "
                         android:drawableRight="@drawable/sell"/>
-
 
                 </LinearLayout>
             </LinearLayout>

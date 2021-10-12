@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricBooking">
         <activity
+            android:name=".OrderWorkerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UpdateWorkerProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".SearchWorkerSuccesfullActivity"
             android:exported="true" />
         <activity

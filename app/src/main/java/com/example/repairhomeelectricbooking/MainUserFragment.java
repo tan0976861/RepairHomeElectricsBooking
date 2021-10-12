@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.item.Item;
 import com.example.repairhomeelectricbooking.item.ItemAdapter;
@@ -32,6 +36,7 @@ import java.util.List;
  */
 public class MainUserFragment extends Fragment {
 
+    private Spinner edtInputThietBi;
     private RecyclerView recyclerView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,6 +56,7 @@ public class MainUserFragment extends Fragment {
     private RelativeLayout layout_firstWorker;
      private DatabaseReference mDatabase;
      private EditText edtThietbi,edtProblem,edtFee;
+
 
 
     public MainUserFragment() {
@@ -103,17 +109,44 @@ public class MainUserFragment extends Fragment {
         rcv_item.setLayoutManager(linearLayoutManager);
         itemAdapter.setData(getListItem());
         rcv_item.setAdapter(itemAdapter);
-        edtThietbi=(EditText) view.findViewById(R.id.edtInputThietBi);
+//        edtThietbi=(EditText) view.findViewById(R.id.edtInputThietBi);
         edtProblem=(EditText)  view.findViewById(R.id.edtInputVanDe);
-        edtFee= (EditText)  view.findViewById(R.id.edtInputGiaTien);
+//        edtFee= (EditText)  view.findViewById(R.id.edtInputGiaTien);
+        edtInputThietBi=(Spinner) view.findViewById(R.id.edtInputThietBi);
         btnBookingRepair=(Button) view.findViewById(R.id.btn_BookingRepair);
         btnBookingRepair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strThietBi = edtThietbi.getText().toString();
+                String strThietBi = edtInputThietBi.getSelectedItem().toString();
                 String strVanDe = edtProblem.getText().toString();
-                String strFee = edtFee.getText().toString();
-                gotoSearchAnimation(strThietBi,strVanDe,strFee);
+//                String strFee = edtFee.getText().toString();
+//                gotoSearchAnimation(strThietBi,strVanDe,strFee);
+            }
+        });
+
+        List<String> list = new ArrayList<>();
+        list.add("Quạt");
+        list.add("Đèn");
+        list.add("Máy lạnh");
+        list.add("Máy giặt");
+        list.add("Nồi cơm");
+        list.add("Lò nướng");
+        list.add("Máy rửa chén");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item,list);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+
+        edtInputThietBi.setAdapter(adapter);
+        edtInputThietBi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), edtInputThietBi.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 //        btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -149,11 +182,11 @@ public class MainUserFragment extends Fragment {
         list.add(new Item(R.drawable.ocam,"Ổ cắm"));
         return list;
     }
-    public void gotoSearchAnimation(String thietbi, String problem, String price ){
+    public void gotoSearchAnimation(String thietbi, String problem ){
         Intent intent = new Intent(getActivity(),AnimationSearchActivity.class);
         intent.putExtra("thietbi",thietbi);
         intent.putExtra("problem",problem);
-        intent.putExtra("price",price);
+//        intent.putExtra("price",price);
         startActivity(intent);
     }
 
