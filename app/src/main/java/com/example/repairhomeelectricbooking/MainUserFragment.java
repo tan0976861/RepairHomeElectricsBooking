@@ -18,11 +18,16 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.dto.Item;
 import com.example.repairhomeelectricbooking.adapter.ItemAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +56,12 @@ public class MainUserFragment extends Fragment {
     private ItemAdapter itemAdapter;
     private Context mContext;
     private RelativeLayout layout_firstWorker;
-     private DatabaseReference mDatabase;
-     private EditText edtProblem,edtFee;
-     private Spinner  edtInputThietBi;
+    private DatabaseReference mDatabase;
+    private EditText edtProblem,edtFee;
+    private Spinner  edtInputThietBi;
+    private  Spinner spinnerMoTaVanDe;
+    private TextView tvMoTaVanDeKhac;
+    private  EditText edtMoTaVanDeKhac;
 
 
     public MainUserFragment() {
@@ -107,22 +115,28 @@ public class MainUserFragment extends Fragment {
         itemAdapter.setData(getListItem());
         rcv_item.setAdapter(itemAdapter);
         //edtThietbi=(EditText) view.findViewById(R.id.edtInputThietBi);
-        edtProblem=(EditText)  view.findViewById(R.id.edtInputVanDe);
+//        edtProblem=(EditText)  view.findViewById(R.id.edtInputVanDe);
         //edtFee= (EditText)  view.findViewById(R.id.edtInputGiaTien);
         edtInputThietBi=(Spinner) view.findViewById(R.id.edtInputThietBi);
         btnBookingRepair=(Button) view.findViewById(R.id.btn_BookingRepair);
+        spinnerMoTaVanDe = (Spinner) view.findViewById(R.id.spinnerMoTaVanDe);
         btnBookingRepair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String strThietBi = edtInputThietBi.getSelectedItem().toString();
-                String strVanDe = edtProblem.getText().toString();
+                String strVanDe = spinnerMoTaVanDe.getSelectedItem().toString();
                 //String strFee = edtFee.getText().toString();
                 gotoSearchAnimation(strThietBi,strVanDe);
             }
         });
+        tvMoTaVanDeKhac = (TextView) view.findViewById(R.id.tvMoTaVanDeKhac);
+        tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+        edtMoTaVanDeKhac = (EditText) view.findViewById(R.id.edtInputVanDeKhac);
+        edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
 
 
         List<String> list = new ArrayList<>();
+        list.add(0,"Chọn thiết bị");
         list.add("Quạt");
         list.add("Đèn");
         list.add("Máy lạnh");
@@ -140,6 +154,308 @@ public class MainUserFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getActivity(), edtInputThietBi.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                switch (edtInputThietBi.getSelectedItemPosition()){
+                    case 0:
+                        break;
+                    case 1:
+                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("item");
+                        mDatabase.child("quat").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final List<String> areas = new ArrayList<String>();
+                                areas.add("Chọn vấn đề");
+
+                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                                    String areaName = areaSnapshot.child("1").getValue(String.class);
+                                    areas.add(areaName);
+                                }
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                        }
+                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        break;
+
+                    case 2:
+                        DatabaseReference mDatabase1 = FirebaseDatabase.getInstance().getReference("item");
+                        mDatabase1.child("den").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final List<String> areas = new ArrayList<String>();
+                                areas.add("Chọn vấn đề");
+                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                                    String areaName = areaSnapshot.child("1").getValue(String.class);
+                                    areas.add(areaName);
+                                }
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                        }
+                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        break;
+
+                    case 3:
+                        DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference("item");
+                        mDatabase2.child("maylanh").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final List<String> areas = new ArrayList<String>();
+                                areas.add("Chọn vấn đề");
+                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                                    String areaName = areaSnapshot.child("1").getValue(String.class);
+                                    areas.add(areaName);
+                                }
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                        }
+                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        break;
+
+                    case 4:
+                        DatabaseReference mDatabase3 = FirebaseDatabase.getInstance().getReference("item");
+                        mDatabase3.child("maygiat").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final List<String> areas = new ArrayList<String>();
+                                areas.add("Chọn vấn đề");
+
+                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                                    String areaName = areaSnapshot.child("1").getValue(String.class);
+                                    areas.add(areaName);
+                                }
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                        }
+                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        break;
+
+                    case 5:
+                        DatabaseReference mDatabase4 = FirebaseDatabase.getInstance().getReference("item");
+                        mDatabase4.child("noicom").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final List<String> areas = new ArrayList<String>();
+                                areas.add("Chọn vấn đề");
+
+                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                                    String areaName = areaSnapshot.child("1").getValue(String.class);
+                                    areas.add(areaName);
+                                }
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                        }
+                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        break;
+
+                    case 6:
+                        DatabaseReference mDatabase5 = FirebaseDatabase.getInstance().getReference("item");
+                        mDatabase5.child("lonuong").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final List<String> areas = new ArrayList<String>();
+                                areas.add("Chọn vấn đề");
+
+                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                                    String areaName = areaSnapshot.child("1").getValue(String.class);
+                                    areas.add(areaName);
+                                }
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                        }
+                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        break;
+
+                    case 7:
+                        DatabaseReference mDatabase6 = FirebaseDatabase.getInstance().getReference("item");
+                        mDatabase6.child("mayruachen").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final List<String> areas = new ArrayList<String>();
+                                areas.add("Chọn vấn đề");
+
+                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                                    String areaName = areaSnapshot.child("1").getValue(String.class);
+                                    areas.add(areaName);
+                                }
+
+                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                        }
+                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        break;
+                }
             }
 
             @Override
@@ -147,6 +463,38 @@ public class MainUserFragment extends Fragment {
 
             }
         });
+
+//        List<String> listProblem = new ArrayList<>();
+//        listProblem.add("Máy lạnh rò rỉ nước");
+//        listProblem.add("Vệ sinh máy lạnh");
+//        listProblem.add("Tủ lạnh không đủ lạnh");
+//        listProblem.add("Máy giặt không quay được");
+//        listProblem.add("Ti vi không lên hình");
+//        listProblem.add("Vấn đề khác...");
+//
+//        ArrayAdapter<String> adapterProblem = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item,listProblem);
+//        adapterProblem.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+//
+//        spinnerMoTaVanDe.setAdapter(adapterProblem);
+//        spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                if(spinnerMoTaVanDe.getSelectedItem().toString() == listProblem.get(listProblem.size()-1)){
+//                    tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+//                    edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+//                } else{
+//                    tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+//                    edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+//                }
+//                Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+
 //        btnSearch.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

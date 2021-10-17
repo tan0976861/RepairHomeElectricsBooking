@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="600dp"
         android:layout_marginTop="80dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
@@ -29,7 +29,7 @@
                 android:fontFamily="@font/font5"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:textSize="30dp"
+                android:textSize="17dp"
                 android:textColor="@color/black"/>
 
             <EditText
@@ -40,10 +40,11 @@
                 android:drawableLeft="@drawable/account"
                 android:drawablePadding="16dp"
                 android:padding="16dp"
+                android:textSize="17dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/register_border"
-                android:hint="Tên đăng nhập" />
+                android:hint="Email (Bắt Buộc)" />
 
             <EditText
                 android:id="@+id/tv_password_worker"
@@ -55,8 +56,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:padding="16dp"
+                android:textSize="17dp"
                 android:background="@drawable/register_border"
-                android:hint="Mật khẩu"
+                android:hint="Mật khẩu (Bắt Buộc)"
                 android:inputType="textPassword" />
 
             <EditText
@@ -67,11 +69,12 @@
                 android:drawableLeft="@drawable/checkpassword"
                 android:drawablePadding="16dp"
                 android:padding="16dp"
+                android:textSize="17dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:inputType="textPassword"
                 android:background="@drawable/register_border"
-                android:hint="Nhập lại mật khẩu" />
+                android:hint="Nhập lại mật khẩu (Bắt Buộc)" />
 
             <EditText
                 android:id="@+id/tv_phone_worker"
@@ -81,10 +84,24 @@
                 android:drawableLeft="@drawable/phone"
                 android:drawablePadding="16dp"
                 android:padding="16dp"
+                android:textSize="17dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/register_border"
-                android:hint="Điện thoại" />
+                android:hint="Điện thoại (Bắt Buộc)" />
+            <EditText
+                android:id="@+id/tv_type_worker"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/phone"
+                android:drawablePadding="16dp"
+                android:padding="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/register_border"
+                android:hint="Thiết bị sửa (Bắt Buộc)"
+                android:textSize="17dp"/>
 
             <Button
                 android:id="@+id/btn_signup_worker"

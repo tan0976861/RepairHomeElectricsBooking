@@ -41,7 +41,7 @@
             android:background="@drawable/login_border"
             android:drawableLeft="@drawable/account"
             android:drawablePadding="16dp"
-            android:hint="Tên đăng nhập"
+            android:hint="Email"
             android:imeOptions="actionNext"
             android:padding="16dp" />
 

@@ -13,6 +13,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.repairhomeelectricbooking.adapter.ViewPagerAdapter;
 import com.example.repairhomeelectricbooking.adapter.ItemAdapter;
+import com.example.repairhomeelectricbooking.fcm.FcmNotificationsSender;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
@@ -28,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         setUpViewPaper();
 
 // Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab1, R.drawable.home, R.color.bluesky);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab2, R.drawable.task, R.color.bluesky);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab3, R.drawable.notification, R.color.bluesky);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab4, R.drawable.info, R.color.bluesky);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab1, R.drawable.home, R.color.black);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab2, R.drawable.task, R.color.black);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab3, R.drawable.notification, R.color.black);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab4, R.drawable.info, R.color.black);
 
 
 // Add items
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.addItem(item4);
         bottomNavigation.setColored(false);
         bottomNavigation.setDefaultBackgroundColor(getResources().getColor(R.color.white));
-        bottomNavigation.setAccentColor(getResources().getColor(R.color.bluesky));
-        bottomNavigation.setInactiveColor(getResources().getColor(R.color.bluesky));
+        bottomNavigation.setAccentColor(getResources().getColor(R.color.black));
+        bottomNavigation.setInactiveColor(getResources().getColor(R.color.black));
 
         AHNotification notification = new AHNotification.Builder()
                 .setText("10")
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+//        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("cC841uQ5RJuyoRxtj30LXe:APA91bGofn0rJWgVUMa4cMC00DeiNPiINuuFHqcRU87KhxR9VUUStfIESuzoBxBcCiX1HibrEZpHQfDp2d7WFg4HeieSoc5LsWglZ45vUKqidpfcIjUdL5BWG2LOmkvDnyr_1kUvjnKp",
+//                "TNT3",
+//                "Notification",getApplicationContext(),MainActivity.this);
+//        notificationsSender.SendNotifications();
     }
 
     public void setUpViewPaper(){

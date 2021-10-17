@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WorkerMainFragment"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:id="@+id/layout_info_worker_main"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginHorizontal="@dimen/bottom_navigation_icon"-->
+    <!--                android:layout_marginTop="30dp"-->
+    <!--                android:background="@drawable/custom_layout_detailworker"-->
+    <!--                android:orientation="vertical"-->
+    <!--                android:paddingBottom="15dp">-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/account"-->
+    <!--                    android:drawablePadding="10dp"-->
+    <!--                    android:text="Hồ Minh Tuấn"-->
+    <!--                    android:textColor="@color/black"-->
+    <!--                    android:textSize="30dp" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_fix"-->
+    <!--                    android:drawablePadding="5dp"-->
+    <!--                    android:text="Chuyên sửa máy lạnh" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_money"-->
+    <!--                    android:text="Công ~ 500,000 VNĐ" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_location"-->
+    <!--                    android:text="Quận 9, Hồ Chí Minh" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:drawableLeft="@drawable/icon_contact"-->
+    <!--                    android:drawablePadding="10dp"-->
+    <!--                    android:paddingRight="30dp"-->
+    <!--                    android:text="0946746543" />-->
+    <!--            </LinearLayout>-->
+    <!--        </RelativeLayout>-->
+    <!--        -->
+    <!--    </ScrollView>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đơn hàng hiện tại"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:background="#ffd700"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <RelativeLayout
+            android:id="@+id/layoutName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <ImageView
+                android:id="@+id/imgViewOrderBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/orderbyicon" />
+
+            <TextView
+                android:id="@+id/tv_OrderBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/imgViewOrderBy"
+                android:fontFamily="@font/font5"
+                android:text="Đặt bởi"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tv_GetOrderBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_OrderBy"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/imgViewOrderBy"
+                android:text="Ngô Đức Lương"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutAddressCustomer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutName">
+
+            <ImageView
+                android:id="@+id/imgViewAddressCustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/locationcolor" />
+
+            <TextView
+                android:id="@+id/tv_locationAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/imgViewAddressCustomer"
+                android:fontFamily="@font/font5"
+                android:text="567 Lê Văn Việt, Long Thạnh Mỹ, Quận 9, Thủ Đức"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layoutAddressCustomer"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="#33000000" />
+
+        <TextView
+            android:id="@+id/tv_Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewLine"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/font5"
+            android:text="Chi phí"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewLine"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="30dp"
+            android:text="150000 "
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <RelativeLayout
+            android:id="@+id/layoutCancelAndHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_Price"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:id="@+id/layoutCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/cancel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Hủy bỏ"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutHelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="80dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Trợ giúp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutCancelAndHelp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:background="@color/green"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:text="Đã hoàn thành"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

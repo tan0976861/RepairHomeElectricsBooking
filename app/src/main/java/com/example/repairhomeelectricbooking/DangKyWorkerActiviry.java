@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DangKyWorkerActiviry extends AppCompatActivity {
     public static final String TAG = DangKyActivity.class.getName();
-    EditText email_worker,password_worker,repassword_worker,phonenumber_worker;
+    EditText email_worker,password_worker,repassword_worker,phonenumber_worker, type_worker;
     Button signup_worker,signin_worker;
     FirebaseAuth mAuth;
     ProgressDialog progressDialog;
@@ -46,6 +46,7 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
         password_worker = (EditText) findViewById(R.id.tv_password_worker);
         repassword_worker = (EditText) findViewById(R.id.tv_repassword_worker);
         phonenumber_worker = (EditText) findViewById(R.id.tv_phone_worker);
+        type_worker=(EditText) findViewById(R.id.tv_type_worker);
         signup_worker = (Button) findViewById(R.id.btn_signup_worker);
         signin_worker = (Button) findViewById(R.id.btn_signin_worker);
         mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
@@ -57,12 +58,13 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                 String strPass = password_worker.getText().toString();
                 String strRepass = repassword_worker.getText().toString();
                 String strPhone = "+84" + phonenumber_worker.getText().toString();
+                String strType= type_worker.getText().toString();
 
-                if(strEmail.equals("") || strPass.equals("") || strRepass.equals("")){
+                if(strEmail.equals("") || strPass.equals("") || strRepass.equals("") || strType.equals("")){
                     Toast.makeText(DangKyWorkerActiviry.this,"Xin vui lòng điền hết thông tin",Toast.LENGTH_SHORT).show();
                 }else{
                     if(strPass.equals(strRepass)){
-                        onClickSignUp2(strEmail,strPass,strPhone);
+                        onClickSignUp2(strEmail,strPass,strPhone, strType);
                     }else{
                         Toast.makeText(DangKyWorkerActiviry.this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
                     }
@@ -82,7 +84,7 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
             }
         });
     }
-    private void onClickSignUp2(String strEmail,String strPass,String strPhone){
+    private void onClickSignUp2(String strEmail,String strPass,String strPhone, String strType){
         progressDialog.show();
         mAuth.createUserWithEmailAndPassword(strEmail, strPass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -92,7 +94,7 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             LocationApp location= new LocationApp(10.13121212,103.12312313);
-                            Worker worker = new Worker(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"","","",false,false,0, location);
+                            Worker worker = new Worker(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"",strType,"",false,false,0, location);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
 
                             mDatabase.child(firebaseUser.getUid()).setValue(worker).addOnCompleteListener(new OnCompleteListener<Void>() {

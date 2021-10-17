@@ -7,21 +7,26 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.example.repairhomeelectricbooking.dto.Rating;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -34,13 +39,25 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LocationMapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener {
-
+    Timer time;
     //google map object
     private GoogleMap mMap;
 
@@ -57,10 +74,18 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     //polyline object
     private List<Polyline> polylines = null;
     TextView  tvNameWorker,tvRatingPoint;
-    Button      btnCallWorker;
     ImageButton btnBack;
-    String strNameWorker,strPhoneWorker;
+    String strNameWorker,strPhoneWorker,strUID;
     Double strRatingPoint;
+    CircleImageView imgWorkerLocationMap;
+    DatabaseReference rootDatabaseref;
+
+    //phone
+    private TextView tv_PhoneNumber;
+    private ImageButton btnCallWorker;
+    private static final int MY_PERMISSION_REQUEST_CODE_CALL_PHONE = 555;
+
+    private static final String LOG_TAG = "AndroidExample";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +93,16 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         setContentView(R.layout.activity_location_map);
         getDataIntent ();
         tvNameWorker= findViewById(R.id.txtNameWorker);
-        btnCallWorker=findViewById(R.id.btnCallWorker);
         tvRatingPoint=findViewById(R.id.txtPointStar);
+        btnCallWorker=findViewById(R.id.btnCallWorker);
+        tv_PhoneNumber=findViewById(R.id.tv_PhoneNumber);
+        imgWorkerLocationMap= findViewById(R.id.imgWorkerLocationMap);
         tvNameWorker.setText(strNameWorker);
-        btnCallWorker.setText(strPhoneWorker);
-        tvRatingPoint.setText(strRatingPoint.toString());
+//        btnCallWorker.setText(strPhoneWorker);
+        //tvRatingPoint.setText(strRatingPoint.toString());
         btnBack=findViewById(R.id.imgBackToMainCustomer);
+
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +117,41 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        time= new Timer();
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent= new Intent(LocationMapActivity.this, RatingActivity.class);
+                startActivity(intent);
 
+            }
+        },30000);
+
+        rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        rootDatabaseref.child(strUID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String link = snapshot.child("image").getValue().toString();
+                if(link.equals("")){
+                    Glide.with(LocationMapActivity.this).load(snapshot.getValue().toString()).error(R.drawable.avatar_default).into(imgWorkerLocationMap);
+                }else{
+                    Picasso.get().load(link).into(imgWorkerLocationMap);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(LocationMapActivity.this, "Chưa thêm hình ảnh", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCallWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askPermissionAndCall();
+            }
+        });
 
     }
 
@@ -97,6 +160,8 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         strNameWorker = getIntent().getStringExtra("full_name");
        // strFee = getIntent().getDoubleExtra("fee",0.0d);
         strRatingPoint= getIntent().getDoubleExtra("ratingPoint",0.0d);
+        strUID=getIntent().getStringExtra("uID");
+
 
     }
     private void requestPermision() {
@@ -281,5 +346,94 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 
       Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
       startActivity(intent);
+    }
+    private void goToRating() {
+        Intent intent = new Intent(LocationMapActivity.this, RatingActivity.class);
+        startActivity(intent);
+    }
+
+    private void askPermissionAndCall() {
+
+        // With Android Level >= 23, you have to ask the user
+        // for permission to Call.
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) { // 23
+
+            // Check if we have Call permission
+            int sendSmsPermisson = ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.CALL_PHONE);
+
+            if (sendSmsPermisson != PackageManager.PERMISSION_GRANTED) {
+                // If don't have permission so prompt the user.
+                this.requestPermissions(
+                        new String[]{Manifest.permission.CALL_PHONE},
+                        MY_PERMISSION_REQUEST_CODE_CALL_PHONE
+                );
+                return;
+            }
+        }
+        this.callNow();
+    }
+
+    @SuppressLint("MissingPermission")
+    private void callNow() {
+        String phoneNumber = this.tv_PhoneNumber.getText().toString();
+
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + phoneNumber));
+        try {
+            this.startActivity(callIntent);
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),"Your call failed... " + ex.getMessage(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
+
+
+    // When you have the request results
+
+    public void onRequestPermissionsResult1(int requestCode,
+                                            String permissions[], int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //
+        switch (requestCode) {
+            case MY_PERMISSION_REQUEST_CODE_CALL_PHONE: {
+
+                // Note: If request is cancelled, the result arrays are empty.
+                // Permissions granted (CALL_PHONE).
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Log.i( LOG_TAG,"Permission granted!");
+                    Toast.makeText(this, "Permission granted!", Toast.LENGTH_LONG).show();
+
+                    this.callNow();
+                }
+                // Cancelled or denied.
+                else {
+                    Log.i( LOG_TAG,"Permission denied!");
+                    Toast.makeText(this, "Permission denied!", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+        }
+    }
+
+    // When results returned
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MY_PERMISSION_REQUEST_CODE_CALL_PHONE) {
+            if (resultCode == RESULT_OK) {
+                // Do something with data (Result returned).
+                Toast.makeText(this, "Action OK", Toast.LENGTH_LONG).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Action Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Action Failed", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

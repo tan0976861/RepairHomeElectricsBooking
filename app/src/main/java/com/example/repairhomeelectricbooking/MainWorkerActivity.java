@@ -26,21 +26,21 @@ public class MainWorkerActivity extends AppCompatActivity {
         setUpViewPaper();
 
 // Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab1, R.drawable.home, R.color.bluesky);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab2, R.drawable.task, R.color.bluesky);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab3, R.drawable.notification, R.color.bluesky);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab4, R.drawable.info, R.color.bluesky);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab1, R.drawable.home, R.color.black);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab2, R.drawable.task, R.color.black);
+        //AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab3, R.drawable.notification, R.color.black);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab4, R.drawable.info, R.color.black);
 
 
 // Add items
         bottomNavigationWorker.addItem(item1);
         bottomNavigationWorker.addItem(item2);
-        bottomNavigationWorker.addItem(item3);
+       // bottomNavigationWorker.addItem(item3);
         bottomNavigationWorker.addItem(item4);
         bottomNavigationWorker.setColored(false);
         bottomNavigationWorker.setDefaultBackgroundColor(getResources().getColor(R.color.white));
-        bottomNavigationWorker.setAccentColor(getResources().getColor(R.color.bluesky));
-        bottomNavigationWorker.setInactiveColor(getResources().getColor(R.color.bluesky));
+        bottomNavigationWorker.setAccentColor(getResources().getColor(R.color.black));
+        bottomNavigationWorker.setInactiveColor(getResources().getColor(R.color.black));
 
         AHNotification notification = new AHNotification.Builder()
                 .setText("10")
@@ -62,17 +62,17 @@ public class MainWorkerActivity extends AppCompatActivity {
                     case 2:
                         viewPagerWorker.setCurrentItem(2);
                         break;
-                    case 3:
-                        viewPagerWorker.setCurrentItem(3);
-                        break;
+//                    case 3:
+//                        viewPagerWorker.setCurrentItem(3);
+//                        break;
                 }
                 return true;
             }
         });
-        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("e6i_q8J8Tg6CuXQTAURAJt:APA91bHkHiILL48bz_B9Vti2ILxW1w59rV56XGlPz_XGvZ2QZsZC-R137muAmMJFQs_Csoova1YLwOJ35Vv5W2vQLURhNBFq_lSK6uhkB3mANF3cff-0WI4Du9b2vQw4R6ILv-MBXOIU",
-                "TNT",
-                "Notification",getApplicationContext(),MainWorkerActivity.this);
-        notificationsSender.SendNotifications();
+//        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("chRhtg9qQxK84zl4mPYFHE:APA91bGc5Em6UTKG5am9cvckwbUM4IYEmWYMhTB5zIKTfcqFoRw92cS614s2qXVaSbnYW_8q0RImduUYjZBcNRF8EGYvQvf0qu6oFEaWTwAKrCxOryD7qTEA-WoU9H5TbAjCjDeIdUGC",
+//                "TNT",
+//                "Notification",getApplicationContext(),MainWorkerActivity.this);
+//        notificationsSender.SendNotifications();
     }
 
     public void setUpViewPaper(){
@@ -97,9 +97,9 @@ public class MainWorkerActivity extends AppCompatActivity {
                     case 2:
                         bottomNavigationWorker.setCurrentItem(2);
                         break;
-                    case 3:
-                        bottomNavigationWorker.setCurrentItem(3);
-                        break;
+//                    case 3:
+//                        bottomNavigationWorker.setCurrentItem(3);
+//                        break;
                 }
             }
 
