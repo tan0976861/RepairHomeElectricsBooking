@@ -37,16 +37,16 @@
             android:src="@drawable/back2" />
 
         <TextView
+            android:id="@+id/tv_worker_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:fontFamily="@font/font5"
             android:padding="8dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="23dp"
             android:text="Lưu"
-            android:fontFamily="@font/font5"/>
+            android:textColor="@color/white"
+            android:textSize="18dp" />
     </RelativeLayout>
 
 
@@ -68,9 +68,9 @@
                 android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgAvatar"
-                    android:layout_width="100dp"
-                    android:layout_height="150dp"
+                    android:id="@+id/imgAvatarWorker"
+                    android:layout_width="103dp"
+                    android:layout_height="119dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/avatar"
@@ -78,29 +78,44 @@
                     app:civ_border_width="2dp" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/tv_chooseImgWorker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgAvatar"
-                    android:layout_marginStart="8dp"
+                    android:layout_below="@+id/imgAvatarWorker"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/font5"
+                    android:padding="4dp"
+                    android:text="Chọn ảnh" />
+
+                <TextView
+                    android:id="@+id/tvUpdateImageWorker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_chooseImgWorker"
+                    android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/font5"
                     android:padding="4dp"
                     android:text="Cập nhật hình ảnh"
-                    android:textStyle="bold" />
+                    android:textSize="12dp" />
+
+
 
                 <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_nameuser_worker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="60dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@+id/imgAvatar"
+                    android:layout_toEndOf="@+id/imgAvatarWorker"
                     android:gravity="left"
                     android:padding="5dp"
-                    android:text="Chia sẻ hình ảnh của bạn! Mọi người sẽ thấy nó"
+                    android:text="Chia sẻ hình ảnh của bạn!
+                    Mọi người sẽ thấy nó."
                     android:textSize="15dp"
                     android:fontFamily="@font/font5"/>
 
@@ -114,7 +129,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvCustomerWorker"
+                    android:id="@+id/tvWorker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -129,10 +144,10 @@
                     android:id="@+id/edtWorkerName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/tvCustomerWorker"
-                    android:drawableLeft="@drawable/account"
+                    android:layout_below="@+id/tvWorker"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+                    android:drawableLeft="@drawable/account"
                     android:gravity="center"
                     android:inputType="text"
                     android:maxLength="50" />
@@ -145,47 +160,23 @@
                     android:layout_below="@+id/edtWorkerName"
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:fontFamily="@font/font5"
-                    android:layout_marginTop="20dp"
                     android:text="Số điện thoại"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edtCustomerPhone"
+                    android:id="@+id/edtWorkerPhone"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/tvWorkerPhone"
-                    android:drawableLeft="@drawable/icon_contact"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+                    android:drawableLeft="@drawable/icon_contact"
                     android:inputType="phone" />
 
-
-                <TextView
-                    android:id="@+id/tvWorkerAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/edtCustomerPhone"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:fontFamily="@font/font5"
-                    android:layout_marginTop="20dp"
-                    android:text="Địa chỉ email"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/edtEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:drawableLeft="@drawable/emailicon"
-                    android:layout_below="@+id/tvWorkerAddress"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:inputType="textEmailAddress" />
 
             </RelativeLayout>
 

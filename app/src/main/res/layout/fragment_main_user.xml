@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvAddress"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="22dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:text="Thiết bị"
@@ -89,40 +89,71 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp" />
-
                 <TextView
                     android:id="@+id/tvMoTaVanDe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtInputThietBi"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="22dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/font5"
                     android:text="Mô tả vấn đề"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/edtInputVanDe"
+                <Spinner
+                    android:id="@+id/spinnerMoTaVanDe"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/tvMoTaVanDe"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp" />
+
+                <TextView
+                    android:id="@+id/tvMoTaVanDeKhac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvMoTaVanDe"
+                    android:layout_below="@id/spinnerMoTaVanDe"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:inputType="text" />
+                    android:text="Mô tả vấn đề khác:"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
+                <EditText
+                    android:id="@+id/edtInputVanDeKhac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvMoTaVanDeKhac"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp" />
 
+                <ImageView
+                    android:id="@+id/imgview_imageVande"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtInputVanDeKhac"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/layout_mainuser_imagebtn"
+                    android:padding="20dp"
+                    android:src="@drawable/cameraplus" />
 
                 <Button
                     android:id="@+id/btn_BookingRepair"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/edtInputVanDe"
+                    android:layout_below="@+id/imgview_imageVande"
                     android:layout_marginStart="100dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="100dp"
                     android:layout_marginBottom="20dp"
-                    android:background="#FFD700"
+                    android:background="@drawable/custom_layout_timtho"
                     android:text="Tìm thợ"
                     android:textSize="20dp" />
 

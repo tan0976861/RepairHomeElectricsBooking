@@ -17,13 +17,13 @@
             android:id="@+id/tvThongBaoCustomer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/font5"
             android:gravity="center"
             android:padding="10dp"
             android:text="Thông Báo"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textSize="25dp"
-            android:fontFamily="@font/font5"/>
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/imgbtnCustomerMarkAsRead"
@@ -70,13 +70,13 @@
                     android:id="@+id/tvCustomerTittleNoti1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_toEndOf="@+id/imgNotify1"
                     android:gravity="left"
-                    android:text="Đang đợi đánh giá"
+                    android:text="Khuyến Mãi"
                     android:textColor="#D9000000"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -86,14 +86,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvCustomerTittleNoti1"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="15dp"
                     android:layout_toEndOf="@+id/imgNotify1"
                     android:gravity="left"
-                    android:text="Đơn hàng sửa máy lạnh"
-                    android:textSize="18dp" />
+                    android:text="Giảm giá 5% ngày 20/10"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tvCustomerDayOfNoti1"
@@ -101,12 +101,12 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
-                    android:text="T6"
+                    android:text="16/10/21"
                     android:textColor="#D9000000"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
 
@@ -168,7 +168,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
-                    android:text="T4"
+                    android:text="14/10/2021"
                     android:textColor="#D9000000"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -204,7 +204,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_toEndOf="@+id/imgNotify3"
                     android:gravity="left"
-                    android:text="Thông tin cập nhật ứng dụng"
+                    android:text="cập nhật"
                     android:textColor="#D9000000"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -232,7 +232,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
-                    android:text="T2"
+                    android:text="14/10/2021"
                     android:textColor="#D9000000"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -268,7 +268,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_toEndOf="@+id/imgNotify4"
                     android:gravity="left"
-                    android:text="Cập nhật thông tin cá nhân"
+                    android:text="Cập nhật "
                     android:textColor="#D9000000"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -296,7 +296,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
-                    android:text="CN"
+                    android:text="12/10/2021"
                     android:textColor="#D9000000"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -360,7 +360,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
-                    android:text="10 days ago"
+                    android:text="9/10/2021"
                     android:textColor="#D9000000"
                     android:textSize="20dp"
                     android:textStyle="bold" />

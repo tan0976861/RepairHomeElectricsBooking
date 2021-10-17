@@ -31,7 +31,7 @@
         android:background="@drawable/custom_layout_locationmap">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgAvatarWorker"
+            android:id="@+id/imgWorkerLocationMap"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/imgAvatarWorker"
+            android:layout_toRightOf="@+id/imgWorkerLocationMap"
             android:text="Hồ Văn Tuấn"
             android:textColor="@color/black"
             android:textSize="25dp" />
@@ -72,26 +72,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtNameWorker"
-            android:layout_toRightOf="@+id/imgAvatarWorker"
+            android:layout_toRightOf="@+id/imgWorkerLocationMap"
             android:text="3,5 km"
             android:textSize="20dp" />
 
-        <ImageView
-            android:id="@+id/imgPhone"
-            android:layout_width="30dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/imgAvatarWorker"
+        <TextView
+            android:id="@+id/tv_PhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0946746598"
+            android:layout_below="@id/imgWorkerLocationMap"
             android:layout_marginStart="30dp"
-            android:src="@drawable/phoneicon" />
-
-        <Button
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"/>
+        <ImageButton
             android:id="@+id/btnCallWorker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imgAvatarWorker"
-            android:layout_toRightOf="@id/imgPhone"
-            android:backgroundTint="@color/white"
-            android:text="0967789567" />
+            android:layout_below="@id/imgWorkerLocationMap"
+            android:layout_toRightOf="@id/tv_PhoneNumber"
+            android:src="@drawable/iconphone"
+            android:backgroundTint="@color/white"/>
         <!--        <TextView-->
         <!--            android:id="@+id/txtNoti"-->
         <!--            android:layout_width="wrap_content"-->

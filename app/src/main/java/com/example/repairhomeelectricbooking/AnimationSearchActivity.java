@@ -13,6 +13,7 @@ import android.util.Log;
 import com.example.repairhomeelectricbooking.dto.LocationApp;
 import com.example.repairhomeelectricbooking.dto.Rating;
 import com.example.repairhomeelectricbooking.dto.Worker;
+import com.example.repairhomeelectricbooking.fcm.FcmNotificationsSender;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -64,18 +65,23 @@ public class AnimationSearchActivity extends AppCompatActivity {
             public void run() {
                 if (listWorkers != null && !listWorkers.isEmpty()) {
                     //Main
-                    //sendFormOrderForWorker(listWorkers);
-                    gotoUpdateProfile(listWorkers);
+                    sendFormOrderForWorker(listWorkers);
+                    gotoUpdateProfile(listWorkers,strThietBi);
+                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("cC841uQ5RJuyoRxtj30LXe:APA91bGofn0rJWgVUMa4cMC00DeiNPiINuuFHqcRU87KhxR9VUUStfIESuzoBxBcCiX1HibrEZpHQfDp2d7WFg4HeieSoc5LsWglZ45vUKqidpfcIjUdL5BWG2LOmkvDnyr_1kUvjnKp",
+                            "TNT3",
+                            "Notification",getApplicationContext(),AnimationSearchActivity.this);
+                    notificationsSender.SendNotifications();
 
 
-                } else {
+              }
+                else {
                     //Onboarding
                     gotoNoti();
                 }
 
             }
 
-        }, 2000);
+        }, 5000);
     }
 
     private void getDataIntent() {
@@ -272,17 +278,19 @@ public class AnimationSearchActivity extends AppCompatActivity {
     }
 
 
-    private void gotoUpdateProfile( List<Worker> listWorkers) {
+    private void gotoUpdateProfile( List<Worker> listWorkers,String strThietBi) {
         Intent intent = new Intent(this,SearchWorkerSuccesfullActivity.class);
         intent.putExtra("full_name",listWorkers.get(0).getFullName());
         intent.putExtra("phoneNumber",listWorkers.get(0).getPhone());
         intent.putExtra("fee",listWorkers.get(0).getFee());
         intent.putExtra("ratingPoint", listWorkers.get(0).getRatingPoint());
+        intent.putExtra("thietbi",strThietBi);
+        intent.putExtra("uID",listWorkers.get(0).getWorkerID());
         startActivity(intent);
     }
     private void sendFormOrderForWorker(List<Worker> listWorkers){
         FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
-//       WorkerMainFragment workerMainFragment= new WorkerMainFragment();
+      WorkerMainFragment workerMainFragment= new WorkerMainFragment();
         NotificationFragment notificationFragment= new NotificationFragment();
        Bundle bundle= new Bundle();
        bundle.putString("worker_ReceiveOrder", listWorkers.get(0).getEmail() );
