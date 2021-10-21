@@ -22,7 +22,6 @@
             android:padding="10dp"
             android:text="Thông Báo"
             android:fontFamily="@font/font5"
-            android:textColor="@color/white"
             android:textSize="25dp"
             android:textStyle="bold" />
 

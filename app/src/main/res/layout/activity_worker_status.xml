@@ -3,72 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainWorkerStatusActivity"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!--    <ScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content">-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content">-->
-
-    <!--            <LinearLayout-->
-    <!--                android:id="@+id/layout_info_worker_main"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_marginHorizontal="@dimen/bottom_navigation_icon"-->
-    <!--                android:layout_marginTop="30dp"-->
-    <!--                android:background="@drawable/custom_layout_detailworker"-->
-    <!--                android:orientation="vertical"-->
-    <!--                android:paddingBottom="15dp">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_gravity="center"-->
-    <!--                    android:drawableLeft="@drawable/account"-->
-    <!--                    android:drawablePadding="10dp"-->
-    <!--                    android:text="Hồ Minh Tuấn"-->
-    <!--                    android:textColor="@color/black"-->
-    <!--                    android:textSize="30dp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_gravity="center"-->
-    <!--                    android:drawableLeft="@drawable/icon_fix"-->
-    <!--                    android:drawablePadding="5dp"-->
-    <!--                    android:text="Chuyên sửa máy lạnh" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_gravity="center"-->
-    <!--                    android:drawableLeft="@drawable/icon_money"-->
-    <!--                    android:text="Công ~ 500,000 VNĐ" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_gravity="center"-->
-    <!--                    android:drawableLeft="@drawable/icon_location"-->
-    <!--                    android:text="Quận 9, Hồ Chí Minh" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_gravity="center"-->
-    <!--                    android:drawableLeft="@drawable/icon_contact"-->
-    <!--                    android:drawablePadding="10dp"-->
-    <!--                    android:paddingRight="30dp"-->
-    <!--                    android:text="0946746543" />-->
-    <!--            </LinearLayout>-->
-    <!--        </RelativeLayout>-->
-    <!--        -->
-    <!--    </ScrollView>-->
+    tools:context=".MainWorkerStatusActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -79,21 +14,20 @@
         android:textSize="30dp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:background="#ffd700"
-        />
+        android:background="#ffd700" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp">
 
         <RelativeLayout
             android:id="@+id/layoutName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:id="@+id/imgViewOrderBy"
@@ -131,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutName"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:id="@+id/imgViewAddressCustomer"
@@ -144,24 +78,101 @@
                 android:id="@+id/tv_locationAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_toRightOf="@+id/imgViewAddressCustomer"
                 android:fontFamily="@font/font5"
                 android:text="567 Lê Văn Việt, Long Thạnh Mỹ, Quận 9, Thủ Đức"
-                android:textSize="20dp" />
+                android:textSize="19dp" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutThietbiCustomer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutAddressCustomer"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imgViewThietbi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/repairtoolorder" />
+
+            <TextView
+                android:id="@+id/tv_ThietbiOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_toRightOf="@+id/imgViewThietbi"
+                android:fontFamily="@font/font5"
+                android:text="Máy lạnh"
+                android:textSize="19dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutDescribeProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutThietbiCustomer"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imgViewProblem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/problem" />
+
+            <TextView
+                android:id="@+id/tv_DescribeProblem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_toRightOf="@+id/imgViewProblem"
+                android:fontFamily="@font/font5"
+                android:text="Máy có hiện tượng rung lắc mạnh và kêu to"
+                android:textSize="19dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutDescribeDetailProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutDescribeProblem"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả chi tiết của khách hàng"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_DescribeDeatilProblem"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:fontFamily="@font/font5"
+                android:text="Máy có hiện tượng rung lắc mạnh mặc dù đang vận hành ở chế độ tiêu chuẩn "
+                android:textSize="19dp" />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/layoutPhoneCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutAddressCustomer">
+            android:layout_below="@+id/layoutDescribeDetailProblem">
 
             <ImageView
                 android:id="@+id/imgViewPhoneCustomer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/iconphone" />
 
             <TextView
@@ -169,53 +180,221 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/imgViewPhoneCustomer"
                 android:fontFamily="@font/font5"
                 android:text="0946768765"
-                android:textSize="20dp" />
+                android:textSize="19dp" />
         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_imgae_video_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutPhoneCustomer"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgview_imageVande_inOrder"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_below="@+id/edtInputVanDe"
+                    android:background="@drawable/layout_mainuser_imagebtn"
+                    android:padding="20dp"
+                    android:src="@drawable/cameraplus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgview_videoVande_inOrder"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_below="@+id/imgview_imageVande"
+                    android:background="@drawable/layout_mainuser_imagebtn"
+                    android:padding="20dp"
+                    android:src="@drawable/videoplus" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <View
             android:id="@+id/viewLine"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/layoutPhoneCustomer"
+            android:layout_below="@+id/ll_imgae_video_status"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:background="#33000000" />
 
-        <TextView
-            android:id="@+id/tv_Price"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ly_phi_dich_vu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/viewLine"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/font5"
-            android:text="Chi phí"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:layout_below="@+id/viewLine"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_fee_worker"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_Price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewLine"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/font5"
+                android:text="Phí dịch vụ: "
+                android:textColor="@color/black"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/tv_fee_worker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="147dp"
+                android:text="150,000"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/tv_fee_vnd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" đ"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_phi_di_chuyen"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/viewLine"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="30dp"
-            android:text="150000 "
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:layout_below="@+id/ly_phi_dich_vu"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_PriceBicycle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/font5"
+                android:text="Phí di chuyển:"
+                android:textColor="@color/black"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/tv_fee_dichuyen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="140dp"
+                android:text="15,000"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tv_fee_vnd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" đ"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_phi_phu_tung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ly_phi_di_chuyen"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_PriceItems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/font5"
+                android:text="Phí Phụ Tùng:"
+                android:textColor="@color/black"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/tv_fee_PhuTung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="143dp"
+                android:text="50,000"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/tv_fee_vnd3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" đ"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewLine2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/ly_phi_phu_tung"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:background="#33000000" />
+
+        <LinearLayout
+            android:id="@+id/ly_total_fee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewLine2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_tong_tien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/font5"
+                android:text="Tổng tiền:"
+                android:textColor="@color/black"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/tv_fee_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="163dp"
+                android:text="215,000"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tv_fee_vnd5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" đ"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/layoutCancelAndHelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_Price"
-            android:layout_marginStart="70dp"
+            android:layout_below="@id/viewLine2"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="30dp"
             android:gravity="center_horizontal">
 
@@ -246,14 +425,14 @@
                 android:id="@+id/layoutHelp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="80dp">
+                android:layout_marginRight="70dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
                     android:background="@drawable/help" />
 
                 <TextView
@@ -272,7 +451,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutCancelAndHelp"
             android:layout_centerInParent="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:background="@color/green"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"

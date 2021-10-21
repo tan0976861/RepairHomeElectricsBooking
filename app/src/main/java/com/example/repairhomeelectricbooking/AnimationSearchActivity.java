@@ -9,6 +9,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.repairhomeelectricbooking.dto.LocationApp;
 import com.example.repairhomeelectricbooking.dto.Order;
@@ -39,8 +41,9 @@ public class AnimationSearchActivity extends AppCompatActivity {
     DatabaseReference mDatabase,mDatabaseUser,mDatabaseRating,mDatabaseOrder,mDatabaseToken;
     List<Worker> listWorkers;
     LocationApp locationUser;
-   double ratingPoint;
-
+    Button cancelSearchWorker;
+    double ratingPoint;
+    Handler handler = new Handler();
     long maxId = 0;
 
     @Override
@@ -50,8 +53,9 @@ public class AnimationSearchActivity extends AppCompatActivity {
         getDataIntent();
         String date= LocalDate.now().toString();
         mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
-      listWorkers = searchWorker(strThietBi);
+        listWorkers = searchWorker(strThietBi);
         mDatabaseOrder=FirebaseDatabase.getInstance().getReference("tblOrder");
+        cancelSearchWorker = findViewById(R.id.btnCancelSearchWorker);
         mDatabaseOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,26 +71,32 @@ public class AnimationSearchActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
+        handler = new Handler();
+        Runnable myRunnable = new Runnable() {
             public void run() {
                 if (listWorkers != null && !listWorkers.isEmpty()) {
                     createOrder(new Worker(listWorkers.get(0).getWorkerID(),listWorkers.get(0).getFullName()),new User("oK7VSUpZAGUqV12y0BVq7Iyduom2","Công Liêm Trần",strLocationUser),strThietBi,listWorkers.get(0).getFee(),date,1);
                     gotoUpdateProfile(listWorkers,strThietBi);
                     sendNotiToWorker(listWorkers);
 
-              }
+                }
                 else {
                     gotoNoti();
                 }
-
             }
+        };
+        handler.postDelayed(myRunnable,8000);
 
-        }, 8000);
+        cancelSearchWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AnimationSearchActivity.this,MainActivity.class);
+                startActivity(intent);
+                finishAffinity();
+                finish();
+                handler.removeCallbacks(myRunnable);
+            }
+        });
 
     }
 
@@ -122,40 +132,40 @@ public class AnimationSearchActivity extends AppCompatActivity {
                                 System.out.println("Longtitude User" + localUser.getLongtitude());
                                 System.out.println("Longtitude Worker:  "+ worker.getLocation().getLongtitude());
                                 System.out.println("Latitude Worker: "+ worker.getLocation().getLatitude());
-                               double distance = distance(localUser.getLatitude(),localUser.getLongtitude(),worker.getLocation().getLongtitude(),worker.getLocation().getLatitude());
+                                double distance = distance(localUser.getLatitude(),localUser.getLongtitude(),worker.getLocation().getLongtitude(),worker.getLocation().getLatitude());
                                 System.out.println("Distance: "+ distance);
-                               worker.setDistance(distance);
-                               if(worker.isActive()){
-                                   List<Double>  ratingPointList= new ArrayList<>();
-                                   mDatabaseRating=FirebaseDatabase.getInstance().getReference("tblRating");
-                                   mDatabaseRating.addValueEventListener(new ValueEventListener() {
-                                       @Override
-                                       public void onDataChange(DataSnapshot snapshot) {
-                                           for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                                worker.setDistance(distance);
+                                if(worker.isActive()){
+                                    List<Double>  ratingPointList= new ArrayList<>();
+                                    mDatabaseRating=FirebaseDatabase.getInstance().getReference("tblRating");
+                                    mDatabaseRating.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot snapshot) {
+                                            for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
 
-                                               Rating ratingWorker = postSnapshot.getValue(Rating.class);
-                                               if(ratingWorker.getWorkerId().equals(worker.getWorkerID())){
-                                                   ratingPointList.add(ratingWorker.getRatingPoint());
-                                               }
+                                                Rating ratingWorker = postSnapshot.getValue(Rating.class);
+                                                if(ratingWorker.getWorkerId().equals(worker.getWorkerID())){
+                                                    ratingPointList.add(ratingWorker.getRatingPoint());
+                                                }
 
-                                           }
-                                           ratingPoint=0;
-                                           for (double element : ratingPointList) {
-                                               ratingPoint += element;
-                                           }
-                                           ratingPoint=ratingPoint/ratingPointList.size();
-                                           worker.setRatingPoint(ratingPoint);
+                                            }
+                                            ratingPoint=0;
+                                            for (double element : ratingPointList) {
+                                                ratingPoint += element;
+                                            }
+                                            ratingPoint=ratingPoint/ratingPointList.size();
+                                            worker.setRatingPoint(ratingPoint);
 
-                                       }
+                                        }
 
-                                       @Override
-                                       public void onCancelled( DatabaseError error) {
+                                        @Override
+                                        public void onCancelled( DatabaseError error) {
 
-                                       }
-                                   });
-                                   listWorkers.add(worker);
-                               }
+                                        }
+                                    });
+                                    listWorkers.add(worker);
+                                }
                                 Collections.sort(listWorkers);
                             }
 
@@ -171,7 +181,7 @@ public class AnimationSearchActivity extends AppCompatActivity {
                     }
 
                 }
-           }
+            }
 
 
             @Override
@@ -200,33 +210,33 @@ public class AnimationSearchActivity extends AppCompatActivity {
         return distance;
     }
     private double getRatingPointForWorker(String WorkerId){
-         //ratingPointList;
-                List<Double>  ratingPointList= new ArrayList<>();
-                mDatabaseRating=FirebaseDatabase.getInstance().getReference("tblRating");
-                mDatabaseRating.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+        //ratingPointList;
+        List<Double>  ratingPointList= new ArrayList<>();
+        mDatabaseRating=FirebaseDatabase.getInstance().getReference("tblRating");
+        mDatabaseRating.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
 
-                            Rating ratingWorker = postSnapshot.getValue(Rating.class);
-                            if(ratingWorker.getWorkerId().equals(WorkerId)){
-                                ratingPointList.add(ratingWorker.getRatingPoint());
-                            }
-
-                        }
-
-                        for (double element : ratingPointList) {
-                            ratingPoint += element;
-                        }
-                        ratingPoint=ratingPoint/ratingPointList.size();
+                    Rating ratingWorker = postSnapshot.getValue(Rating.class);
+                    if(ratingWorker.getWorkerId().equals(WorkerId)){
+                        ratingPointList.add(ratingWorker.getRatingPoint());
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                }
 
-                    }
-                });
+                for (double element : ratingPointList) {
+                    ratingPoint += element;
+                }
+                ratingPoint=ratingPoint/ratingPointList.size();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return ratingPoint;
     }
 
