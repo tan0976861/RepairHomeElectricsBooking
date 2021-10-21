@@ -8,15 +8,22 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +33,10 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.example.repairhomeelectricbooking.dto.Order;
 import com.example.repairhomeelectricbooking.dto.Rating;
+import com.example.repairhomeelectricbooking.dto.User;
+import com.example.repairhomeelectricbooking.fcm.MyFirebaseMessagingService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -48,6 +58,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -57,10 +68,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LocationMapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener {
+    public static final String TAG = LocationMapActivity.class.getName();
     Timer time;
     //google map object
     private GoogleMap mMap;
-
+    DatabaseReference mDatabaseOrder;
+    Button btnCancelRealOrderOfCustomer;
     //current and destination location objects
     Location myLocation = null;
     Location destinationLocation = null;
@@ -84,8 +97,12 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     private TextView tv_PhoneNumber;
     private ImageButton btnCallWorker;
     private static final int MY_PERMISSION_REQUEST_CODE_CALL_PHONE = 555;
-
     private static final String LOG_TAG = "AndroidExample";
+
+    //dialog
+    private Button btnCancelOrderCustomer;
+    private ImageView imgCloseDialog;
+    SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,36 +113,36 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         tvRatingPoint=findViewById(R.id.txtPointStar);
         btnCallWorker=findViewById(R.id.btnCallWorker);
         tv_PhoneNumber=findViewById(R.id.tv_PhoneNumber);
+        btnCancelOrderCustomer=findViewById(R.id.btnCancelOrderCustomer);
         imgWorkerLocationMap= findViewById(R.id.imgWorkerLocationMap);
+        imgCloseDialog= findViewById(R.id.imgCloseDialog);
         tvNameWorker.setText(strNameWorker);
 //        btnCallWorker.setText(strPhoneWorker);
         //tvRatingPoint.setText(strRatingPoint.toString());
         btnBack=findViewById(R.id.imgBackToMainCustomer);
 
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 clickToBackHome();
             }
         });
         //request location permission.
         requestPermision();
-
+        gotoRatingWorker();
         //init google map fragment to show map.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        time= new Timer();
-        time.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent= new Intent(LocationMapActivity.this, RatingActivity.class);
-                startActivity(intent);
-
-            }
-        },30000);
+//        time= new Timer();
+//        time.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Intent intent= new Intent(LocationMapActivity.this, RatingActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        },30000);
 
         rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -148,17 +165,105 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 
         btnCallWorker.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                askPermissionAndCall();
+            public void onClick(View view) {
+                showDialogCallPhone(Gravity.CENTER);
+            }
+        });
+
+        btnCancelOrderCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialogReasonCustomer(Gravity.CENTER);
             }
         });
 
     }
 
+    private void showDialogCallPhone(int gravity){
+        final Dialog dialog= new Dialog((this));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_callphone_customer);
+
+        Window window= dialog.getWindow();
+        if(window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes= window.getAttributes();
+        windowAttributes.gravity= gravity;
+        window.setAttributes(windowAttributes);
+
+        if(Gravity.BOTTOM == gravity){
+            dialog.setCancelable(true);
+        }else{
+            dialog.setCancelable(false);
+        }
+
+        Button btnCallWorkerDialog= dialog.findViewById(R.id.btnCallWorkerDialog);
+        Button btnCancelCallWorkerDialog= dialog.findViewById(R.id.btnCancelCallWorkerDialog);
+
+        btnCallWorkerDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                askPermissionAndCall();
+            }
+        });
+        btnCancelCallWorkerDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void openDialogReasonCustomer(int gravity){
+        final Dialog dialog= new Dialog((this));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_reason_customer);
+
+        Window window= dialog.getWindow();
+        if(window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes= window.getAttributes();
+        windowAttributes.gravity= gravity;
+        window.setAttributes(windowAttributes);
+        Log.e(TAG,"195");
+
+        if(Gravity.BOTTOM == gravity){
+            dialog.setCancelable(true);
+        }else{
+            dialog.setCancelable(false);
+        }
+        btnCancelRealOrderOfCustomer = dialog.findViewById(R.id.btnCancelRealOrderOfCustomer);
+
+        btnCancelRealOrderOfCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG,"207");
+                CancelOrder();
+            }
+        });
+
+        ImageView imgCloseDialog=dialog.findViewById(R.id.imgCloseDialog);
+        imgCloseDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
     private void getDataIntent (){
         strPhoneWorker = getIntent().getStringExtra("phoneNumber");
         strNameWorker = getIntent().getStringExtra("full_name");
-       // strFee = getIntent().getDoubleExtra("fee",0.0d);
+        // strFee = getIntent().getDoubleExtra("fee",0.0d);
         strRatingPoint= getIntent().getDoubleExtra("ratingPoint",0.0d);
         strUID=getIntent().getStringExtra("uID");
 
@@ -214,10 +319,27 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             public void onMyLocationChange(Location location) {
 
                 myLocation=location;
-                LatLng ltlng=new LatLng(location.getLatitude(),location.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                        ltlng, 17f);
-                mMap.animateCamera(cameraUpdate);
+                if(location != null) {
+//                    LatLng ltlng = new LatLng(location.getLatitude(), location.getLongitude());
+//                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+//                            ltlng, 17f);
+//                    mMap.animateCamera(cameraUpdate);
+
+
+                    mapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(@NonNull GoogleMap googleMap) {
+                           // LatLng ltlng = new LatLng(10.7695, 106.6825);
+                           LatLng ltlng = new LatLng(location.getLatitude(), location.getLongitude());
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                                    ltlng, 17f);
+                            MarkerOptions markerOptions = new MarkerOptions().position(ltlng).title("Vị trí của bạn");
+                            googleMap.addMarker(markerOptions).showInfoWindow();
+                            mMap.animateCamera(cameraUpdate);
+                        }
+                    });
+
+                }
             }
         });
 
@@ -339,13 +461,12 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Findroutes(start,end);
-
     }
 
     private void clickToBackHome(){
 
-      Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
-      startActivity(intent);
+        Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
+        startActivity(intent);
     }
     private void goToRating() {
         Intent intent = new Intent(LocationMapActivity.this, RatingActivity.class);
@@ -435,5 +556,59 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                 Toast.makeText(this, "Action Failed", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    private void CancelOrder() {
+        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrder");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+                    Log.e(TAG,"515");
+                    Order order= postSnapshot.getValue(Order.class);
+                    Log.e(TAG,order.getUser().getUserID());
+                    Log.e(TAG,userAuth.getUid());
+
+                    if(order.getUser().getUserID().equals(userAuth.getUid())){
+                        order.setStatus(0);
+                        Log.e(TAG,"519");
+                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+                        Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void gotoRatingWorker(){
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
+        FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    // TODO: handle the post
+                    Order order = postSnapshot.getValue(Order.class);
+                    String date= LocalDate.now().toString();
+                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 2 ){
+                        Intent intent = new Intent(LocationMapActivity.this,RatingActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

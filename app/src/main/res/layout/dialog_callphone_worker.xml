@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:background="@drawable/custom_dialog"
+    android:layout_margin="16dp">
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv1"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@drawable/dialog_callphone_customer_topheader"-->
+    <!--        android:gravity="center"-->
+    <!--        android:padding="12dp"-->
+    <!--        android:text="Gọi thợ"-->
+    <!--        android:textAllCaps="true"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="20dp"-->
+    <!--        android:textStyle="bold" />-->
+
+    <TextView
+        android:id="@+id/tv_PhoneNumberWorker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="0946768564"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnCancelCallCustomerDialog"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/red"
+        android:text="Hủy bỏ"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnCallCustomerDialog"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@+id/btnCancelCallCustomerDialog"
+        android:background="@color/green"
+        android:text="Gọi"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>

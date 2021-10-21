@@ -5,16 +5,28 @@ import java.util.Date;
 public class Order {
     Worker worker;
     User user;
+    public long orderID;
     public String problem;
     public Double fee;
     public String createDate;
+    public int status;
 
-    public Order(Worker worker, User user, String problem, Double fee, String createDate) {
+    public Order(Worker worker, User user, long orderID, String problem, Double fee, String createDate, int status) {
         this.worker = worker;
         this.user = user;
+        this.orderID = orderID;
         this.problem = problem;
         this.fee = fee;
         this.createDate = createDate;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Worker getWorker() {
@@ -36,7 +48,13 @@ public class Order {
     public Order() {
     }
 
+    public long getOrderID() {
+        return orderID;
+    }
 
+    public void setOrderID(long orderID) {
+        this.orderID = orderID;
+    }
 
     public String getProblem() {
         return problem;

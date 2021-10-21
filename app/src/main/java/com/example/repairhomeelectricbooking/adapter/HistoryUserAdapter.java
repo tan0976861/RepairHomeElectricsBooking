@@ -1,6 +1,7 @@
 package com.example.repairhomeelectricbooking.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,16 @@ public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.
         holder.nameUser.setText(order.getUser().getFullName());
         holder.fee.setText(""+order.getFee());
         holder.thietbi.setText(order.getProblem());
+        if(order.getStatus() == 2){
+            holder.status.setText("Đã hoàn thành");
+            holder.status.setTextColor(Color.GREEN);
+        }else if(order.getStatus() == 1) {
+            holder.status.setText("Đang tiến hành");
+            holder.status.setTextColor(Color.GRAY);
+        }else{
+            holder.status.setText("Đã hủy");
+            holder.status.setTextColor(Color.RED);
+        }
     }
 
     @Override
@@ -50,7 +61,7 @@ public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.
 
     public static class MyViewHolderUser extends RecyclerView.ViewHolder{
 
-        TextView nameUser, fee, thietbi,date;
+        TextView nameUser, fee, thietbi,date,status;
 
         public MyViewHolderUser(@NonNull View itemView) {
             super(itemView);
@@ -59,7 +70,7 @@ public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.
             nameUser = itemView.findViewById(R.id.tvNameHistoryUser);
             fee = itemView.findViewById(R.id.tvPriceHistoryUser);
             thietbi = itemView.findViewById(R.id.tvThietBiSuaHistoryUser);
-
+            status = itemView.findViewById(R.id.tvStatusHistoryUser);
         }
     }
 }

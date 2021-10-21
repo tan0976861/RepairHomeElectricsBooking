@@ -86,68 +86,68 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp">-->
 
 
-                <TextView
-                    android:id="@+id/tv_TrangThaiHoatDong"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/custom_layout_listitem"
-                    android:fontFamily="@font/font5"
-                    android:padding="15dp"
-                    android:text="Trạng thái hoạt động"
-                    android:textSize="20dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_TrangThaiHoatDong"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:background="@drawable/custom_layout_listitem"-->
+<!--                    android:fontFamily="@font/font5"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:text="Trạng thái hoạt động"-->
+<!--                    android:textSize="20dp" />-->
 
-                <Switch
-                    android:id="@+id/switch_on_off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="30dp" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
+<!--                <Switch-->
+<!--                    android:id="@+id/switch_on_off"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginEnd="30dp" />-->
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/custom_layout_listitem"
-                    android:drawableLeft="@drawable/orderhistory"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/font5"
-                    android:gravity="top"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:text="Lịch sử đơn hàng"
-                    android:textSize="20dp" />
+<!--            </RelativeLayout>-->
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="300dp"
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginTop="20dp">-->
 
-                    android:src="@drawable/direction" />
-            </RelativeLayout>
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:background="@drawable/custom_layout_listitem"-->
+<!--                    android:drawableLeft="@drawable/orderhistory"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:fontFamily="@font/font5"-->
+<!--                    android:gravity="top"-->
+<!--                    android:paddingLeft="15dp"-->
+<!--                    android:paddingTop="15dp"-->
+<!--                    android:paddingBottom="15dp"-->
+<!--                    android:text="Lịch sử đơn hàng"-->
+<!--                    android:textSize="20dp" />-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginStart="300dp"-->
+
+<!--                    android:src="@drawable/direction" />-->
+<!--            </RelativeLayout>-->
 
             <RelativeLayout
                 android:id="@+id/layoutHotrokhachhang"
@@ -156,6 +156,7 @@
                 android:layout_marginTop="20dp">
 
                 <TextView
+                    android:id="@+id/tv_layoutHotrokhachhangworker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

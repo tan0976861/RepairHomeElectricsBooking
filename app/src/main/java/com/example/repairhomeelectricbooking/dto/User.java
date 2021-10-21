@@ -15,6 +15,11 @@ public class User {
         this.adress = adress;
         this.location = location;
     }
+    public User(String userID,String fullName,String adress){
+        this.userID=userID;
+        this.fullName=fullName;
+        this.adress=adress;
+    }
 
     public String getUserID() {
         return userID;

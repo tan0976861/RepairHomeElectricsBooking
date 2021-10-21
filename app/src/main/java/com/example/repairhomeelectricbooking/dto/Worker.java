@@ -29,6 +29,10 @@ public class Worker implements Serializable, Comparable<Worker> {
         this.location=location;
 
     }
+    public Worker(String workerID,String fullName){
+        this.workerID=workerID;
+        this.fullName=fullName;
+    }
 
     public String getWorkerID() {
         return workerID;
