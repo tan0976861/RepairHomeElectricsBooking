@@ -8,11 +8,11 @@
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".MainActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        tools:context=".MainActivity" />
 
     <ImageButton
         android:id="@+id/imgBackToMainCustomer"
@@ -26,7 +26,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/custom_layout_locationmap">
 
@@ -69,39 +69,64 @@
             android:src="@drawable/starsmall" />
 
         <TextView
+            android:id="@+id/km"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtNameWorker"
             android:layout_toRightOf="@+id/imgWorkerLocationMap"
             android:text="3,5 km"
             android:textSize="20dp" />
+        <TextView
+            android:id="@+id/gachnoi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtNameWorker"
+            android:layout_toRightOf="@+id/km"
+            android:text=" - "
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtNameWorker"
+            android:layout_toRightOf="@+id/gachnoi"
+            android:text="20 phút"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tv_PhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0946746598"
             android:layout_below="@id/imgWorkerLocationMap"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:textSize="20dp"/>
+            android:text="0946746598"
+            android:textSize="20dp" />
+
         <ImageButton
             android:id="@+id/btnCallWorker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgWorkerLocationMap"
             android:layout_toRightOf="@id/tv_PhoneNumber"
-            android:src="@drawable/iconphone"
-            android:backgroundTint="@color/white"/>
-        <!--        <TextView-->
-        <!--            android:id="@+id/txtNoti"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_below="@id/imgPhone"-->
-        <!--            android:text="Tôi đang trên đường đến"-->
-        <!--            android:layout_marginStart="25dp"-->
-        <!--            android:textSize="20dp" />-->
+            android:backgroundTint="@color/white"
+            android:src="@drawable/iconphone" />
 
-
+        <Button
+            android:id="@+id/btnCancelOrderCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_below="@+id/btnCallWorker"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/custom_btnhuydonhang_customer"
+            android:text="Hủy đơn hàng"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
     </RelativeLayout>
+
+
 </RelativeLayout>

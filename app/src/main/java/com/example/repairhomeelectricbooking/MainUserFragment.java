@@ -46,7 +46,7 @@ public class MainUserFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String mParam1,strUserName,strPhone;
     private String mParam2;
     private View view;
     private Button btnSearch;
@@ -60,8 +60,8 @@ public class MainUserFragment extends Fragment {
     private EditText edtProblem,edtFee;
     private Spinner  edtInputThietBi;
     private  Spinner spinnerMoTaVanDe;
-    private TextView tvMoTaVanDeKhac;
-    private  EditText edtMoTaVanDeKhac;
+    private TextView tvVanDeKhac;
+    private  EditText edtMoTaVanDeKhac,edtVitri;
 
 
     public MainUserFragment() {
@@ -108,31 +108,35 @@ public class MainUserFragment extends Fragment {
 //        btnSearch = (Button) view.findViewById(R.id.btnSearch);
 //        layout_firstWorker= (RelativeLayout) view.findViewById(R.id.layout_firstWorker);
 //        scrollViewMainUser = (ScrollView) view.findViewById(R.id.scrollViewMainUser);
-        rcv_item = (RecyclerView) view.findViewById(R.id.rcv_item);
-        itemAdapter = new ItemAdapter(getActivity());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false);
-        rcv_item.setLayoutManager(linearLayoutManager);
-        itemAdapter.setData(getListItem());
-        rcv_item.setAdapter(itemAdapter);
+//        rcv_item = (RecyclerView) view.findViewById(R.id.rcv_item);
+//        itemAdapter = new ItemAdapter(getActivity());
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false);
+//        rcv_item.setLayoutManager(linearLayoutManager);
+//        itemAdapter.setData(getListItem());
+//        rcv_item.setAdapter(itemAdapter);
         //edtThietbi=(EditText) view.findViewById(R.id.edtInputThietBi);
 //        edtProblem=(EditText)  view.findViewById(R.id.edtInputVanDe);
         //edtFee= (EditText)  view.findViewById(R.id.edtInputGiaTien);
         edtInputThietBi=(Spinner) view.findViewById(R.id.edtInputThietBi);
         btnBookingRepair=(Button) view.findViewById(R.id.btn_BookingRepair);
         spinnerMoTaVanDe = (Spinner) view.findViewById(R.id.spinnerMoTaVanDe);
+        edtVitri=(EditText) view.findViewById(R.id.edtAddressUser);
+        //TextView=(EditText) view.findViewById(R.id)
+        //getUserInfo();
         btnBookingRepair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String strThietBi = edtInputThietBi.getSelectedItem().toString();
                 String strVanDe = spinnerMoTaVanDe.getSelectedItem().toString();
+                String StrLocation=edtVitri.getText().toString();
                 //String strFee = edtFee.getText().toString();
-                gotoSearchAnimation(strThietBi,strVanDe);
+                gotoSearchAnimation(strThietBi,strVanDe,StrLocation);
             }
         });
-        tvMoTaVanDeKhac = (TextView) view.findViewById(R.id.tvMoTaVanDeKhac);
-        tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+        tvVanDeKhac = (TextView) view.findViewById(R.id.tvVanDeKhac);
         edtMoTaVanDeKhac = (EditText) view.findViewById(R.id.edtInputVanDeKhac);
-        edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+        tvVanDeKhac.setVisibility(View.GONE);
+        edtMoTaVanDeKhac.setVisibility(View.GONE);
 
 
         List<String> list = new ArrayList<>();
@@ -177,11 +181,11 @@ public class MainUserFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
                                             edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
                                         } else{
-                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
                                         }
                                         Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -219,11 +223,11 @@ public class MainUserFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
                                             edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
                                         } else{
-                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
                                         }
                                         Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -261,11 +265,11 @@ public class MainUserFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
                                             edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
                                         } else{
-                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
                                         }
                                         Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -304,11 +308,11 @@ public class MainUserFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
                                             edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
                                         } else{
-                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
                                         }
                                         Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -347,11 +351,11 @@ public class MainUserFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
                                             edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
                                         } else{
-                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
                                         }
                                         Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -390,11 +394,11 @@ public class MainUserFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
                                             edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
                                         } else{
-                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
                                         }
                                         Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -433,11 +437,11 @@ public class MainUserFragment extends Fragment {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
                                             edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
                                         } else{
-                                            tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
                                         }
                                         Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                                     }
@@ -528,12 +532,35 @@ public class MainUserFragment extends Fragment {
         list.add(new Item(R.drawable.ocam,"Ổ cắm"));
         return list;
     }
-    public void gotoSearchAnimation(String thietbi, String problem ){
+    public void gotoSearchAnimation(String thietbi, String problem,String strLocation){
         Intent intent = new Intent(getActivity(),AnimationSearchActivity.class);
         intent.putExtra("thietbi",thietbi);
         intent.putExtra("problem",problem);
+        intent.putExtra("locationUser",strLocation);
         //intent.putExtra("price",price);
         startActivity(intent);
     }
+//    public void getUserInfo(){
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        mDatabase=  FirebaseDatabase.getInstance().getReference("tblUser").child(user.getUid());
+//        mDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                strUserName=snapshot.child("fullName").getValue().toString();
+//                strPhone=snapshot.child("phone").getValue().toString();
+//
+//                Intent intent = new Intent(getActivity(),AnimationSearchActivity.class);
+//                intent.putExtra("userName",strUserName);
+//                intent.putExtra("phoneUser",strPhone);
+//                //edtVitri.setText(strPhone);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
 }

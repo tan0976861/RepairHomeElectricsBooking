@@ -11,9 +11,12 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.example.repairhomeelectricbooking.dto.LocationApp;
+import com.example.repairhomeelectricbooking.dto.Order;
 import com.example.repairhomeelectricbooking.dto.Rating;
+import com.example.repairhomeelectricbooking.dto.User;
 import com.example.repairhomeelectricbooking.dto.Worker;
 import com.example.repairhomeelectricbooking.fcm.FcmNotificationsSender;
+import com.example.repairhomeelectricbooking.fcm.MyFirebaseMessagingService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,39 +26,47 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class AnimationSearchActivity extends AppCompatActivity {
-    String strThietBi, strVanDe, strFee;
-    DatabaseReference mDatabase,mDatabaseUser,mDatabaseRating;
+    public static final String TAG = AnimationSearchActivity.class.getName();
+
+    String strThietBi, strVanDe, strFee,strLocationUser,strUserName,strPhoneUser;
+    DatabaseReference mDatabase,mDatabaseUser,mDatabaseRating,mDatabaseOrder,mDatabaseToken;
     List<Worker> listWorkers;
     LocationApp locationUser;
    double ratingPoint;
 
+    long maxId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation_search);
         getDataIntent();
-
-
-        //double fee = Double.parseDouble(strFee);
+        String date= LocalDate.now().toString();
         mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
-        //System.out.println(getRatingPointForWorker("1AQayxmAzWPgPsSrLt4ZO03yYeo1"));
-//        locationUser= new LocationApp();
-//        locationUser=getLocationUser();
-//        System.out.println("123 ^ "+locationUser.getLongtitude());
       listWorkers = searchWorker(strThietBi);
-        //System.out.println("List after search. "+ listWorkers.toString());
-//      for(Worker setRatingList : listWorkers){
-//
-//          ratingPoint=getRatingPointForWorker(setRatingList.getWorkerId());
-//          setRatingList.setRatingPoint(ratingPoint);
-//      }
-//        System.out.println("List after set rating: "+ listWorkers.toString());
+        mDatabaseOrder=FirebaseDatabase.getInstance().getReference("tblOrder");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.e(TAG,"367"+snapshot.getChildrenCount());
+                maxId = (snapshot.getChildrenCount());
+                Log.e(TAG,"369"+maxId);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
 
@@ -64,40 +75,33 @@ public class AnimationSearchActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (listWorkers != null && !listWorkers.isEmpty()) {
-                    //Main
-                    sendFormOrderForWorker(listWorkers);
+                    createOrder(new Worker(listWorkers.get(0).getWorkerID(),listWorkers.get(0).getFullName()),new User("oK7VSUpZAGUqV12y0BVq7Iyduom2","Công Liêm Trần",strLocationUser),strThietBi,listWorkers.get(0).getFee(),date,1);
                     gotoUpdateProfile(listWorkers,strThietBi);
-                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("cC841uQ5RJuyoRxtj30LXe:APA91bGofn0rJWgVUMa4cMC00DeiNPiINuuFHqcRU87KhxR9VUUStfIESuzoBxBcCiX1HibrEZpHQfDp2d7WFg4HeieSoc5LsWglZ45vUKqidpfcIjUdL5BWG2LOmkvDnyr_1kUvjnKp",
-                            "TNT3",
-                            "Notification",getApplicationContext(),AnimationSearchActivity.this);
-                    notificationsSender.SendNotifications();
-
+                    sendNotiToWorker(listWorkers);
 
               }
                 else {
-                    //Onboarding
                     gotoNoti();
                 }
 
             }
 
-        }, 5000);
+        }, 8000);
+
     }
 
     private void getDataIntent() {
         strThietBi = getIntent().getStringExtra("thietbi");
         strVanDe = getIntent().getStringExtra("problem");
         strFee = getIntent().getStringExtra("price");
+        strLocationUser=getIntent().getStringExtra("locationUser");
+
+
 
     }
-//    private LocationApp getLocationUser(){
-//
-//
-//    }
+
 
     private List<Worker> searchWorker(String Type) {
-        //boolean check = false;
-        //List<Worker> list = new ArrayList<Worker>();
         listWorkers = new ArrayList<Worker>();
         Query queryWorker = mDatabase.orderByChild("fee");
         queryWorker.addValueEventListener(new ValueEventListener() {
@@ -114,8 +118,6 @@ public class AnimationSearchActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange( DataSnapshot snapshot) {
                                 LocationApp localUser = snapshot.getValue(LocationApp.class);
-                                // System.out.println("Local User: "+localUser.getLongtitude());
-                                //locationUser=localUser;
                                 System.out.println("Latitude User"+ localUser.getLatitude());
                                 System.out.println("Longtitude User" + localUser.getLongtitude());
                                 System.out.println("Longtitude Worker:  "+ worker.getLocation().getLongtitude());
@@ -124,7 +126,6 @@ public class AnimationSearchActivity extends AppCompatActivity {
                                 System.out.println("Distance: "+ distance);
                                worker.setDistance(distance);
                                if(worker.isActive()){
-//                                   double ratingPonint=getRatingPointForWorker(worker.getWorkerId());
                                    List<Double>  ratingPointList= new ArrayList<>();
                                    mDatabaseRating=FirebaseDatabase.getInstance().getReference("tblRating");
                                    mDatabaseRating.addValueEventListener(new ValueEventListener() {
@@ -135,23 +136,15 @@ public class AnimationSearchActivity extends AppCompatActivity {
 
                                                Rating ratingWorker = postSnapshot.getValue(Rating.class);
                                                if(ratingWorker.getWorkerId().equals(worker.getWorkerID())){
-
-                                                   System.out.println("CustomerId= " + ratingWorker.getCustomerId());
-                                                   System.out.println("WorkerId= " + ratingWorker.getWorkerId());
-                                                   System.out.println("Comment= " + ratingWorker.getComment());
-                                                   System.out.println("Ratting point = " + ratingWorker.getRatingPoint());
                                                    ratingPointList.add(ratingWorker.getRatingPoint());
-                                                   System.out.println("RatingPoint List: " + ratingPointList);
                                                }
 
                                            }
                                            ratingPoint=0;
                                            for (double element : ratingPointList) {
                                                ratingPoint += element;
-                                               System.out.println("Rating Point in  for: " +ratingPoint);
                                            }
                                            ratingPoint=ratingPoint/ratingPointList.size();
-                                           System.out.println("fianlRating Point: "+ ratingPoint);
                                            worker.setRatingPoint(ratingPoint);
 
                                        }
@@ -161,19 +154,9 @@ public class AnimationSearchActivity extends AppCompatActivity {
 
                                        }
                                    });
-                                   System.out.println("@#@zcx"+worker.getWorkerID());
-                                  // System.out.println("ratingPoint : "+ ratingPonint);
-                                   //worker.setRatingPoint(getRatingPointForWorker(worker.getWorkerId()));
-
                                    listWorkers.add(worker);
-                                   System.out.println(worker.toString());
                                }
-
-
                                 Collections.sort(listWorkers);
-                                System.out.println("@#@##2 "+listWorkers);
-
-
                             }
 
 
@@ -188,25 +171,6 @@ public class AnimationSearchActivity extends AppCompatActivity {
                     }
 
                 }
-
-
-//               Collections.sort(list, new Comparator<Worker>() {
-//                   @Override
-//                   public int compare(Worker worker, Worker t1) {
-//                       //sap xep distance tang dan
-//                       if (worker.distance < t1.distance) {
-//                           return -1;
-//                       } else {
-//                           if (worker.distance == t1.distance) {
-//                               return 0;
-//
-//                           } else {
-//                               return -1;
-//                           }
-//                       }
-//                   }
-//               });
-
            }
 
 
@@ -222,10 +186,7 @@ public class AnimationSearchActivity extends AppCompatActivity {
     }
 
     private double distance(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
-//        double startLatitude = 10.7693;
-//        double startLongitude = 106.6832;
-//        double endLongitude = 10.7925;
-//        double endLatitude = 106.6786;
+
         float[] result = new float[1];
         Location.distanceBetween(startLatitude, startLongitude, endLongitude, endLatitude, result);
         double distance = result[0];
@@ -250,13 +211,7 @@ public class AnimationSearchActivity extends AppCompatActivity {
 
                             Rating ratingWorker = postSnapshot.getValue(Rating.class);
                             if(ratingWorker.getWorkerId().equals(WorkerId)){
-
-                                System.out.println("CustomerId= " + ratingWorker.getCustomerId());
-                                System.out.println("WorkerId= " + ratingWorker.getWorkerId());
-                                System.out.println("Comment= " + ratingWorker.getComment());
-                                System.out.println("Ratting point = " + ratingWorker.getRatingPoint());
                                 ratingPointList.add(ratingWorker.getRatingPoint());
-                                System.out.println("RatingPoint List: " + ratingPointList);
                             }
 
                         }
@@ -265,8 +220,6 @@ public class AnimationSearchActivity extends AppCompatActivity {
                             ratingPoint += element;
                         }
                         ratingPoint=ratingPoint/ratingPointList.size();
-                        System.out.println("fianlRating Point: "+ ratingPoint);
-
                     }
 
                     @Override
@@ -288,16 +241,36 @@ public class AnimationSearchActivity extends AppCompatActivity {
         intent.putExtra("uID",listWorkers.get(0).getWorkerID());
         startActivity(intent);
     }
-    private void sendFormOrderForWorker(List<Worker> listWorkers){
-        FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
-      WorkerMainFragment workerMainFragment= new WorkerMainFragment();
-        NotificationFragment notificationFragment= new NotificationFragment();
-       Bundle bundle= new Bundle();
-       bundle.putString("worker_ReceiveOrder", listWorkers.get(0).getEmail() );
-        notificationFragment.setArguments(bundle);
 
+    private void createOrder(Worker worker, User user, String problem, Double fee, String createDate, int status){
+        //FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
 
-        fragmentTransaction.commit();
+        getG(worker,user, maxId,problem,fee,createDate,1);
+        Log.e(TAG,"376"+maxId);
+    }
+
+    public void getG(Worker worker, User user,long maxId, String problem, Double fee, String createDate, int status){
+        DatabaseReference mDatabaseOrder2=FirebaseDatabase.getInstance().getReference("tblOrder");
+        Order order = new Order(worker,user, maxId + 1,problem,fee,createDate,1);
+        mDatabaseOrder2.child(String.valueOf(maxId + 1)).setValue(order);
+    }
+    private void sendNotiToWorker(List<Worker> listWorkers){
+        mDatabaseToken = FirebaseDatabase.getInstance().getReference("Tokens").child(listWorkers.get(0).getWorkerID());
+        mDatabaseToken.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String token =snapshot.getValue(String.class);
+                FcmNotificationsSender notificationsSender = new FcmNotificationsSender(token,
+                        "E-Repair Home Electric",
+                        "New Order",getApplicationContext(),AnimationSearchActivity.this);
+                notificationsSender.SendNotifications();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
     private void gotoNoti() {

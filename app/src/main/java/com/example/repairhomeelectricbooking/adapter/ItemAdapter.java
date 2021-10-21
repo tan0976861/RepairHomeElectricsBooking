@@ -50,12 +50,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.imgItem.setImageResource(item.getResourceID());
         holder.tvItem.setText(item.getTitle());
 
-        holder.cardView_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickGoToSearch(item);
-            }
-        });
+//        holder.cardView_item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onClickGoToSearch(item);
+//            }
+//        });
     }
 
     private void onClickGoToSearch(Item item){

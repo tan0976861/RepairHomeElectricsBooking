@@ -83,45 +83,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/custom_layout_listitem"
-                    android:drawableLeft="@drawable/account"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/font5"
-                    android:gravity="top"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:text="Thông tin người dùng"
-                    android:textSize="20dp" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="300dp"
-                    android:layout_marginTop="37dp"
-                    android:src="@drawable/direction" />
-            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layoutHotrokhachhang"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/layoutHotrokhachhanguser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -132,13 +100,13 @@
                     android:background="@drawable/custom_layout_listitem"
                     android:drawableLeft="@drawable/contactsupport_ic"
                     android:drawablePadding="10dp"
+                    android:fontFamily="@font/font5"
                     android:gravity="top"
                     android:paddingLeft="15dp"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
                     android:text="Hỗ trợ khách hàng"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/font5"/>
+                    android:textSize="20dp" />
 
                 <ImageView
                     android:layout_width="match_parent"
