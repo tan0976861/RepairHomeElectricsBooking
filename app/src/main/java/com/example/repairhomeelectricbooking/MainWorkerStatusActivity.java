@@ -34,6 +34,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+
 public class MainWorkerStatusActivity extends AppCompatActivity {
 
     private ImageView imgCancelWorker;
@@ -60,9 +62,9 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
         getDataIntent();
         tv_GetOrderBy.setText(strUserName);
         tv_locationAddress.setText(strAddress);
-        tv_fee_worker.setText(strFee);
+       // tv_fee_worker.setText(strFee);
         getOrderPresent();
-
+        gotoMainWorkerWhenCancel();
         btnSuccess=(Button) findViewById(R.id.btnSuccess);
 
         btnSuccess.setOnClickListener(new View.OnClickListener() {
@@ -276,7 +278,7 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
                         String fee= order.getFee().toString();
                         tv_GetOrderBy.setText(name);
                         tv_locationAddress.setText(address);
-                        tv_fee_worker.setText(fee);
+                       // tv_fee_worker.setText(fee);
                         return;
                     }
                 }
@@ -324,7 +326,7 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot postSnapshot: snapshot.getChildren()){
                     Order order= postSnapshot.getValue(Order.class);
-                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus()==1 ){
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 1 ){
 
 //                        intent.putExtra("userName",order.getUser().getFullName());
 //                        intent.putExtra("fee",order.getWorker().getFee());
@@ -343,4 +345,31 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
             }
         });
     }
+    private void gotoMainWorkerWhenCancel(){
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
+        FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    // TODO: handle the post
+                    Order order = postSnapshot.getValue(Order.class);
+                    String date= LocalDate.now().toString();
+                    if(order.getWorker().getWorkerID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 0 ){
+                        Intent intent = new Intent(MainWorkerStatusActivity.this,MainWorkerActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                        Toast.makeText(MainWorkerStatusActivity.this, "Đơn hàng đã bị hủy", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }

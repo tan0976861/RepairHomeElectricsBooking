@@ -131,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                         startActivity(intent);
                                                         finishAffinity();
+                                                        finish();
                                                     }
                                                 });
                                         return;
@@ -166,6 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
                                                         startActivity(intent);
                                                         finishAffinity();
+                                                        finish();
                                                         // Log and toast
 //                                                        FirebaseDatabase.getInstance().getReference("Tokens").addValueEventListener(new ValueEventListener() {
 //                                                            @Override

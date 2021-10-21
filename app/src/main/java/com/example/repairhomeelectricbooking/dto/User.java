@@ -1,24 +1,34 @@
 package com.example.repairhomeelectricbooking.dto;
 
 public class User {
-    public String userID,email,password,fullName,phone,adress;
+    public String userID,email,password,fullName,phone,adress,image;
     public LocationApp location;
 
     public User() { }
 
-    public User(String userID, String email, String password, String fullName, String phone, String adress, LocationApp location) {
+    public User(String userID, String email, String password, String fullName, String phone, String adress, String image, LocationApp location) {
         this.userID = userID;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
         this.phone = phone;
         this.adress = adress;
+        this.image = image;
         this.location = location;
     }
-    public User(String userID,String fullName,String adress){
+
+    public User(String userID, String fullName, String adress){
         this.userID=userID;
         this.fullName=fullName;
         this.adress=adress;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUserID() {

@@ -42,12 +42,6 @@ public class MainWorkerActivity extends AppCompatActivity {
         bottomNavigationWorker.setAccentColor(getResources().getColor(R.color.black));
         bottomNavigationWorker.setInactiveColor(getResources().getColor(R.color.black));
 
-        AHNotification notification = new AHNotification.Builder()
-                .setText("10")
-                .setBackgroundColor(ContextCompat.getColor(MainWorkerActivity.this, R.color.red))
-                .setTextColor(ContextCompat.getColor(MainWorkerActivity.this, R.color.white))
-                .build();
-        bottomNavigationWorker.setNotification(notification, 2);
         getDataIntent();
         bottomNavigationWorker.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override

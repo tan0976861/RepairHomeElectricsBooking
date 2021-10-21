@@ -16,6 +16,7 @@
         app:lottie_loop="true"/>
 
     <Button
+        android:id="@+id/btnCancelSearchWorker"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="70dp"

@@ -48,7 +48,7 @@ public class WorkerHistoryFragment extends Fragment {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Order order = dataSnapshot.getValue(Order.class);
                     if(order.getWorker().getWorkerID().equals(firebaseUser.getUid())){

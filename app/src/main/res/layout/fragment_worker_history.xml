@@ -22,11 +22,10 @@
                 android:id="@+id/tvDonHangWorker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font5"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="Đơn Hàng"
-                android:fontFamily="@font/font5"
-                android:textColor="@color/white"
                 android:textSize="25dp"
                 android:textStyle="bold" />
         </RelativeLayout>

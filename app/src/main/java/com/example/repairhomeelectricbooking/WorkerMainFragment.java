@@ -12,9 +12,12 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.dto.Order;
 import com.example.repairhomeelectricbooking.dto.Worker;
@@ -29,6 +32,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -56,25 +61,48 @@ public class WorkerMainFragment extends Fragment implements OnMapReadyCallback,
     private TextView tvTest1;
     private TextView edtTest;
     private String emailTest;
+    private Switch sw_on_of_activity;
     DatabaseReference mDatabaseOrder;
     private GoogleMap mMap;
-
-//    private Runnable mRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            if (mViewPager.getCurrentItem() == mListPhoto.size() - 1) {
-//                mViewPager.setCurrentItem(0);
-//            } else {
-//                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
-//            }
-//        }
-//    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_worker_main, container, false);
+
+        DatabaseReference mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblWorker");
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference mDatabaseOrder2= FirebaseDatabase.getInstance().getReference("tblWorker").child(firebaseUser.getUid()).child("active");
+        mDatabaseOrder2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean value = snapshot.getValue(Boolean.class);
+                if(value== true){
+                    sw_on_of_activity.setChecked(true);
+                }else{
+                    sw_on_of_activity.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        sw_on_of_activity = view.findViewById(R.id.switch_on_off);
+        sw_on_of_activity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    mDatabaseOrder.child(firebaseUser.getUid()).child("active").setValue(true);
+                    Toast.makeText(getActivity(), "Bật hoạt động", Toast.LENGTH_SHORT).show();
+                }else{
+                    mDatabaseOrder.child(firebaseUser.getUid()).child("active").setValue(false);
+                    Toast.makeText(getActivity(), "Tắt hoạt động", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapWorker);
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override

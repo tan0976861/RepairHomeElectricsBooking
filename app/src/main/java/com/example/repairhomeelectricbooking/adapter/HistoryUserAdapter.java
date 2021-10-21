@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.repairhomeelectricbooking.R;
 import com.example.repairhomeelectricbooking.dto.Order;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.MyViewHolderUser> {
@@ -40,7 +42,8 @@ public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.
         Order order = list.get(position);
         holder.date.setText(""+order.getCreateDate());
         holder.nameUser.setText(order.getUser().getFullName());
-        holder.fee.setText(""+order.getFee());
+        NumberFormat format = new DecimalFormat("0.#");
+        holder.fee.setText(""+format.format(order.getFee()));
         holder.thietbi.setText(order.getProblem());
         if(order.getStatus() == 2){
             holder.status.setText("Đã hoàn thành");

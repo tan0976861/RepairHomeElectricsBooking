@@ -129,21 +129,13 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         });
         //request location permission.
         requestPermision();
-        gotoRatingWorker();
+        gotoBillReceipt();
+        //gotoRatingWorker();
+        gotoMainUserWhenCancel();
         //init google map fragment to show map.
-         mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-//        time= new Timer();
-//        time.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                Intent intent= new Intent(LocationMapActivity.this, RatingActivity.class);
-//                startActivity(intent);
-//
-//            }
-//        },30000);
-
         rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -162,6 +154,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                 Toast.makeText(LocationMapActivity.this, "Chưa thêm hình ảnh", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         btnCallWorker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -324,13 +317,11 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 //                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
 //                            ltlng, 17f);
 //                    mMap.animateCamera(cameraUpdate);
-
-
                     mapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(@NonNull GoogleMap googleMap) {
-                           // LatLng ltlng = new LatLng(10.7695, 106.6825);
-                           LatLng ltlng = new LatLng(location.getLatitude(), location.getLongitude());
+                            // LatLng ltlng = new LatLng(10.7695, 106.6825);
+                            LatLng ltlng = new LatLng(location.getLatitude(), location.getLongitude());
                             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
                                     ltlng, 17f);
                             MarkerOptions markerOptions = new MarkerOptions().position(ltlng).title("Vị trí của bạn");
@@ -568,14 +559,12 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                     Order order= postSnapshot.getValue(Order.class);
                     Log.e(TAG,order.getUser().getUserID());
                     Log.e(TAG,userAuth.getUid());
-
-                    if(order.getUser().getUserID().equals(userAuth.getUid())){
+                    if(order.getUser().getUserID().equals(userAuth.getUid()) && order.getStatus() == 1){
                         order.setStatus(0);
                         Log.e(TAG,"519");
                         mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
                         Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
                         startActivity(intent);
-                        return;
                     }
                 }
             }
@@ -586,7 +575,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             }
         });
     }
-    private void gotoRatingWorker(){
+    private void gotoBillReceipt(){
         DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
         FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
         mDatabaseOrder.addValueEventListener(new ValueEventListener() {
@@ -597,9 +586,35 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                     Order order = postSnapshot.getValue(Order.class);
                     String date= LocalDate.now().toString();
                     if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 2 ){
-                        Intent intent = new Intent(LocationMapActivity.this,RatingActivity.class);
+                        Intent intent = new Intent(LocationMapActivity.this,ShowBillForCustomerActivity.class);
                         startActivity(intent);
                         finishAffinity();
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void gotoMainUserWhenCancel(){
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
+        FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    // TODO: handle the post
+                    Order order = postSnapshot.getValue(Order.class);
+                    String date= LocalDate.now().toString();
+                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 0 ){
+                        Intent intent = new Intent(LocationMapActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                        Toast.makeText(LocationMapActivity.this, "Đơn hàng đã bị hủy", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
