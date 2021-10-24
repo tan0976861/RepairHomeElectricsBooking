@@ -39,11 +39,11 @@ import java.time.LocalDate;
 public class MainWorkerStatusActivity extends AppCompatActivity {
 
     private ImageView imgCancelWorker;
-    Button btnSuccess;
+    Button btnSuccess,btn_dadendiadiemsuachua,btn_hoanthanh;
     Button btnCancelRealOrder;
     String strUserName,strAddress,strFee;
     DatabaseReference mDatabaseOrder;
-    TextView tv_GetOrderBy, tv_locationAddress,tv_fee_worker;
+    TextView tv_GetOrderBy, tv_locationAddress;
     //phone
     private ImageView imgViewPhoneCustomer;
     private TextView tv_callPhone;
@@ -58,7 +58,6 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
         tv_callPhone=findViewById(R.id.tv_callPhone);
         tv_GetOrderBy=findViewById(R.id.tv_GetOrderBy);
         tv_locationAddress=findViewById(R.id.tv_locationAddress);
-        tv_fee_worker=findViewById(R.id.tv_fee_worker);
         getDataIntent();
         tv_GetOrderBy.setText(strUserName);
         tv_locationAddress.setText(strAddress);
@@ -66,15 +65,41 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
         getOrderPresent();
         gotoMainWorkerWhenCancel();
         btnSuccess=(Button) findViewById(R.id.btnSuccess);
+        btn_dadendiadiemsuachua =findViewById(R.id.btn_dadendiadiemsuachua);
+        btn_hoanthanh=findViewById(R.id.btn_hoanThanh);
 
         btnSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DoneOrder();
+//                DoneOrder();
+                if(btn_dadendiadiemsuachua.getVisibility()==View.GONE){
+                    btn_dadendiadiemsuachua.setVisibility(View.VISIBLE);
+                    btnSuccess.setVisibility(View.GONE);
+                }else {
+                    btn_dadendiadiemsuachua.setVisibility(View.VISIBLE);
+                }
             }
         });
+        btn_dadendiadiemsuachua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(btn_hoanthanh.getVisibility()==View.GONE){
+                    btn_hoanthanh.setVisibility(View.VISIBLE);
+                    btn_dadendiadiemsuachua.setVisibility(View.GONE);
+                }else {
+                    btn_hoanthanh.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        btn_hoanthanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(MainWorkerStatusActivity.this, ShowBillForWorkerActivity.class);
+                startActivity(intent);
+               // DoneOrder();
 
-
+            }
+        });
         imgCancelWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -291,33 +316,35 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
         });
 
     }
-    private void DoneOrder(){
-        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
-        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrder");
-        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot postSnapshot: snapshot.getChildren()){
-                    Order order= postSnapshot.getValue(Order.class);
-                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus()==1 ){
-
-//                        intent.putExtra("userName",order.getUser().getFullName());
-//                        intent.putExtra("fee",order.getWorker().getFee());
-                        order.setStatus(2);
-                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
-                        Intent intent= new Intent(MainWorkerStatusActivity.this, MainWorkerActivity.class);
-                        startActivity(intent);
-                        return;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
+//    private void DoneOrder(){
+//        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+//        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrder");
+//        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+//                    Order order= postSnapshot.getValue(Order.class);
+//                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus()==1 && order.getUser().getUserID().equals("oK7VSUpZAGUqV12y0BVq7Iyduom2")){
+//
+////                        intent.putExtra("userName",order.getUser().getFullName());
+////                        intent.putExtra("fee",order.getWorker().getFee());
+//                        order.setStatus(2);
+//                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+//                        Intent intent= new Intent(MainWorkerStatusActivity.this, MainWorkerActivity.class);
+//                        startActivity(intent);
+//                        finishAffinity();
+//                        finish();
+//                        return;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
     private void CancelOrder() {
         FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
         mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrder");
@@ -334,6 +361,8 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
                         mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
                         Intent intent= new Intent(MainWorkerStatusActivity.this, MainWorkerActivity.class);
                         startActivity(intent);
+                        finishAffinity();
+                        finish();
                         return;
                     }
                 }

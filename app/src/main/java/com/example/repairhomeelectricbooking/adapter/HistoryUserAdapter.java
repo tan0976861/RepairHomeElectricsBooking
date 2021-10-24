@@ -41,7 +41,7 @@ public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.
 
         Order order = list.get(position);
         holder.date.setText(""+order.getCreateDate());
-        holder.nameUser.setText(order.getUser().getFullName());
+        holder.nameUser.setText(order.getWorker().getFullName());
         NumberFormat format = new DecimalFormat("0.#");
         holder.fee.setText(""+format.format(order.getFee()));
         holder.thietbi.setText(order.getProblem());
@@ -68,7 +68,6 @@ public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.
 
         public MyViewHolderUser(@NonNull View itemView) {
             super(itemView);
-
             date = itemView.findViewById(R.id.tvDateHistoryUser);
             nameUser = itemView.findViewById(R.id.tvNameHistoryUser);
             fee = itemView.findViewById(R.id.tvPriceHistoryUser);

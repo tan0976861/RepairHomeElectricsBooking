@@ -15,11 +15,9 @@
         tools:context=".MainActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_alignParentBottom="true"
-        >
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tv_TrangThaiHoatDong"
@@ -42,6 +40,7 @@
             android:layout_marginEnd="30dp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
     </RelativeLayout>
+
 
 
 

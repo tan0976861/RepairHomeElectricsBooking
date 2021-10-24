@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private EditText edtCustomerName, edtCustomerPhone;
     private TextView tv_update, tv_chooseImgCustomer, tvUpdateImageCustomer;
     private CircleImageView imgAvatarCustomer;
+    private ImageButton  imgBackToMainCustomer;
     Uri uri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         tvUpdateImageCustomer=findViewById(R.id.tvUpdateImageCustomer);
         imgAvatarCustomer=findViewById(R.id.imgAvatarCustomer);
         tv_update=findViewById(R.id.tv_update);
+        imgBackToMainCustomer=findViewById(R.id.imgBackToMainCustomer);
         rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblUser");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -140,6 +143,12 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 });
             }
         });
+        imgBackToMainCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               finish();
+            }
+        });
 
 //        rootDatabaseref.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
@@ -173,7 +182,5 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     }
 
-    public void clickToBackProfile(View view){
-        finish();
-    }
+
 }

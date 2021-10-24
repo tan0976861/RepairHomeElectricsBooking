@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricBooking">
         <activity
+            android:name=".ShowBillForWorkerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SeeFeedBackActivity"
+            android:exported="true" />
+        <activity
             android:name=".ShowBillForCustomerActivity"
             android:exported="true" />
         <activity

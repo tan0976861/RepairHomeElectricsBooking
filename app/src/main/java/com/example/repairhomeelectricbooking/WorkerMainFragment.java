@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,12 +65,16 @@ public class WorkerMainFragment extends Fragment implements OnMapReadyCallback,
     private Switch sw_on_of_activity;
     DatabaseReference mDatabaseOrder;
     private GoogleMap mMap;
+    //private RelativeLayout layoutSeeFeedback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_worker_main, container, false);
+
+       // layoutSeeFeedback=(RelativeLayout) view.findViewById(R.id.layoutSeeFeedback);
+
 
         DatabaseReference mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblWorker");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

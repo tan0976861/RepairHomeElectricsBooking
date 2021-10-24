@@ -1,17 +1,26 @@
 package com.example.repairhomeelectricbooking.dto;
 
 public class Rating {
-    public String customerId,workerId,comment;
+    public String customerId,workerId,comment,date;
     double ratingPoint;
 
     public Rating() {
     }
 
-    public Rating(String customerId, String workerId, String comment, double ratingPoint) {
+    public Rating(String customerId, String workerId, String comment, String date, double ratingPoint) {
         this.customerId = customerId;
         this.workerId = workerId;
         this.comment = comment;
+        this.date = date;
         this.ratingPoint = ratingPoint;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCustomerId() {

@@ -29,11 +29,10 @@
             android:id="@+id/imgBackToMainWorker"
             android:layout_width="70dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
             android:backgroundTint="#66DDDDDD"
-            android:onClick="clickToBackProfile"
             android:src="@drawable/back2" />
 
         <TextView

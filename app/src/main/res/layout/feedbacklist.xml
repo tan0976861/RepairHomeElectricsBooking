@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_layout_history"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/tvDateFeedbackReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22/10/2021"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/tv_numberOfStarFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="190dp"
+                android:layout_toEndOf="@id/img_avatar"
+                android:text="5.0"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_toEndOf="@+id/tv_numberOfStar"
+                android:src="@drawable/star2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Mã đơn: "
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/tvOrderIDFeedBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="c73b5d9a-f45a-4a4e-9bb0-cc05"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_commentFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thợ rất nhiệt tình. Khắc phục sự cố nhanh chóng"
+            android:textSize="16dp"
+            android:fontFamily="@font/font5"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+

@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,6 +41,7 @@ public class WorkerProfileFragment extends Fragment {
     private TextView tv_name;
     private CircleImageView img_avatar;
     private TextView layoutHotrokhachhangworker;
+    private RelativeLayout layoutSeeFeedback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +54,16 @@ public class WorkerProfileFragment extends Fragment {
         tv_name=(TextView) view.findViewById(R.id.tv_name);
         layoutHotrokhachhangworker = (TextView) view.findViewById(R.id.tv_layoutHotrokhachhangworker);
         //tv_hotline_worker = (TextView) view.findViewById(R.id.tv_hotline_worker);
+
+        layoutSeeFeedback=(RelativeLayout) view.findViewById(R.id.layoutSeeFeedback);
+        layoutSeeFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getActivity(), SeeFeedBackActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
         imgViewUpdateWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

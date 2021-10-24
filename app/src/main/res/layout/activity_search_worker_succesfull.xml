@@ -90,7 +90,7 @@
                 android:id="@+id/tv_search_worker_giaTien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="300.000 VND"
+                android:text="250.000 ~ 300.000 VND"
                 android:textColor="@color/black"/>
         </LinearLayout>
 

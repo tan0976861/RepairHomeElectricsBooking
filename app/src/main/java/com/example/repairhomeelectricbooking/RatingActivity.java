@@ -22,5 +22,6 @@ public class RatingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }
