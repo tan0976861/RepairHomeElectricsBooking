@@ -33,9 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtAddressUser"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        android:text="Thiết bị:"
+        android:layout_marginEnd="20dp"
+        android:text="Thiết bị (*)"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/font5"
-        android:text="Chọn vấn đề:"
+        android:text="Chọn vấn đề (*)"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -100,8 +100,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edtInputVanDeKhac"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:text="Mô tả thêm chi tiết:"
         android:textSize="18dp"
         android:textStyle="bold" />
@@ -112,6 +112,7 @@
         android:layout_height="100dp"
         android:layout_below="@+id/tvMoTaVanDe"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/customer_layout_description_problem"
         android:gravity="left" />

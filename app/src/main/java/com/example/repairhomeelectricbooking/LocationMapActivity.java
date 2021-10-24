@@ -565,6 +565,8 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                         mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
                         Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finishAffinity();
+                        finish();
                     }
                 }
             }
@@ -585,7 +587,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                     // TODO: handle the post
                     Order order = postSnapshot.getValue(Order.class);
                     String date= LocalDate.now().toString();
-                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 2 ){
+                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 2 && order.getWorker().getWorkerID().equals("pI8Mffqvcsfa1HkRuTtKoy4Li2c2") ){
                         Intent intent = new Intent(LocationMapActivity.this,ShowBillForCustomerActivity.class);
                         startActivity(intent);
                         finishAffinity();
@@ -614,6 +616,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                         Intent intent = new Intent(LocationMapActivity.this,MainActivity.class);
                         startActivity(intent);
                         finishAffinity();
+                        finish();
                         Toast.makeText(LocationMapActivity.this, "Đơn hàng đã bị hủy", Toast.LENGTH_SHORT).show();
                     }
                 }

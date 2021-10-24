@@ -15,13 +15,19 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:background="#ffd700" />
+    <ScrollView
+        android:id="@+id/Sv_Bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/layoutName"
@@ -78,6 +84,7 @@
                 android:id="@+id/tv_locationAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/imgViewAddressCustomer"
                 android:fontFamily="@font/font5"
                 android:text="567 Lê Văn Việt, Long Thạnh Mỹ, Quận 9, Thủ Đức"
@@ -104,7 +111,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_toRightOf="@+id/imgViewThietbi"
                 android:fontFamily="@font/font5"
-                android:text="Máy lạnh"
+                android:text="Máy giặt"
                 android:textSize="19dp" />
 
         </RelativeLayout>
@@ -240,233 +247,300 @@
             android:layout_marginEnd="20dp"
             android:background="#33000000" />
 
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ly_phi_dich_vu"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/viewLine"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_Price"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/viewLine"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:fontFamily="@font/font5"-->
+<!--                android:text="Phí dịch vụ: "-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="19dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_fee_worker"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="147dp"-->
+<!--                android:text="150,000"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_fee_vnd1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" đ"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18dp" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ly_phi_di_chuyen"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/ly_phi_dich_vu"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_PriceBicycle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:fontFamily="@font/font5"-->
+<!--                android:text="Phí di chuyển:"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="19dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_fee_dichuyen"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="140dp"-->
+<!--                android:text="15,000"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_fee_vnd2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" đ"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18dp" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ly_phi_phu_tung"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/ly_phi_di_chuyen"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_PriceItems"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:fontFamily="@font/font5"-->
+<!--                android:text="Phí Phụ Tùng:"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="19dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_fee_PhuTung"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="143dp"-->
+<!--                android:text="50,000"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_fee_vnd3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" đ"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18dp" />-->
+<!--        </LinearLayout>-->
+<!--            <ImageButton-->
+<!--                android:id="@+id/img_additon_service"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:background="@drawable/additonservice"-->
+
+<!--                />-->
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ly_them_phi"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/img_additon_service"-->
+<!--                android:visibility="gone"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_phi_them"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:fontFamily="@font/font5"-->
+<!--                    android:text="Tiền di chuyển:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="19dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_gia_phi_them"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="130dp"-->
+<!--                    android:text="15,000"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_fee_vnd6"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text=" đ"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18dp" />-->
+<!--            </LinearLayout>-->
+
+<!--        <View-->
+<!--            android:id="@+id/viewLine2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_below="@+id/ly_phi_phu_tung"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:background="#33000000" />-->
+
+
+
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ly_total_fee"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/viewLine2"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_tong_tien"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:fontFamily="@font/font5"-->
+<!--                    android:text="Tổng tiền:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="19dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_fee_total"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="163dp"-->
+<!--                    android:text="230,000"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_fee_vnd5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text=" đ"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18dp" />-->
+<!--            </LinearLayout>-->
+
+       </LinearLayout>-->
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/layoutCancelAndHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/Sv_Bill"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+
         <LinearLayout
-            android:id="@+id/ly_phi_dich_vu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/viewLine"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_Price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/viewLine"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/font5"
-                android:text="Phí dịch vụ: "
-                android:textColor="@color/black"
-                android:textSize="19dp" />
-
-            <TextView
-                android:id="@+id/tv_fee_worker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="147dp"
-                android:text="150,000"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-            <TextView
-                android:id="@+id/tv_fee_vnd1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" đ"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ly_phi_di_chuyen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ly_phi_dich_vu"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_PriceBicycle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/font5"
-                android:text="Phí di chuyển:"
-                android:textColor="@color/black"
-                android:textSize="19dp" />
-
-            <TextView
-                android:id="@+id/tv_fee_dichuyen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="140dp"
-                android:text="15,000"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/tv_fee_vnd2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" đ"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ly_phi_phu_tung"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ly_phi_di_chuyen"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_PriceItems"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/font5"
-                android:text="Phí Phụ Tùng:"
-                android:textColor="@color/black"
-                android:textSize="19dp" />
-
-            <TextView
-                android:id="@+id/tv_fee_PhuTung"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="143dp"
-                android:text="50,000"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-            <TextView
-                android:id="@+id/tv_fee_vnd3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" đ"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/viewLine2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/ly_phi_phu_tung"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:background="#33000000" />
-
-        <LinearLayout
-            android:id="@+id/ly_total_fee"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/viewLine2"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_tong_tien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/font5"
-                android:text="Tổng tiền:"
-                android:textColor="@color/black"
-                android:textSize="19dp" />
-
-            <TextView
-                android:id="@+id/tv_fee_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="163dp"
-                android:text="215,000"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/tv_fee_vnd5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" đ"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/layoutCancelAndHelp"
+            android:id="@+id/layoutCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/viewLine2"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="30dp"
-            android:gravity="center_horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/layoutCancel"
+            <ImageView
+                android:id="@+id/imgCancelWorker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_marginStart="5dp"
+                android:background="@drawable/cancel" />
 
-                <ImageView
-                    android:id="@+id/imgCancelWorker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/cancel" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Hủy bỏ"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutHelp"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="70dp"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:text="Hủy bỏ"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/help" />
+        <LinearLayout
+            android:id="@+id/layoutHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Trợ giúp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/help" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Trợ giúp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnSuccess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutCancelAndHelp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:background="@color/green"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:text="Xác Nhận Đơn"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/btn_dadendiadiemsuachua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSuccess"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:background="@color/green"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
-            android:text="Đã hoàn thành"
-            android:textColor="@color/white" />
+            android:text="Đã Đến Điểm Sửa Chữa"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_hoanThanh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_dadendiadiemsuachua"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:background="@color/green"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:text="Hoàn Thành"
+            android:textColor="@color/white"
+            android:visibility="gone" />
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-    </RelativeLayout>
-
-
-
 
 </RelativeLayout>

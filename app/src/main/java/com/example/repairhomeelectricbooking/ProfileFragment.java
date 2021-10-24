@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent= new Intent(getActivity(),ProfileUpdateActivity.class);
                 getActivity().startActivity(intent);
-                getActivity().finish();
+
             }
         });
         btnLogOut.setOnClickListener(new View.OnClickListener() {

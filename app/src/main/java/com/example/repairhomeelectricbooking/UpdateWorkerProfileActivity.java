@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
     private EditText edtWorkerName, edtWorkerPhone;
     private TextView tv_worker_update, tv_chooseImgWorker, tvUpdateImageWorker;
     private CircleImageView imgAvatarWorker;
+    private ImageButton imgBackToMainWorker;
     Uri uri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
         tvUpdateImageWorker =findViewById(R.id.tvUpdateImageWorker);
         imgAvatarWorker =findViewById(R.id.imgAvatarWorker);
         tv_worker_update =findViewById(R.id.tv_worker_update);
+        imgBackToMainWorker=(ImageButton) findViewById(R.id.imgBackToMainWorker);
         rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -139,7 +143,14 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
                 });
             }
         });
+        imgBackToMainWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(UpdateWorkerProfileActivity.this, WorkerProfileFragment.class);
+                startActivity(intent);
 
+            }
+        });
 //        rootDatabaseref.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -172,7 +183,5 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
 
     }
 
-    public void clickToBackProfile(View view){
-        finish();
-    }
+
 }
