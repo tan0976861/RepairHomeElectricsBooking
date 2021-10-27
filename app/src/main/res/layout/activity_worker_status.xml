@@ -514,17 +514,20 @@
             android:paddingRight="80dp"
             android:text="Xác Nhận Đơn"
             android:textColor="@color/white" />
+
         <Button
             android:id="@+id/btn_dadendiadiemsuachua"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnSuccess"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="-49dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/green"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
-            android:text="Đã Đến Điểm Sửa Chữa"
+            android:text="Đã Đến"
             android:textColor="@color/white"
             android:visibility="gone" />
 
@@ -533,8 +536,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_dadendiadiemsuachua"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="-57dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/green"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"

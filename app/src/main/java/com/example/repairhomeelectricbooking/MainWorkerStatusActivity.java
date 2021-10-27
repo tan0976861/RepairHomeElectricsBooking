@@ -72,34 +72,31 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                DoneOrder();
-                if(btn_dadendiadiemsuachua.getVisibility()==View.GONE){
-                    btn_dadendiadiemsuachua.setVisibility(View.VISIBLE);
-                    btnSuccess.setVisibility(View.GONE);
-                }else {
-                    btn_dadendiadiemsuachua.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        btn_dadendiadiemsuachua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(btn_hoanthanh.getVisibility()==View.GONE){
-                    btn_hoanthanh.setVisibility(View.VISIBLE);
-                    btn_dadendiadiemsuachua.setVisibility(View.GONE);
-                }else {
-                    btn_hoanthanh.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        btn_hoanthanh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent= new Intent(MainWorkerStatusActivity.this, ShowBillForWorkerActivity.class);
+                Intent intent= new Intent(MainWorkerStatusActivity.this, LocationMapWorkerActivity.class);
                 startActivity(intent);
-               // DoneOrder();
 
             }
         });
+//        btn_dadendiadiemsuachua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(btn_hoanthanh.getVisibility()==View.GONE){
+//                    btn_hoanthanh.setVisibility(View.VISIBLE);
+//                    btn_dadendiadiemsuachua.setVisibility(View.GONE);
+//                }else {
+//                    btn_hoanthanh.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
+//        btn_hoanthanh.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent= new Intent(MainWorkerStatusActivity.this, ShowBillForWorkerActivity.class);
+//                startActivity(intent);
+//               // DoneOrder();
+//
+//            }
+//        });
         imgCancelWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

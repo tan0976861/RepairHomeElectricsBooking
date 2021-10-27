@@ -76,16 +76,16 @@
             android:layout_toRightOf="@+id/imgWorkerLocationMap"
             android:text="3,5 km"
             android:textSize="20dp" />
+
         <TextView
             android:id="@+id/gachnoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtNameWorker"
-            android:layout_toRightOf="@+id/km"
-            android:text=" - "
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
-            />
+            android:layout_toRightOf="@+id/km"
+            android:text=" - " />
 
         <TextView
             android:layout_width="wrap_content"

@@ -27,32 +27,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_toEndOf="@+id/img_avatar"
             android:fontFamily="sans-serif-light"
+
             android:text="Trần Nhật Tân"
             android:textSize="32sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name_user"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toEndOf="@+id/img_avatar"
-            android:fontFamily="sans-serif-light"
-            android:text="test@gmail.com"
-            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_chinhsuataikhoan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_email"
+            android:layout_below="@+id/tv_name_user"
             android:layout_marginStart="14dp"
             android:layout_toEndOf="@+id/img_avatar"
             android:fontFamily="@font/font5"
@@ -62,8 +49,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_email"
-            android:layout_marginTop="3dp"
+            android:layout_below="@+id/tv_name_user"
             android:layout_toEndOf="@+id/tv_chinhsuataikhoan"
             android:src="@drawable/direction2" />
 

@@ -21,9 +21,8 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="Tài khoản"
-            android:textColor="@color/white"
-            android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="25dp" />
 
         <ImageButton
             android:id="@+id/imgBackToMainCustomer"
@@ -33,7 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:backgroundTint="#66DDDDDD"
-            android:src="@drawable/back2" />
+            android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/tv_update"
@@ -45,7 +44,7 @@
             android:fontFamily="@font/font5"
             android:padding="8dp"
             android:text="Lưu"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18dp"
             />
     </RelativeLayout>

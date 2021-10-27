@@ -48,7 +48,7 @@
 
             <RadioButton
                 android:id="@+id/radio_1"
-                android:text="Vi tri qua xa"
+                android:text="Vị Trí quá xa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -68,7 +68,7 @@
 
             <RadioButton
                 android:id="@+id/radio_3"
-                android:text="Không thể liên hệ voi khach hang"
+                android:text="Không thể liên hệ với khách hàng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -76,7 +76,7 @@
                 android:paddingLeft="15dp"/>
             <RadioButton
                 android:id="@+id/radio_4"
-                android:text="Toi dang ban"
+                android:text="Tôi không sửa được thiết bị này."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -84,7 +84,7 @@
                 android:paddingLeft="15dp"/>
             <RadioButton
                 android:id="@+id/radio_5"
-                android:text="Gặp khó khăn khi liên hệ voi khach hang"
+                android:text="Gặp khó khăn khi liên hệ với khách hàng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"

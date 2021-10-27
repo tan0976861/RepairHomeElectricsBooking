@@ -29,7 +29,7 @@
                 android:fontFamily="@font/font5"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:textSize="17dp"
+                android:textSize="30dp"
                 android:textColor="@color/black"/>
 
             <EditText

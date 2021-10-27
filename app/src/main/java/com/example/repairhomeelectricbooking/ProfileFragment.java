@@ -52,7 +52,7 @@ public class ProfileFragment extends Fragment {
         layoutChinhSuaTaiKhoan = (TextView) view.findViewById(R.id.tv_chinhsuataikhoan);
         tvName = (TextView) view.findViewById(R.id.tv_name_user);
         layoutHotrokhachhang=(TextView) view.findViewById(R.id.layoutHotrokhachhanguser);
-        tvEmail = (TextView) view.findViewById(R.id.tv_email);
+        //tvEmail = (TextView) view.findViewById(R.id.tv_email);
         imgAvatar = (ImageView) view.findViewById(R.id.img_avatar);
         btnLogOut = (Button) view.findViewById(R.id.btn_Logout);
         showUserInformation(view);
@@ -85,9 +85,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name=snapshot.child("fullName").getValue().toString();
-                String phone=snapshot.child("email").getValue().toString();
+                //String phone=snapshot.child("email").getValue().toString();
                 tvName.setText(name);
-                tvEmail.setText(phone);
+                //tvEmail.setText(phone);
             }
 
             @Override

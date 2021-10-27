@@ -47,133 +47,133 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/layout_Customer_Noti1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/layout_Customer_Noti1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp">-->
 
-                <ImageView
-                    android:id="@+id/imgNotify1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/notify" />
-
-
-                <TextView
-                    android:id="@+id/tvCustomerTittleNoti1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@+id/imgNotify1"
-                    android:gravity="left"
-                    android:text="Khuyến Mãi"
-                    android:textColor="#D9000000"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvCustomerDetailNoti1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvCustomerTittleNoti1"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_toEndOf="@+id/imgNotify1"
-                    android:gravity="left"
-                    android:text="Giảm giá 5% ngày 20/10"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/tvCustomerDayOfNoti1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="16/10/21"
-                    android:textColor="#D9000000"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgNotify1"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:background="@drawable/notify" />-->
 
 
-            </RelativeLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCustomerTittleNoti1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:layout_toEndOf="@+id/imgNotify1"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Khuyến Mãi"-->
+<!--                    android:textColor="#D9000000"-->
+<!--                    android:textSize="18dp"-->
+<!--                    android:textStyle="bold" />-->
 
-            <RelativeLayout
-                android:id="@+id/layout_Customer_Noti2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCustomerDetailNoti1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/tvCustomerTittleNoti1"-->
+<!--                    android:layout_marginStart="14dp"-->
+<!--                    android:layout_marginTop="0dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:layout_toEndOf="@+id/imgNotify1"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Giảm giá 5% ngày 20/10"-->
+<!--                    android:textSize="15dp" />-->
 
-                <ImageView
-                    android:id="@+id/imgNotify2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/notify" />
-
-
-                <TextView
-                    android:id="@+id/tvCustomerTittleNoti2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toEndOf="@+id/imgNotify2"
-                    android:gravity="left"
-                    android:text="Offer"
-                    android:textColor="#D9000000"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvCustomerDetailNoti2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvCustomerTittleNoti2"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_toEndOf="@+id/imgNotify2"
-                    android:gravity="left"
-                    android:text="Sale 5% khi thanh toán qua momo"
-                    android:textSize="18dp" />
-
-                <TextView
-                    android:id="@+id/tvCustomerDayOfNoti2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="14/10/2021"
-                    android:textColor="#D9000000"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCustomerDayOfNoti1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:text="16/10/21"-->
+<!--                    android:textColor="#D9000000"-->
+<!--                    android:textSize="18dp"-->
+<!--                    android:textStyle="bold" />-->
 
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/layout_Customer_Noti2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgNotify2"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:background="@drawable/notify" />-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCustomerTittleNoti2"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:layout_toEndOf="@+id/imgNotify2"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Offer"-->
+<!--                    android:textColor="#D9000000"-->
+<!--                    android:textSize="18dp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCustomerDetailNoti2"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/tvCustomerTittleNoti2"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:layout_toEndOf="@+id/imgNotify2"-->
+<!--                    android:gravity="left"-->
+<!--                    android:text="Sale 5% khi thanh toán qua momo"-->
+<!--                    android:textSize="18dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCustomerDayOfNoti2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginTop="7dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:text="14/10/2021"-->
+<!--                    android:textColor="#D9000000"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--            </RelativeLayout>-->
 
             <RelativeLayout
                 android:id="@+id/layout_Customer_Noti3"
@@ -331,7 +331,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_toEndOf="@+id/imgNotify5"
                     android:gravity="left"
-                    android:text="Voucher"
+                    android:text="Đánh giá"
                     android:textColor="#D9000000"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -347,7 +347,7 @@
                     android:layout_marginBottom="15dp"
                     android:layout_toEndOf="@+id/imgNotify5"
                     android:gravity="left"
-                    android:text="Hết hạn voucher giảm 10% "
+                    android:text="Đánh giá trải nghiệm dịch vụ của bạn"
                     android:textSize="18dp" />
 
                 <TextView
