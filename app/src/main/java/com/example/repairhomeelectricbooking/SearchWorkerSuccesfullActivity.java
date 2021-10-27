@@ -19,16 +19,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchWorkerSuccesfullActivity extends AppCompatActivity {
-    private TextView  tvFullName,tvPhoneNumber,tvFee,tvLoai;
+    private TextView  tvFullName,tvPhoneNumber,tvFee1,tvFee2,tvLoai;
     String strFullName,strPhoneNumber,strThietBi,strUid;
-      Double      strFee,strRatingPoint;
+      Double      strFee,strRatingPoint,strFee1,strFee2;
       Timer time;
       CircleImageView imgSearchWorkerSuccess;
       DatabaseReference rootDatabaseref;
@@ -39,13 +41,21 @@ public class SearchWorkerSuccesfullActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_worker_succesfull);
         tvFullName= (TextView)findViewById(R.id.tv_search_worker_fullName);
         tvPhoneNumber= (TextView)findViewById(R.id.tv_search_worker_sdt);
-        tvFee= (TextView)findViewById(R.id.tv_search_worker_giaTien);
+        tvFee1= (TextView)findViewById(R.id.tv_search_worker_giaTien1);
+        tvFee2= (TextView)findViewById(R.id.tv_search_worker_giaTien2);
         tvLoai=(TextView)findViewById(R.id.tv_search_worker_loai) ;
 //        tvRatingPoint=(TextView)findViewById(R.id.tv_search_worker_longtitude);
         imgSearchWorkerSuccess=(CircleImageView) findViewById(R.id.imgSearchWorkerSuccess);
         getDataIntent();
+
+        Locale localeVn= new Locale("vi","VN");
+        NumberFormat nf=NumberFormat.getInstance(localeVn);
+       // String.format("%,2f", strFee);
+        strFee1=strFee-50000;
+        strFee2=strFee+50000;
         tvFullName.setText(strFullName);
-        tvFee.setText(strFee.toString());
+        tvFee1.setText(nf.format(strFee1));
+        tvFee2.setText(nf.format(strFee2));
         tvPhoneNumber.setText(strPhoneNumber);
         tvLoai.setText(strThietBi);
 //        tvRatingPoint.setText(strRatingPoint.toString());
@@ -63,7 +73,7 @@ public class SearchWorkerSuccesfullActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        },3000);
+        },9000);
 
         rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

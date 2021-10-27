@@ -146,9 +146,7 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
         imgBackToMainWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(UpdateWorkerProfileActivity.this, WorkerProfileFragment.class);
-                startActivity(intent);
-
+                finish();
             }
         });
 //        rootDatabaseref.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {

@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.example.repairhomeelectricbooking.dto.LocationApp;
 import com.example.repairhomeelectricbooking.dto.Order;
 import com.example.repairhomeelectricbooking.dto.Rating;
+import com.example.repairhomeelectricbooking.dto.Service;
 import com.example.repairhomeelectricbooking.dto.User;
 import com.example.repairhomeelectricbooking.dto.Worker;
 import com.example.repairhomeelectricbooking.fcm.FcmNotificationsSender;
@@ -45,6 +46,7 @@ public class AnimationSearchActivity extends AppCompatActivity {
     double ratingPoint;
     Handler handler = new Handler();
     long maxId = 0;
+    List<Service> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +87,7 @@ public class AnimationSearchActivity extends AppCompatActivity {
                 }
             }
         };
-        handler.postDelayed(myRunnable,8000);
+        handler.postDelayed(myRunnable,6000);
 
         cancelSearchWorker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,7 +263,11 @@ public class AnimationSearchActivity extends AppCompatActivity {
 
     public void getG(Worker worker, User user,long maxId, String problem, Double fee, String createDate, int status){
         DatabaseReference mDatabaseOrder2=FirebaseDatabase.getInstance().getReference("tblOrder");
-        Order order = new Order(worker,user, maxId + 1,problem,fee,createDate,1);
+        Service service= new Service("Phí dịch vụ: ", fee);
+        // list = new List<Service>();
+
+        list.add(service);
+        Order order = new Order(worker,user,list, maxId + 1,problem,fee,createDate,1);
         mDatabaseOrder2.child(String.valueOf(maxId + 1)).setValue(order);
     }
     private void sendNotiToWorker(List<Worker> listWorkers){

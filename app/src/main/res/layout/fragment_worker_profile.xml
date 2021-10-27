@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
+            android:text="Tran nhat tan"
             android:layout_toEndOf="@+id/img_avatar"
             android:fontFamily="sans-serif-light"
             android:textSize="30dp"
@@ -59,7 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:layout_toEndOf="@id/tv_name"
             android:src="@drawable/direction" />
@@ -172,7 +172,6 @@
                     android:paddingBottom="15dp"
                     android:text="Đăng xuất"
                     android:textAllCaps="false"
-                    android:textColor="#99FB0000"
                     android:textSize="20dp" />
 
             </RelativeLayout>

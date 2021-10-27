@@ -76,7 +76,7 @@ public class OnboardingFragment4 extends Fragment {
         btnGetRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),DangKyActivity.class);
+                Intent intent = new Intent(getActivity(),ChangeRegisterActivity.class);
                 getActivity().startActivity(intent);
             }
         });

@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RepairHomeElectricBooking">
         <activity
+            android:name=".LocationMapWorkerActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".ShowBillForWorkerActivity"
             android:exported="true" />
         <activity

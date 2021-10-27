@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:background="#fafafa">
+
+    <RelativeLayout
+        android:id="@+id/rl_them_phi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_tienCong_worker"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_Phi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Phí"
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
+            android:textSize="19dp" />
+
+        <EditText
+            android:id="@+id/edt_phi_them"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_Phi"
+            android:hint="Nhập tên phí"
+            android:padding="5dp"
+            android:textSize="19dp" />
+
+        <EditText
+            android:id="@+id/edt_gia_phi_them"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/tv_gia_phi_them2"
+            android:hint="Giá"
+            android:padding="5dp"
+            android:textSize="19dp" />
+
+        <TextView
+            android:id="@+id/tv_gia_phi_them2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/image_removev"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingEnd="5dp"
+            android:text=" đ"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/image_removev"
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/cancel1" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

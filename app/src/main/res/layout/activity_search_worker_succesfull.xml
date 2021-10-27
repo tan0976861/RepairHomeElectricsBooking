@@ -87,10 +87,29 @@
                 android:textColor="@color/black"
                 />
             <TextView
-                android:id="@+id/tv_search_worker_giaTien"
+                android:id="@+id/tv_search_worker_giaTien1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="250.000 ~ 300.000 VND"
+                android:text="100000"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_search_worker_Noi2tien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_search_worker_giaTien2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200000 "
+                android:layout_marginRight="5dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_search_worker_VND"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VND"
                 android:textColor="@color/black"/>
         </LinearLayout>
 

@@ -1,11 +1,5 @@
 package com.example.repairhomeelectricbooking;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -27,6 +21,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import com.bumptech.glide.Glide;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -34,9 +33,6 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.repairhomeelectricbooking.dto.Order;
-import com.example.repairhomeelectricbooking.dto.Rating;
-import com.example.repairhomeelectricbooking.dto.User;
-import com.example.repairhomeelectricbooking.fcm.MyFirebaseMessagingService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -62,13 +58,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LocationMapActivity extends FragmentActivity implements OnMapReadyCallback,
+public class LocationMapWorkerActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener {
-    public static final String TAG = LocationMapActivity.class.getName();
+    public static final String TAG = LocationMapWorkerActivity.class.getName();
     Timer time;
     //google map object
     private GoogleMap mMap;
@@ -92,6 +87,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     Double strRatingPoint;
     CircleImageView imgWorkerLocationMap;
     DatabaseReference rootDatabaseref;
+    Button btn_hoanThanhWorker;
 
     //phone
     private TextView tv_PhoneNumber;
@@ -100,60 +96,84 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     private static final String LOG_TAG = "AndroidExample";
 
     //dialog
-    private Button btnCancelOrderCustomer;
+    private Button btnCancelOrderCustomer,btnArrivedOrderWorker;
     private ImageView imgCloseDialog;
     SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_map);
+        setContentView(R.layout.activity_location_map_worker);
+
         getDataIntent ();
-        tvNameWorker= findViewById(R.id.txtNameWorker);
-        tvRatingPoint=findViewById(R.id.txtPointStar);
-        btnCallWorker=findViewById(R.id.btnCallWorker);
-        tv_PhoneNumber=findViewById(R.id.tv_PhoneNumber);
-        btnCancelOrderCustomer=findViewById(R.id.btnCancelOrderCustomer);
-        imgWorkerLocationMap= findViewById(R.id.imgWorkerLocationMap);
-        imgCloseDialog= findViewById(R.id.imgCloseDialog);
-        tvNameWorker.setText(strNameWorker);
+        tvNameWorker= findViewById(R.id.txtNameWorkerWorker);
+        btnCallWorker=findViewById(R.id.btnCallWorkerWorker);
+        tv_PhoneNumber=findViewById(R.id.tv_PhoneNumberWorker);
+        //btnCancelOrderWorker=findViewById(R.id.btnCancelOrderWorker);
+        btnCancelOrderCustomer=findViewById(R.id.btnCancelOrderWorker);
+        btnArrivedOrderWorker=findViewById(R.id.btnArrivedOrderWorker);
+        imgWorkerLocationMap= findViewById(R.id.imgWorkerLocationMapWorker);
+        imgCloseDialog= findViewById(R.id.imgCloseDialogWorker);
+        btn_hoanThanhWorker= findViewById(R.id.btn_hoanThanhWorker);
+//        tvNameWorker.setText(strNameWorker);
 //        btnCallWorker.setText(strPhoneWorker);
         //tvRatingPoint.setText(strRatingPoint.toString());
-        btnBack=findViewById(R.id.imgBackToMainCustomer);
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickToBackHome();
-            }
-        });
+//        btnBack=findViewById(R.id.imgBackToMainCustomer);
+//
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                clickToBackHome();
+//            }
+//        });
         //request location permission.
         requestPermision();
         gotoBillReceipt();
         //gotoRatingWorker();
         gotoMainUserWhenCancel();
+        btnArrivedOrderWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(btn_hoanThanhWorker.getVisibility()==View.GONE){
+                    btn_hoanThanhWorker.setVisibility(View.VISIBLE);
+                    btnArrivedOrderWorker.setVisibility(View.GONE);
+                }else {
+                    btn_hoanThanhWorker.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        btn_hoanThanhWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(LocationMapWorkerActivity.this, ShowBillForWorkerActivity.class);
+                startActivity(intent);
+               // DoneOrder();
+
+            }
+        });
+
         //init google map fragment to show map.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        rootDatabaseref.child(strUID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String link = snapshot.child("image").getValue().toString();
-                if(link.equals("")){
-                    Glide.with(LocationMapActivity.this).load(snapshot.getValue().toString()).error(R.drawable.avatar_default).into(imgWorkerLocationMap);
-                }else{
-                    Picasso.get().load(link).into(imgWorkerLocationMap);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(LocationMapActivity.this, "Chưa thêm hình ảnh", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        rootDatabaseref.child(strUID).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String link = snapshot.child("image").getValue().toString();
+//                if(link.equals("")){
+//                    Glide.with(LocationMapWorkerActivity.this).load(snapshot.getValue().toString()).error(R.drawable.avatar_default).into(imgWorkerLocationMap);
+//                }else{
+//                    Picasso.get().load(link).into(imgWorkerLocationMap);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(LocationMapWorkerActivity.this, "Chưa thêm hình ảnh", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         btnCallWorker.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +186,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         btnCancelOrderCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialogReasonCustomer(Gravity.CENTER);
+                openDialogReasonWorker(Gravity.CENTER);
             }
         });
 
@@ -212,11 +232,10 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         dialog.show();
     }
 
-    private void openDialogReasonCustomer(int gravity){
+    private void openDialogReasonWorker(int gravity){
         final Dialog dialog= new Dialog((this));
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_reason_customer);
-
+        dialog.setContentView(R.layout.reason_worker);
         Window window= dialog.getWindow();
         if(window == null){
             return;
@@ -227,25 +246,24 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         WindowManager.LayoutParams windowAttributes= window.getAttributes();
         windowAttributes.gravity= gravity;
         window.setAttributes(windowAttributes);
-        Log.e(TAG,"195");
 
-        if(Gravity.BOTTOM == gravity){
+        if(Gravity.CENTER == gravity){
             dialog.setCancelable(true);
         }else{
             dialog.setCancelable(false);
         }
-        btnCancelRealOrderOfCustomer = dialog.findViewById(R.id.btnCancelRealOrderOfCustomer);
 
-        btnCancelRealOrderOfCustomer.setOnClickListener(new View.OnClickListener() {
+        btnCancelOrderCustomer = dialog.findViewById(R.id.btnCancelRealOrder);
+
+        btnCancelOrderCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG,"207");
                 CancelOrder();
             }
         });
 
-        ImageView imgCloseDialog=dialog.findViewById(R.id.imgCloseDialog);
-        imgCloseDialog.setOnClickListener(new View.OnClickListener() {
+        ImageView imgCloseDialogWorker=dialog.findViewById(R.id.imgCloseDialogWorker);
+        imgCloseDialogWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
@@ -365,7 +383,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     public void Findroutes(LatLng Start, LatLng End)
     {
         if(Start==null || End==null) {
-            Toast.makeText(LocationMapActivity.this,"Unable to get location",Toast.LENGTH_LONG).show();
+            Toast.makeText(LocationMapWorkerActivity.this,"Unable to get location",Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -392,7 +410,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 
     @Override
     public void onRoutingStart() {
-        Toast.makeText(LocationMapActivity.this,"Finding Route...",Toast.LENGTH_LONG).show();
+        Toast.makeText(LocationMapWorkerActivity.this,"Finding Route...",Toast.LENGTH_LONG).show();
     }
 
     //If Route finding success..
@@ -456,11 +474,11 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 
     private void clickToBackHome(){
 
-        Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
+        Intent intent= new Intent(LocationMapWorkerActivity.this, MainActivity.class);
         startActivity(intent);
     }
     private void goToRating() {
-        Intent intent = new Intent(LocationMapActivity.this, RatingActivity.class);
+        Intent intent = new Intent(LocationMapWorkerActivity.this, RatingActivity.class);
         startActivity(intent);
     }
 
@@ -563,7 +581,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                         order.setStatus(0);
                         Log.e(TAG,"519");
                         mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
-                        Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
+                        Intent intent= new Intent(LocationMapWorkerActivity.this, MainActivity.class);
                         startActivity(intent);
                         finishAffinity();
                         finish();
@@ -588,7 +606,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                     Order order = postSnapshot.getValue(Order.class);
                     String date= LocalDate.now().toString();
                     if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 2 && order.getWorker().getWorkerID().equals("pI8Mffqvcsfa1HkRuTtKoy4Li2c2") ){
-                        Intent intent = new Intent(LocationMapActivity.this,ShowBillForCustomerActivity.class);
+                        Intent intent = new Intent(LocationMapWorkerActivity.this,ShowBillForCustomerActivity.class);
                         startActivity(intent);
                         finishAffinity();
                     }
@@ -613,11 +631,11 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                     Order order = postSnapshot.getValue(Order.class);
                     String date= LocalDate.now().toString();
                     if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 0 ){
-                        Intent intent = new Intent(LocationMapActivity.this,MainActivity.class);
+                        Intent intent = new Intent(LocationMapWorkerActivity.this,MainActivity.class);
                         startActivity(intent);
                         finishAffinity();
                         finish();
-                        Toast.makeText(LocationMapActivity.this, "Đơn hàng đã bị hủy", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LocationMapWorkerActivity.this, "Đơn hàng đã bị hủy", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

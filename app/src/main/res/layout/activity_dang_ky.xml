@@ -42,7 +42,7 @@
                 android:background="@drawable/register_border"
                 android:drawableLeft="@drawable/account"
                 android:drawablePadding="16dp"
-                android:hint="Email (Bắt Buộc)"
+                android:hint="Email(bắt buộc)"
                 android:padding="16dp"
                 android:textSize="17dp" />
 
@@ -56,7 +56,7 @@
                 android:background="@drawable/register_border"
                 android:drawableLeft="@drawable/lock"
                 android:drawablePadding="16dp"
-                android:hint="Mật khẩu (Bắt Buộc)"
+                android:hint="Mật khẩu(bắt buộc)"
                 android:inputType="textPassword"
                 android:textSize="17dp"
                 android:padding="16dp" />
@@ -71,7 +71,7 @@
                 android:background="@drawable/register_border"
                 android:drawableLeft="@drawable/checkpassword"
                 android:drawablePadding="16dp"
-                android:hint="Nhập lại mật khẩu (Bắt Buộc)"
+                android:hint="Nhập lại mật khẩu(bắt buộc)"
                 android:inputType="textPassword"
                 android:textSize="17dp"
                 android:padding="16dp" />
@@ -86,7 +86,7 @@
                 android:background="@drawable/register_border"
                 android:drawableLeft="@drawable/phone"
                 android:drawablePadding="16dp"
-                android:hint="Điện thoại (Bắt Buộc)"
+                android:hint="Điện thoại(bắt buộc)"
                 android:textSize="17dp"
                 android:padding="16dp" />
 
