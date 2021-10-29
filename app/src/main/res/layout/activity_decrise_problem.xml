@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DecriseProblemActivity">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_layout_notify"
+        android:fontFamily="@font/font5"
+        android:gravity="center"
+        android:text="Vấn đề của bạn là gì?"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/tvDiachi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/font5"
+        android:text="Vị trí"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtAddressUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDiachi"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="20dp"
+        android:drawableLeft="@drawable/icon_location"
+        android:text="567 Lê Văn Việt, quận 9, Hồ Chí Minh"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/tvThietBi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtAddressUser"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:text="Thiết bị (*)"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/edtInputThietBiDaChon"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvThietBi"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/style_spinner"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/tvThietBiHang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtInputThietBiDaChon"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:text="Hãng"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvInputThietBiHangDaChon"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvThietBiHang"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/style_spinner"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/tvThietBiLoai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvInputThietBiHangDaChon"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:text="Loại"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvInputThietBiLoaiDaChon"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvThietBiLoai"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/style_spinner"
+        android:textAlignment="center" />
+
+
+
+    <TextView
+        android:id="@+id/tvChonVanDe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvInputThietBiLoaiDaChon"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/font5"
+        android:text="Chọn vấn đề (*)"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/spinnerMoTaVanDe"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/tvChonVanDe"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/custom_input_problem"
+        android:drawableEnd="@drawable/down1"
+        android:gravity="center"
+        android:hint="Chọn vấn đề" />
+
+    <TextView
+        android:id="@+id/tvVanDeKhac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerMoTaVanDe"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:visibility="gone"
+        android:text="Nhập vấn đề khác (*)"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtInputVanDeKhac"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvVanDeKhac"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:visibility="gone"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/customer_layout_description_problem" />
+
+
+    <TextView
+        android:id="@+id/tvMoTaVanDe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtInputVanDeKhac"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:layout_marginEnd="20dp"
+        android:text="Mô tả thêm chi tiết:"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtInputVanDe"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/tvMoTaVanDe"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginEnd="20dp"
+        android:visibility="gone"
+        android:background="@drawable/customer_layout_description_problem"
+        android:gravity="left" />
+
+    <LinearLayout
+        android:id="@+id/ll_imgae_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_below="@+id/edtInputVanDe"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgview_imageVande"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_below="@+id/edtInputVanDe"
+                android:background="@drawable/layout_mainuser_imagebtn"
+                android:padding="20dp"
+                android:src="@drawable/cameraplus" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgview_videoVande"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_below="@+id/imgview_imageVande"
+                android:background="@drawable/layout_mainuser_imagebtn"
+                android:padding="20dp"
+                android:src="@drawable/videoplus" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_BookingRepair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_imgae_video"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_layout_timtho"
+        android:text="Tìm thợ"
+        android:textSize="20dp" />
+
+
+</RelativeLayout>
