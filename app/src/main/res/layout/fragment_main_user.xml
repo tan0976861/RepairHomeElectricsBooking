@@ -12,38 +12,15 @@
         android:background="@drawable/custom_layout_notify"
         android:fontFamily="@font/font5"
         android:gravity="center"
-        android:text="Vấn đề của bạn là gì?"
+        android:text="Thông tin thiết bị"
         android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/tvDiachi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"
-        android:textStyle="bold"
-        android:fontFamily="@font/font5"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:text="Vị trí"
-        android:textSize="20dp" />
-
-    <EditText
-        android:id="@+id/edtAddressUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvDiachi"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="20dp"
-        android:drawableLeft="@drawable/icon_location"
-        android:text="567 Lê Văn Việt, quận 9, Hồ Chí Minh"
-        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/tvThietBi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtAddressUser"
+        android:layout_below="@+id/tv_title"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
@@ -62,141 +39,787 @@
         android:background="@drawable/style_spinner"
         android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tvChonVanDe"
+    <LinearLayout
+        android:id="@+id/ly_Input_Info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtInputThietBi"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ly_inputMayLanh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvChonHangMayLanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Hãng"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/spinnerHangMayLanh"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_input_problem"
+            android:drawableEnd="@drawable/down1"
+            android:gravity="center"
+            android:hint="Chọn Hãng" />
+
+        <TextView
+            android:id="@+id/tvChonCongNgheMayLanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Công nghệ inverter "
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:text="Có" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:text="Không" />
+
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvChonCongSuatMayLanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Công Suất"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputCongSuatMayLanh"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:hint="1HP, 1.5HP, 2HP, 2.5HP"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvChonLoaiMayLanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Loại"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputLoaiMayLanh"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:hint="đứng, treo tường, âm trần"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_inputMayGiat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvChonHangMayGiat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtInputThietBi"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Hãng"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/spinnerHangMayGiat"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_input_problem"
+            android:drawableEnd="@drawable/down1"
+            android:gravity="center"
+            android:hint="Chọn Hãng" />
+
+        <TextView
+            android:id="@+id/tvChonKhoiLuongGiatMayGiat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Khối lượng giặt"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputCongNgheMayGiat"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:hint="6kg, 6.5kg,7kg,7,5kg,7.8kg,8k"
+            android:paddingEnd="10dp"
+            android:visibility="visible" />
+        <TextView
+            android:id="@+id/tvChonLoaiMayGiat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Loại"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvInputLoaiMayGiat"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Lồng Đứng ,Lồng Ngang, có inverter, không inverter"
+            android:background="@drawable/customer_layout_description_problem"
+            android:drawableEnd="@drawable/down1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_inputTivi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvChonHangTivi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Hãng"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/spinnerHangTivi"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_input_problem"
+            android:drawableEnd="@drawable/down1"
+            android:gravity="center"
+            android:hint="Chọn Hãng" />
+
+        <TextView
+            android:id="@+id/tvChonKichThuocTivi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Kích thước "
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputKichThuocTivi"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:hint=":32 inch,40 inch,43 inch,,48 inch,49 inch"
+            android:paddingEnd="10dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvChonLoaiTivi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Loại"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputChonLoaiTivi"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Smart tivi,Android Tivi, Tivi led,Tivi Oled,"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="visible" />
+        <TextView
+            android:id="@+id/tvNamRaMat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Năm ra mắt:"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputNamRaMat"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="2013,2014,2015..."
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_inputQuat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvChonHangQuat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/font5"
-        android:text="Chọn vấn đề (*)"
+        android:text=" Hãng"
         android:textSize="18dp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/spinnerMoTaVanDe"
+        android:id="@+id/spinnerHangQuat"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/tvChonVanDe"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/custom_input_problem"
         android:drawableEnd="@drawable/down1"
         android:gravity="center"
-        android:hint="Chọn vấn đề" />
+        android:hint="Chọn Hãng" />
 
     <TextView
-        android:id="@+id/tvVanDeKhac"
+        android:id="@+id/tvChonLoaiQuat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spinnerMoTaVanDe"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:visibility="gone"
-        android:text="Nhập vấn đề khác (*)"
+        android:fontFamily="@font/font5"
+        android:text=" Loại "
         android:textSize="18dp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edtInputVanDeKhac"
+    <TextView
+        android:id="@+id/tvInputChonLoaiQuat"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/tvVanDeKhac"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:layout_marginStart="20dp"
-        android:visibility="gone"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/customer_layout_description_problem" />
-
-
-    <TextView
-        android:id="@+id/tvMoTaVanDe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtInputVanDeKhac"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:layout_marginEnd="20dp"
-        android:text="Mô tả thêm chi tiết:"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/edtInputVanDe"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/tvMoTaVanDe"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:layout_marginEnd="20dp"
-        android:visibility="gone"
         android:background="@drawable/customer_layout_description_problem"
-        android:gravity="left" />
-
-    <LinearLayout
-        android:id="@+id/ll_imgae_video"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:layout_below="@+id/edtInputVanDe"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imgview_imageVande"
-                android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:layout_below="@+id/edtInputVanDe"
-                android:background="@drawable/layout_mainuser_imagebtn"
-                android:padding="20dp"
-                android:src="@drawable/cameraplus" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imgview_videoVande"
-                android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:layout_below="@+id/imgview_imageVande"
-                android:background="@drawable/layout_mainuser_imagebtn"
-                android:padding="20dp"
-                android:src="@drawable/videoplus" />
-
-        </LinearLayout>
+        android:paddingStart="10dp"
+        android:hint="đứng/treo, điều hòa/hơi nước"
+        android:paddingEnd="10dp"
+        />
 
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/btn_BookingRepair"
+    <LinearLayout
+        android:id="@+id/ly_inputDen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_imgae_video"
+        android:visibility="gone"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvChonLoaiDen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Loại "
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtChonLoaiDen"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:hint="LED, sợi đốt, ống huỳnh quang, neon..."
+            android:paddingEnd="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_inputTuLanh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvChonHangTuLanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Hãng"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/spinnerHangTuLanh"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_input_problem"
+            android:drawableEnd="@drawable/down1"
+            android:gravity="center"
+            android:hint="Chọn Hãng" />
+
+        <TextView
+            android:id="@+id/tvChonLoaiTuLanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Loại "
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputLoaiTuLanh"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:hint= "Tủ lạnh Mini,Tủ lạnh cao, thấp..."
+            android:paddingEnd="10dp"
+            />
+        <TextView
+            android:id="@+id/tvChonTheTichTuLanh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Thể tích "
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputTheTichTuLanh"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint=" nhỏ hơn 100 lít, 100-150 lít, 150-200 lít, lớn hơn 200 lít"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_inputNoiCom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvChonHangNoiCom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Hãng"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/spinnerHangNoiCom"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_input_problem"
+            android:drawableEnd="@drawable/down1"
+            android:gravity="center"
+            android:hint="Chọn Hãng" />
+
+        <TextView
+            android:id="@+id/tvChonLoaiNoiCom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Loại "
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputLoaiNoiCom"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:hint="Nồi điện tử, Nồi cao tần, Nồi nắp rờ"
+            android:paddingEnd="10dp"
+            />
+        <TextView
+            android:id="@+id/tvChonDungTichNoiCom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Dung Tích"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputDungTichNoiCom"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="1 lít, 1,5 lít, 2 lít, hơn 2 lít"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_inputLoNuong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/edtInputThietBi"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvChonHangLoNuong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Hãng"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/spinnerHangLoNuong"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_input_problem"
+            android:drawableEnd="@drawable/down1"
+            android:gravity="center"
+            android:hint="Chọn Hãng" />
+
+        <TextView
+            android:id="@+id/tvChonLoaiLoNuong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Loại "
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputLoaiLoNuong"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:hint="Lò nướng thùng, âm tủ,…"
+            android:paddingEnd="10dp"
+            />
+        <TextView
+            android:id="@+id/tvChonDungTichLoNuong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font5"
+            android:text=" Dung Tích"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtInputDungTichLoNuong"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="dưới 20 lít, từ 20-35 lít,  lớn hơn 35 lí"
+            android:background="@drawable/customer_layout_description_problem"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+             />
+
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ly_inputMayRuaChen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@+id/edtInputThietBi"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvChonHangMayRuaChen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/font5"
+                android:text=" Hãng"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/spinnerHangMayRuaCheng"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/custom_input_problem"
+                android:drawableEnd="@drawable/down1"
+                android:gravity="center"
+                android:hint="Chọn Hãng" />
+
+            <TextView
+                android:id="@+id/tvChonLoaiMayRuaChen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/font5"
+                android:text=" Loại "
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtInputLoaiMayRuaChen"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/customer_layout_description_problem"
+                android:paddingStart="10dp"
+                android:hint="Thiết kế âm, độc lập, để bàn..."
+                android:paddingEnd="10dp"
+                />
+            <TextView
+                android:id="@+id/tvChonDungTichMayRuaChen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/font5"
+                android:text=" Dung Tích Thùng Chứa"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtInputDungTichMayRuaChe"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="6 bộ, 12 bộ..."
+                android:background="@drawable/customer_layout_description_problem"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                />
+
+        </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_imgae_video"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:weightSum="2"-->
+<!--        android:layout_below="@+id/ly_inputMayLanh"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imgview_imageVande"-->
+<!--                android:layout_width="95dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:layout_below="@+id/edtInputVanDe"-->
+<!--                android:background="@drawable/layout_mainuser_imagebtn"-->
+<!--                android:padding="20dp"-->
+<!--                android:src="@drawable/cameraplus" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imgview_videoVande"-->
+<!--                android:layout_width="95dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:layout_below="@+id/imgview_imageVande"-->
+<!--                android:background="@drawable/layout_mainuser_imagebtn"-->
+<!--                android:padding="20dp"-->
+<!--                android:src="@drawable/videoplus" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_NextToDecriseProblem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_Input_Info"
         android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_layout_timtho"
-        android:text="Tìm thợ"
+        android:text="Tiếp theo"
         android:textSize="20dp" />
 
 
