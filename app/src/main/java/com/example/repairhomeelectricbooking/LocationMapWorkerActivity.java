@@ -16,8 +16,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,7 +90,7 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
     Double strRatingPoint;
     CircleImageView imgWorkerLocationMap;
     DatabaseReference rootDatabaseref;
-    Button btn_hoanThanhWorker;
+    Button btn_hoanThanhWorker,btnGoOfWorker;
 
     //phone
     private TextView tv_PhoneNumber;
@@ -96,7 +99,9 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
     private static final String LOG_TAG = "AndroidExample";
 
     //dialog
-    private Button btnCancelOrderCustomer,btnArrivedOrderWorker;
+    private Button btnCancelOrderCustomer,btnArrivedOrderWorker,btn_CancelOrderWorker2, btnCancelRealOrderofWorker,btnCancelRealOrderofWorker2;
+    RadioButton rb_lydokhac2, rb_lydokhac1;
+    EditText edtlydohuy2, edtlydohuy1;
     private ImageView imgCloseDialog;
     SupportMapFragment mapFragment;
 
@@ -111,10 +116,12 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         tv_PhoneNumber=findViewById(R.id.tv_PhoneNumberWorker);
         //btnCancelOrderWorker=findViewById(R.id.btnCancelOrderWorker);
         btnCancelOrderCustomer=findViewById(R.id.btnCancelOrderWorker);
+        btn_CancelOrderWorker2=findViewById((R.id.btn_CancelOrderWorker2));
         btnArrivedOrderWorker=findViewById(R.id.btnArrivedOrderWorker);
         imgWorkerLocationMap= findViewById(R.id.imgWorkerLocationMapWorker);
         imgCloseDialog= findViewById(R.id.imgCloseDialogWorker);
         btn_hoanThanhWorker= findViewById(R.id.btn_hoanThanhWorker);
+       // btnGoOfWorker=findViewById(R.id.btnGoOfWorker);
 //        tvNameWorker.setText(strNameWorker);
 //        btnCallWorker.setText(strPhoneWorker);
         //tvRatingPoint.setText(strRatingPoint.toString());
@@ -131,15 +138,35 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         gotoBillReceipt();
         //gotoRatingWorker();
         gotoMainUserWhenCancel();
+//        btnGoOfWorker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
         btnArrivedOrderWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(btn_hoanThanhWorker.getVisibility()==View.GONE){
                     btn_hoanThanhWorker.setVisibility(View.VISIBLE);
                     btnArrivedOrderWorker.setVisibility(View.GONE);
+                    btn_CancelOrderWorker2.setVisibility(View.VISIBLE);
+                    btnCancelOrderCustomer.setVisibility(View.GONE);
                 }else {
                     btn_hoanThanhWorker.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        btnCancelOrderCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialogReasonWorker(Gravity.CENTER);
+            }
+        });
+        btn_CancelOrderWorker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialogReasonWorker2(Gravity.CENTER);
             }
         });
         btn_hoanThanhWorker.setOnClickListener(new View.OnClickListener() {
@@ -183,12 +210,7 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
             }
         });
 
-        btnCancelOrderCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialogReasonWorker(Gravity.CENTER);
-            }
-        });
+
 
     }
 
@@ -253,9 +275,11 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
             dialog.setCancelable(false);
         }
 
-        btnCancelOrderCustomer = dialog.findViewById(R.id.btnCancelRealOrder);
+        btnCancelRealOrderofWorker = dialog.findViewById(R.id.btnCancelRealOrder);
+        rb_lydokhac1=dialog.findViewById(R.id.rb_lydokhac1);
+        edtlydohuy1=dialog.findViewById(R.id.edtlydohuy1);
 
-        btnCancelOrderCustomer.setOnClickListener(new View.OnClickListener() {
+        btnCancelRealOrderofWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CancelOrder();
@@ -269,7 +293,91 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
                 dialog.dismiss();
             }
         });
+        rb_lydokhac1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    edtlydohuy1.setVisibility(View.VISIBLE);
+                }
+                else{
+                    edtlydohuy1.setVisibility(View.GONE);
+                }
+            }
+        });
+
         dialog.show();
+
+
+    }
+    private void openDialogReasonWorker2(int gravity){
+        final Dialog dialog= new Dialog((this));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.reason_worker2);
+        Window window= dialog.getWindow();
+        if(window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes= window.getAttributes();
+        windowAttributes.gravity= gravity;
+        window.setAttributes(windowAttributes);
+
+        if(Gravity.CENTER == gravity){
+            dialog.setCancelable(true);
+        }else{
+            dialog.setCancelable(false);
+        }
+
+
+        btnCancelRealOrderofWorker2 = dialog.findViewById(R.id.btnCancelRealOrder2);
+        rb_lydokhac2=dialog.findViewById(R.id.rb_lydokhac2);
+        edtlydohuy2=dialog.findViewById(R.id.edtlydohuy2);
+        btnCancelRealOrderofWorker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CancelOrder();
+            }
+        });
+
+
+        ImageView imgCloseDialogWorker2=dialog.findViewById(R.id.imgCloseDialogWorker2);
+        imgCloseDialogWorker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        rb_lydokhac2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    edtlydohuy2.setVisibility(View.VISIBLE);
+                }
+                else{
+                    edtlydohuy2.setVisibility(View.GONE);
+                }
+            }
+        });
+        dialog.show();
+
+
+//        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rdg_lydohuy2);
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//        {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId)
+//            {
+//                switch (checkedId) {
+//                    case R.id.radio1:
+//                        RadioButton value = Integer.parseInt(((RadioButton) findViewById(R.id.radio1).getText()) * 3);
+//                        break;
+//                }
+//            }
+//        });
+
+
     }
     private void getDataIntent (){
         strPhoneWorker = getIntent().getStringExtra("phoneNumber");
@@ -338,11 +446,11 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
                     mapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(@NonNull GoogleMap googleMap) {
-                             LatLng ltlng = new LatLng(10.7695, 106.6825);
+                             LatLng ltlng = new LatLng(10.7740, 106.6889);
                             //LatLng ltlng = new LatLng(location.getLatitude(), location.getLongitude());
                             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
                                     ltlng, 17f);
-                            MarkerOptions markerOptions = new MarkerOptions().position(ltlng).title("Vị trí của thợ");
+                            MarkerOptions markerOptions = new MarkerOptions().position(ltlng).title("Vị trí của Khách ");
                             googleMap.addMarker(markerOptions).showInfoWindow();
                             mMap.animateCamera(cameraUpdate);
                         }
@@ -573,18 +681,15 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot postSnapshot: snapshot.getChildren()){
-                    Log.e(TAG,"515");
                     Order order= postSnapshot.getValue(Order.class);
-                    Log.e(TAG,order.getUser().getUserID());
-                    Log.e(TAG,userAuth.getUid());
-                    if(order.getUser().getUserID().equals(userAuth.getUid()) && order.getStatus() == 1){
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 1 ){
                         order.setStatus(0);
-                        Log.e(TAG,"519");
                         mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
-                        Intent intent= new Intent(LocationMapWorkerActivity.this, MainActivity.class);
+                        Intent intent= new Intent(LocationMapWorkerActivity.this, MainWorkerActivity.class);
                         startActivity(intent);
                         finishAffinity();
                         finish();
+                        return;
                     }
                 }
             }

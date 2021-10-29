@@ -104,18 +104,35 @@
             android:weightSum="2">
 
 
-            <Button
-                android:id="@+id/btnCancelOrderWorker"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/custom_btnhuydonhang_worker"
-                android:text="Hủy đơn hàng"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:id="@+id/canel_donhang">
+
+
+                <Button
+                    android:id="@+id/btnCancelOrderWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:background="@drawable/custom_btnhuydonhang_worker"
+                    android:text="Hủy đơn hàng"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_CancelOrderWorker2"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:visibility="gone"
+                    android:background="@drawable/custom_btnhuydonhang_worker"
+                    android:text="Hủy đơn hàng"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -124,12 +141,21 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp">
 
+<!--                <Button-->
+<!--                    android:id="@+id/btnGoOfWorker"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="36dp"-->
+<!--                    android:background="@drawable/custom_btnhhoanthanh_worker"-->
+<!--                    android:text="Đã đi"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/white" />-->
                 <Button
                     android:id="@+id/btnArrivedOrderWorker"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:background="@drawable/custom_btnhhoanthanh_worker"
                     android:text="Đã đến"
+                    android:visibility="visible"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 

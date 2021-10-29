@@ -22,8 +22,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,6 +99,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     //phone
     private TextView tv_PhoneNumber;
     private ImageButton btnCallWorker;
+    RadioButton rb_lydokhaccuacustomer;
     private static final int MY_PERMISSION_REQUEST_CODE_CALL_PHONE = 555;
     private static final String LOG_TAG = "AndroidExample";
 
@@ -127,6 +131,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                 clickToBackHome();
             }
         });
+        openFeedbackDialog(Gravity.CENTER);
         //request location permission.
         requestPermision();
         gotoBillReceipt();
@@ -234,6 +239,19 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         }else{
             dialog.setCancelable(false);
         }
+        rb_lydokhaccuacustomer=dialog.findViewById(R.id.radio_6);
+        EditText edtlydohuycuaCustomer=dialog.findViewById(R.id.edtlydohuycuaCustomer);
+        rb_lydokhaccuacustomer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    edtlydohuycuaCustomer.setVisibility(View.VISIBLE);
+                }
+                else{
+                    edtlydohuycuaCustomer.setVisibility(View.GONE);
+                }
+            }
+        });
         btnCancelRealOrderOfCustomer = dialog.findViewById(R.id.btnCancelRealOrderOfCustomer);
 
         btnCancelRealOrderOfCustomer.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +270,7 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             }
         });
         dialog.show();
+
     }
     private void getDataIntent (){
         strPhoneWorker = getIntent().getStringExtra("phoneNumber");
@@ -628,5 +647,80 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 
             }
         });
+    }
+    private void openFeedbackDialog(int gravity){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_dangdi);
+
+        Window window = dialog.getWindow();
+        if(window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams winAttributes = window.getAttributes();
+        winAttributes.gravity = gravity;
+        window.setAttributes(winAttributes);
+        if(Gravity.CENTER == gravity){
+            dialog.setCancelable(false);
+        }
+//        ImageView imgCloseDialogWorker=dialog.findViewById(R.id.imgCloseDialogWorker);
+//        imgCloseDialogWorker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//        dialog.show();
+
+        Button btnOK = dialog.findViewById(R.id.btn_ok_dangdi);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFeedbackDialog2(Gravity.CENTER);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+    private void openFeedbackDialog2(int gravity){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_dadennoi);
+
+        Window window = dialog.getWindow();
+        if(window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams winAttributes = window.getAttributes();
+        winAttributes.gravity = gravity;
+        window.setAttributes(winAttributes);
+        if(Gravity.CENTER == gravity){
+            dialog.setCancelable(false);
+        }
+//        ImageView imgCloseDialogWorker=dialog.findViewById(R.id.imgCloseDialogWorker);
+//        imgCloseDialogWorker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//        dialog.show();
+
+        Button btnOK = dialog.findViewById(R.id.btn_ok_dadennoi);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

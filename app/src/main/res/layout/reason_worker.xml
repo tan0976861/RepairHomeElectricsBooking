@@ -41,71 +41,99 @@
             android:textSize="18sp"
             android:text="Hãy chọn những lý do bên dưới" />
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/radio_1"
-                android:text="Vị Trí quá xa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/rdg_lydohuy1">
 
-            <RadioButton
-                android:id="@+id/radio_2"
-                android:text="Thiết bị đã hoạt động"
-                android:checked="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"
-                />
+                    <RadioButton
+                        android:id="@+id/radio_1"
+                        android:text="Vị Trí quá xa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="16sp"
+                        android:paddingLeft="15dp"/>
 
-            <RadioButton
-                android:id="@+id/radio_3"
-                android:text="Không thể liên hệ với khách hàng"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"/>
-            <RadioButton
-                android:id="@+id/radio_4"
-                android:text="Tôi không sửa được thiết bị này."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"/>
-            <RadioButton
-                android:id="@+id/radio_5"
-                android:text="Gặp khó khăn khi liên hệ với khách hàng"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"/>
+                    <RadioButton
+                        android:id="@+id/radio_2"
+                        android:text="Tôi bị hỏng xe giữa đường"
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="16sp"
+                        android:paddingLeft="15dp"
+                        />
 
-            <RadioButton
-                android:id="@+id/radio_6"
-                android:text="Lý do khác"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"/>
-        </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radio_3"
+                        android:text="Không thể liên hệ với khách hàng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="16sp"
+                        android:paddingLeft="15dp"/>
+                    <RadioButton
+                        android:id="@+id/radio_4"
+                        android:text="Tôi có chuyện đột xuất"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="16sp"
+                        android:paddingLeft="15dp"/>
+                    <RadioButton
+                        android:id="@+id/radio_5"
+                        android:text="Tôi không tìm thấy địa chỉ khách hàng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="16sp"
+                        android:paddingLeft="15dp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_lydokhac1"
+                        android:text="Lý do khác"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="16sp"
+                        android:paddingLeft="15dp"/>
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/edtlydohuy1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:visibility="gone"
+                    android:layout_below="@+id/rb_lydokhac1"
+                    android:hint=" Điền lý do hủy đơn"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/customer_layout_description_problem" />
+
+            </LinearLayout>
+        </ScrollView>
+
 
         <Button
             android:id="@+id/btnCancelRealOrder"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:text="Hủy Đơn Hàng"
+            android:layout_marginTop="20dp"
+
             android:background="@drawable/custom_btnhuydonhang_customer"
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"

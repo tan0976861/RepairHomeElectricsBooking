@@ -19,9 +19,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +46,8 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
     Button btnCancelRealOrder;
     String strUserName,strAddress,strFee;
     DatabaseReference mDatabaseOrder;
+    RadioButton rb_lydokhac1;
+    EditText edtlydohuy1;
     TextView tv_GetOrderBy, tv_locationAddress;
     //phone
     private ImageView imgViewPhoneCustomer;
@@ -180,7 +185,19 @@ public class MainWorkerStatusActivity extends AppCompatActivity {
         }
 
         btnCancelRealOrder = dialog.findViewById(R.id.btnCancelRealOrder);
-
+        rb_lydokhac1=dialog.findViewById(R.id.rb_lydokhac1);
+        edtlydohuy1=dialog.findViewById(R.id.edtlydohuy1);
+        rb_lydokhac1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    edtlydohuy1.setVisibility(View.VISIBLE);
+                }
+                else{
+                    edtlydohuy1.setVisibility(View.GONE);
+                }
+            }
+        });
         btnCancelRealOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
