@@ -72,12 +72,12 @@ public class AnimationSearchActivity extends AppCompatActivity {
 
             }
         });
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         handler = new Handler();
         Runnable myRunnable = new Runnable() {
             public void run() {
                 if (listWorkers != null && !listWorkers.isEmpty()) {
-                    createOrder(new Worker(listWorkers.get(0).getWorkerID(),listWorkers.get(0).getFullName()),new User("oK7VSUpZAGUqV12y0BVq7Iyduom2","Công Liêm Trần",strLocationUser),strThietBi,listWorkers.get(0).getFee(),date,1);
+                    createOrder(new Worker(listWorkers.get(0).getWorkerID(),listWorkers.get(0).getFullName()),new User(user.getUid(),"Công Liêm Trần",strLocationUser),strThietBi,listWorkers.get(0).getFee(),date,1);
                     gotoUpdateProfile(listWorkers,strThietBi);
                     sendNotiToWorker(listWorkers);
 

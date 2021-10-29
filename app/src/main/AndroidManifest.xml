@@ -18,7 +18,6 @@
         <activity
             android:name=".LocationMapWorkerActivity"
             android:exported="true" />
-
         <activity
             android:name=".ShowBillForWorkerActivity"
             android:exported="true" />

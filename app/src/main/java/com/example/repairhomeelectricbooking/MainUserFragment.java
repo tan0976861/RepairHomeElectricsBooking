@@ -1,6 +1,8 @@
 package com.example.repairhomeelectricbooking;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -30,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,19 +53,17 @@ public class MainUserFragment extends Fragment {
     private String mParam1,strUserName,strPhone;
     private String mParam2;
     private View view;
-    private Button btnSearch;
     private Button btnBookingRepair;
-    private ScrollView scrollViewMainUser;
-    private RecyclerView rcv_item;
-    private ItemAdapter itemAdapter;
     private Context mContext;
     private RelativeLayout layout_firstWorker;
     private DatabaseReference mDatabase;
     private EditText edtProblem,edtFee;
     private Spinner  edtInputThietBi;
     private  Spinner spinnerMoTaVanDe;
-    private TextView tvVanDeKhac;
-    private  EditText edtMoTaVanDeKhac,edtVitri;
+    private TextView tvVanDeKhac,tvMotaVande,tvMotaVandechitiet;
+    private  EditText edtMoTaVanDeKhac,edtVitri,edtInputVanDeChitiet;
+    private boolean[] selectedProblem;
+
 
 
     public MainUserFragment() {
@@ -105,21 +107,11 @@ public class MainUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = (View) inflater.inflate(R.layout.fragment_main_user, container, false);
-//        btnSearch = (Button) view.findViewById(R.id.btnSearch);
-//        layout_firstWorker= (RelativeLayout) view.findViewById(R.id.layout_firstWorker);
-//        scrollViewMainUser = (ScrollView) view.findViewById(R.id.scrollViewMainUser);
-//        rcv_item = (RecyclerView) view.findViewById(R.id.rcv_item);
-//        itemAdapter = new ItemAdapter(getActivity());
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false);
-//        rcv_item.setLayoutManager(linearLayoutManager);
-//        itemAdapter.setData(getListItem());
-//        rcv_item.setAdapter(itemAdapter);
-        //edtThietbi=(EditText) view.findViewById(R.id.edtInputThietBi);
-//        edtProblem=(EditText)  view.findViewById(R.id.edtInputVanDe);
-        //edtFee= (EditText)  view.findViewById(R.id.edtInputGiaTien);
         edtInputThietBi=(Spinner) view.findViewById(R.id.edtInputThietBi);
         btnBookingRepair=(Button) view.findViewById(R.id.btn_BookingRepair);
-        spinnerMoTaVanDe = (Spinner) view.findViewById(R.id.spinnerMoTaVanDe);
+       tvMotaVande = (TextView) view.findViewById(R.id.spinnerMoTaVanDe);
+        tvMotaVandechitiet=(TextView) view.findViewById(R.id.tvMoTaVanDe);
+        edtInputVanDeChitiet=(EditText) view.findViewById(R.id.edtInputVanDe);
         edtVitri=(EditText) view.findViewById(R.id.edtAddressUser);
         //TextView=(EditText) view.findViewById(R.id)
         //getUserInfo();
@@ -127,7 +119,7 @@ public class MainUserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String strThietBi = edtInputThietBi.getSelectedItem().toString();
-                String strVanDe = spinnerMoTaVanDe.getSelectedItem().toString();
+                String strVanDe = tvMotaVande.getText().toString();
                 String StrLocation=edtVitri.getText().toString();
                 //String strFee = edtFee.getText().toString();
                 gotoSearchAnimation(strThietBi,strVanDe,StrLocation);
@@ -135,8 +127,8 @@ public class MainUserFragment extends Fragment {
         });
         tvVanDeKhac = (TextView) view.findViewById(R.id.tvVanDeKhac);
         edtMoTaVanDeKhac = (EditText) view.findViewById(R.id.edtInputVanDeKhac);
-        tvVanDeKhac.setVisibility(View.GONE);
-        edtMoTaVanDeKhac.setVisibility(View.GONE);
+//        tvVanDeKhac.setVisibility(View.GONE);
+//        edtMoTaVanDeKhac.setVisibility(View.GONE);
 
 
         List<String> list = new ArrayList<>();
@@ -157,7 +149,7 @@ public class MainUserFragment extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), edtInputThietBi.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), edtInputThietBi.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                 switch (edtInputThietBi.getSelectedItemPosition()){
                     case 0:
                         break;
@@ -167,34 +159,131 @@ public class MainUserFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 final List<String> areas = new ArrayList<String>();
-                                areas.add("Chọn vấn đề");
-
+                                List<Integer> problemList = new ArrayList<>();
                                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                                     String areaName = areaSnapshot.child("1").getValue(String.class);
                                     areas.add(areaName);
                                 }
 
-                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String[] object= new String[areas.size()];
+                                for(int i=0;i<areas.size();i++){
+                                    object[i]=areas.get(i);
+                                }
+                                selectedProblem= new boolean[areas.size()];
+                                //tvMotaVande.setHint("Chọn vấn đề");
+                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-                                        } else{
-                                            tvVanDeKhac.setVisibility(view.GONE);
-                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-                                        }
-                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    public void onClick(View view) {
+                                        //intitial dialog
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("Lựa chọn vấn đề");
+                                        //set dialog non cancelable
+                                        builder.setCancelable(false);
+                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                                if(b){
+                                                    //when checkbox selected
+                                                    //add position in day problem
+                                                    problemList.add(i);
+                                                    Collections.sort(problemList);
+                                                }else{
+                                                    //when checkbox unselected
+                                                    //remove position from day list
+                                                    //
+                                                    for(int  j=0  ; j<problemList.size(); j++){
+                                                        if(problemList.get(j) == i){
+                                                            problemList.remove(j);
+                                                            break;
+                                                        }
+                                                    }
+                                                   // problemList.remove(i);
 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                                }
+                                            }
+                                        });
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Initialize string builder
+                                                StringBuilder stringBuilder= new StringBuilder();
+                                                //use for loop
+                                                for(int j=0;j<problemList.size();j++){
+                                                    stringBuilder.append(object[problemList.get(j)]);
+                                                    //check condition
+                                                    if(j!= problemList.size()-1){
+                                                        stringBuilder.append(",");
+                                                    }
+                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                                    } else{
+                                                        tvVanDeKhac.setVisibility(view.GONE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                    }
+                                                }
+                                                if(stringBuilder.toString().length() > 100){
+                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                                }else{
+                                                    tvMotaVande.setText(stringBuilder.toString());
+                                                }
 
+                                            }
+                                        });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Use for loop
+                                                for(int j=0;j<selectedProblem.length;j++){
+                                                    //remove all selection
+                                                    selectedProblem[j]=false;
+                                                    //clear prolem list
+                                                    problemList.clear();
+                                                    //clear text view value
+                                                    tvMotaVande.setText("");
+                                                    tvVanDeKhac.setVisibility(view.GONE);
+                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                    tvMotaVandechitiet.setVisibility(view.GONE);
+                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
+
+                                                }
+                                            }
+                                        });
+                                        builder.show();
                                     }
                                 });
+//                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
+//                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+//                                spinnerMoTaVanDe.setAdapter(areasAdapter);
+//                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                    @Override
+//                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
+//                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+//                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+//                                        } else{
+//                                            tvVanDeKhac.setVisibility(view.GONE);
+//                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+//                                        }
+//                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+//                                    }
+//
+//                                    @Override
+//                                    public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                                    }
+//                                });
+
                             }
 
                             @Override
@@ -210,35 +299,109 @@ public class MainUserFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 final List<String> areas = new ArrayList<String>();
-                                areas.add("Chọn vấn đề");
+                                List<Integer> problemList = new ArrayList<>();
                                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                                     String areaName = areaSnapshot.child("1").getValue(String.class);
                                     areas.add(areaName);
                                 }
 
-                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String[] object= new String[areas.size()];
+                                for(int i=0;i<areas.size();i++){
+                                    object[i]=areas.get(i);
+                                }
+                                selectedProblem= new boolean[areas.size()];
+                                //tvMotaVande.setHint("Chọn vấn đề");
+                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-                                        } else{
-                                            tvVanDeKhac.setVisibility(view.GONE);
-                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-                                        }
-                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    public void onClick(View view) {
+                                        //intitial dialog
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("Lựa chọn vấn đề");
+                                        //set dialog non cancelable
+                                        builder.setCancelable(false);
+                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                                if(b){
+                                                    //when checkbox selected
+                                                    //add position in day problem
+                                                    problemList.add(i);
+                                                    Collections.sort(problemList);
+                                                }else{
+                                                    //when checkbox unselected
+                                                    //remove position from day list
+                                                    //
+                                                    for(int  j=0  ; j<problemList.size(); j++){
+                                                        if(problemList.get(j) == i){
+                                                            problemList.remove(j);
+                                                            break;
+                                                        }
+                                                    }
+                                                    // problemList.remove(i);
 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                                }
+                                            }
+                                        });
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Initialize string builder
+                                                StringBuilder stringBuilder= new StringBuilder();
+                                                //use for loop
+                                                for(int j=0;j<problemList.size();j++){
+                                                    stringBuilder.append(object[problemList.get(j)]);
+                                                    //check condition
+                                                    if(j!= problemList.size()-1){
+                                                        stringBuilder.append(",");
+                                                    }
+                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                                    } else{
+                                                        tvVanDeKhac.setVisibility(view.GONE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                    }
+                                                }
+                                                if(stringBuilder.toString().length() > 100){
+                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                                }else{
+                                                    tvMotaVande.setText(stringBuilder.toString());
+                                                }
 
+                                            }
+                                        });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Use for loop
+                                                for(int j=0;j<selectedProblem.length;j++){
+                                                    //remove all selection
+                                                    selectedProblem[j]=false;
+                                                    //clear prolem list
+                                                    problemList.clear();
+                                                    //clear text view value
+                                                    tvMotaVande.setText("");
+                                                    tvVanDeKhac.setVisibility(view.GONE);
+                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                    tvMotaVandechitiet.setVisibility(view.GONE);
+                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                }
+                                            }
+                                        });
+                                        builder.show();
                                     }
                                 });
                             }
-
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
 
@@ -252,31 +415,106 @@ public class MainUserFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 final List<String> areas = new ArrayList<String>();
-                                areas.add("Chọn vấn đề");
+                                List<Integer> problemList = new ArrayList<>();
                                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                                     String areaName = areaSnapshot.child("1").getValue(String.class);
                                     areas.add(areaName);
                                 }
 
-                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String[] object= new String[areas.size()];
+                                for(int i=0;i<areas.size();i++){
+                                    object[i]=areas.get(i);
+                                }
+                                selectedProblem= new boolean[areas.size()];
+                                //tvMotaVande.setHint("Chọn vấn đề");
+                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-                                        } else{
-                                            tvVanDeKhac.setVisibility(view.GONE);
-                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-                                        }
-                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    public void onClick(View view) {
+                                        //intitial dialog
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("Lựa chọn vấn đề");
+                                        //set dialog non cancelable
+                                        builder.setCancelable(false);
+                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                                if(b){
+                                                    //when checkbox selected
+                                                    //add position in day problem
+                                                    problemList.add(i);
+                                                    Collections.sort(problemList);
+                                                }else{
+                                                    //when checkbox unselected
+                                                    //remove position from day list
+                                                    //
+                                                    for(int  j=0  ; j<problemList.size(); j++){
+                                                        if(problemList.get(j) == i){
+                                                            problemList.remove(j);
+                                                            break;
+                                                        }
+                                                    }
+                                                    // problemList.remove(i);
 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                                }
+                                            }
+                                        });
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Initialize string builder
+                                                StringBuilder stringBuilder= new StringBuilder();
+                                                //use for loop
+                                                for(int j=0;j<problemList.size();j++){
+                                                    stringBuilder.append(object[problemList.get(j)]);
+                                                    //check condition
+                                                    if(j!= problemList.size()-1){
+                                                        stringBuilder.append(",");
+                                                    }
+                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                                    } else{
+                                                        tvVanDeKhac.setVisibility(view.GONE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                    }
+                                                }
+                                                if(stringBuilder.toString().length() > 100){
+                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                                }else{
+                                                    tvMotaVande.setText(stringBuilder.toString());
+                                                }
 
+                                            }
+                                        });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Use for loop
+                                                for(int j=0;j<selectedProblem.length;j++){
+                                                    //remove all selection
+                                                    selectedProblem[j]=false;
+                                                    //clear prolem list
+                                                    problemList.clear();
+                                                    //clear text view value
+                                                    tvMotaVande.setText("");
+                                                    tvVanDeKhac.setVisibility(view.GONE);
+                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                    tvMotaVandechitiet.setVisibility(view.GONE);
+                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                }
+                                            }
+                                        });
+                                        builder.show();
                                     }
                                 });
                             }
@@ -294,34 +532,109 @@ public class MainUserFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 final List<String> areas = new ArrayList<String>();
-                                areas.add("Chọn vấn đề");
-
+                                List<Integer> problemList = new ArrayList<>();
                                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                                     String areaName = areaSnapshot.child("1").getValue(String.class);
                                     areas.add(areaName);
                                 }
 
-                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String[] object= new String[areas.size()];
+                                for(int i=0;i<areas.size();i++){
+                                    object[i]=areas.get(i);
+                                }
+                                selectedProblem= new boolean[areas.size()];
+                                //tvMotaVande.setHint("Chọn vấn đề");
+                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-                                        } else{
-                                            tvVanDeKhac.setVisibility(view.GONE);
-                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-                                        }
-                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    public void onClick(View view) {
+                                        //intitial dialog
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("Lựa chọn vấn đề");
+                                        //set dialog non cancelable
+                                        builder.setCancelable(false);
+                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                                if(b){
+                                                    //when checkbox selected
+                                                    //add position in day problem
+                                                    problemList.add(i);
+                                                    Collections.sort(problemList);
+                                                }else{
+                                                    //when checkbox unselected
+                                                    //remove position from day list
+                                                    //
+                                                    for(int  j=0  ; j<problemList.size(); j++){
+                                                        if(problemList.get(j) == i){
+                                                            problemList.remove(j);
+                                                            break;
+                                                        }
+                                                    }
+                                                    // problemList.remove(i);
 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                                }
+                                            }
+                                        });
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Initialize string builder
+                                                StringBuilder stringBuilder= new StringBuilder();
+                                                //use for loop
+                                                for(int j=0;j<problemList.size();j++){
+                                                    stringBuilder.append(object[problemList.get(j)]);
+                                                    //check condition
+                                                    if(j!= problemList.size()-1){
+                                                        stringBuilder.append(",");
+                                                    }
+                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                                    } else{
+                                                        tvVanDeKhac.setVisibility(view.GONE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                    }
+                                                }
+                                                if(stringBuilder.toString().length() > 100){
+                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                                }else{
+                                                    tvMotaVande.setText(stringBuilder.toString());
+                                                }
 
+                                            }
+                                        });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Use for loop
+                                                for(int j=0;j<selectedProblem.length;j++){
+                                                    //remove all selection
+                                                    selectedProblem[j]=false;
+                                                    //clear prolem list
+                                                    problemList.clear();
+                                                    //clear text view value
+                                                    tvMotaVande.setText("");
+                                                    tvVanDeKhac.setVisibility(view.GONE);
+                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                    tvMotaVandechitiet.setVisibility(view.GONE);
+                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                }
+                                            }
+                                        });
+                                        builder.show();
                                     }
                                 });
+
                             }
 
                             @Override
@@ -337,34 +650,109 @@ public class MainUserFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 final List<String> areas = new ArrayList<String>();
-                                areas.add("Chọn vấn đề");
-
+                                List<Integer> problemList = new ArrayList<>();
                                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                                     String areaName = areaSnapshot.child("1").getValue(String.class);
                                     areas.add(areaName);
                                 }
 
-                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String[] object= new String[areas.size()];
+                                for(int i=0;i<areas.size();i++){
+                                    object[i]=areas.get(i);
+                                }
+                                selectedProblem= new boolean[areas.size()];
+                                //tvMotaVande.setHint("Chọn vấn đề");
+                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-                                        } else{
-                                            tvVanDeKhac.setVisibility(view.GONE);
-                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-                                        }
-                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    public void onClick(View view) {
+                                        //intitial dialog
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("Lựa chọn vấn đề");
+                                        //set dialog non cancelable
+                                        builder.setCancelable(false);
+                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                                if(b){
+                                                    //when checkbox selected
+                                                    //add position in day problem
+                                                    problemList.add(i);
+                                                    Collections.sort(problemList);
+                                                }else{
+                                                    //when checkbox unselected
+                                                    //remove position from day list
+                                                    //
+                                                    for(int  j=0  ; j<problemList.size(); j++){
+                                                        if(problemList.get(j) == i){
+                                                            problemList.remove(j);
+                                                            break;
+                                                        }
+                                                    }
+                                                    // problemList.remove(i);
 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                                }
+                                            }
+                                        });
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Initialize string builder
+                                                StringBuilder stringBuilder= new StringBuilder();
+                                                //use for loop
+                                                for(int j=0;j<problemList.size();j++){
+                                                    stringBuilder.append(object[problemList.get(j)]);
+                                                    //check condition
+                                                    if(j!= problemList.size()-1){
+                                                        stringBuilder.append(",");
+                                                    }
+                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                                    } else{
+                                                        tvVanDeKhac.setVisibility(view.GONE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                    }
+                                                }
+                                                if(stringBuilder.toString().length() > 100){
+                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                                }else{
+                                                    tvMotaVande.setText(stringBuilder.toString());
+                                                }
 
+                                            }
+                                        });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Use for loop
+                                                for(int j=0;j<selectedProblem.length;j++){
+                                                    //remove all selection
+                                                    selectedProblem[j]=false;
+                                                    //clear prolem list
+                                                    problemList.clear();
+                                                    //clear text view value
+                                                    tvMotaVande.setText("");
+                                                    tvVanDeKhac.setVisibility(view.GONE);
+                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                    tvMotaVandechitiet.setVisibility(view.GONE);
+                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                }
+                                            }
+                                        });
+                                        builder.show();
                                     }
                                 });
+
                             }
 
                             @Override
@@ -380,34 +768,109 @@ public class MainUserFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 final List<String> areas = new ArrayList<String>();
-                                areas.add("Chọn vấn đề");
-
+                                List<Integer> problemList = new ArrayList<>();
                                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                                     String areaName = areaSnapshot.child("1").getValue(String.class);
                                     areas.add(areaName);
                                 }
 
-                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String[] object= new String[areas.size()];
+                                for(int i=0;i<areas.size();i++){
+                                    object[i]=areas.get(i);
+                                }
+                                selectedProblem= new boolean[areas.size()];
+                                //tvMotaVande.setHint("Chọn vấn đề");
+                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-                                        } else{
-                                            tvVanDeKhac.setVisibility(view.GONE);
-                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-                                        }
-                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    public void onClick(View view) {
+                                        //intitial dialog
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("Lựa chọn vấn đề");
+                                        //set dialog non cancelable
+                                        builder.setCancelable(false);
+                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                                if(b){
+                                                    //when checkbox selected
+                                                    //add position in day problem
+                                                    problemList.add(i);
+                                                    Collections.sort(problemList);
+                                                }else{
+                                                    //when checkbox unselected
+                                                    //remove position from day list
+                                                    //
+                                                    for(int  j=0  ; j<problemList.size(); j++){
+                                                        if(problemList.get(j) == i){
+                                                            problemList.remove(j);
+                                                            break;
+                                                        }
+                                                    }
+                                                    // problemList.remove(i);
 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                                }
+                                            }
+                                        });
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Initialize string builder
+                                                StringBuilder stringBuilder= new StringBuilder();
+                                                //use for loop
+                                                for(int j=0;j<problemList.size();j++){
+                                                    stringBuilder.append(object[problemList.get(j)]);
+                                                    //check condition
+                                                    if(j!= problemList.size()-1){
+                                                        stringBuilder.append(",");
+                                                    }
+                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                                    } else{
+                                                        tvVanDeKhac.setVisibility(view.GONE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                    }
+                                                }
+                                                if(stringBuilder.toString().length() > 100){
+                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                                }else{
+                                                    tvMotaVande.setText(stringBuilder.toString());
+                                                }
 
+                                            }
+                                        });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Use for loop
+                                                for(int j=0;j<selectedProblem.length;j++){
+                                                    //remove all selection
+                                                    selectedProblem[j]=false;
+                                                    //clear prolem list
+                                                    problemList.clear();
+                                                    //clear text view value
+                                                    tvMotaVande.setText("");
+                                                    tvVanDeKhac.setVisibility(view.GONE);
+                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                    tvMotaVandechitiet.setVisibility(view.GONE);
+                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                }
+                                            }
+                                        });
+                                        builder.show();
                                     }
                                 });
+
                             }
 
                             @Override
@@ -423,32 +886,107 @@ public class MainUserFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 final List<String> areas = new ArrayList<String>();
-                                areas.add("Chọn vấn đề");
-
+                                List<Integer> problemList = new ArrayList<>();
                                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                                     String areaName = areaSnapshot.child("1").getValue(String.class);
                                     areas.add(areaName);
                                 }
 
-                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                String[] object= new String[areas.size()];
+                                for(int i=0;i<areas.size();i++){
+                                    object[i]=areas.get(i);
+                                }
+                                selectedProblem= new boolean[areas.size()];
+                                //tvMotaVande.setHint("Chọn vấn đề");
+                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-                                        } else{
-                                            tvVanDeKhac.setVisibility(view.GONE);
-                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-                                        }
-                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    public void onClick(View view) {
+                                        //intitial dialog
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("Lựa chọn vấn đề");
+                                        //set dialog non cancelable
+                                        builder.setCancelable(false);
+                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                                if(b){
+                                                    //when checkbox selected
+                                                    //add position in day problem
+                                                    problemList.add(i);
+                                                    Collections.sort(problemList);
+                                                }else{
+                                                    //when checkbox unselected
+                                                    //remove position from day list
+                                                    //
+                                                    for(int  j=0  ; j<problemList.size(); j++){
+                                                        if(problemList.get(j) == i){
+                                                            problemList.remove(j);
+                                                            break;
+                                                        }
+                                                    }
+                                                    // problemList.remove(i);
 
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                                }
+                                            }
+                                        });
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Initialize string builder
+                                                StringBuilder stringBuilder= new StringBuilder();
+                                                //use for loop
+                                                for(int j=0;j<problemList.size();j++){
+                                                    stringBuilder.append(object[problemList.get(j)]);
+                                                    //check condition
+                                                    if(j!= problemList.size()-1){
+                                                        stringBuilder.append(",");
+                                                    }
+                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                                    } else{
+                                                        tvVanDeKhac.setVisibility(view.GONE);
+                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                    }
+                                                }
+                                                if(stringBuilder.toString().length() > 100){
+                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                                }else{
+                                                    tvMotaVande.setText(stringBuilder.toString());
+                                                }
 
+
+                                            }
+                                        });
+                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Use for loop
+                                                for(int j=0;j<selectedProblem.length;j++){
+                                                    //remove all selection
+                                                    selectedProblem[j]=false;
+                                                    //clear prolem list
+                                                    problemList.clear();
+                                                    //clear text view value
+                                                    tvMotaVande.setText("");
+                                                    tvVanDeKhac.setVisibility(view.GONE);
+                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                                    tvMotaVandechitiet.setVisibility(view.GONE);
+                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
+                                                }
+                                            }
+                                        });
+                                        builder.show();
                                     }
                                 });
                             }
@@ -468,52 +1006,6 @@ public class MainUserFragment extends Fragment {
             }
         });
 
-//        List<String> listProblem = new ArrayList<>();
-//        listProblem.add("Máy lạnh rò rỉ nước");
-//        listProblem.add("Vệ sinh máy lạnh");
-//        listProblem.add("Tủ lạnh không đủ lạnh");
-//        listProblem.add("Máy giặt không quay được");
-//        listProblem.add("Ti vi không lên hình");
-//        listProblem.add("Vấn đề khác...");
-//
-//        ArrayAdapter<String> adapterProblem = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item,listProblem);
-//        adapterProblem.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-//
-//        spinnerMoTaVanDe.setAdapter(adapterProblem);
-//        spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                if(spinnerMoTaVanDe.getSelectedItem().toString() == listProblem.get(listProblem.size()-1)){
-//                    tvMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                    edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                } else{
-//                    tvMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-//                    edtMoTaVanDeKhac.setVisibility(view.INVISIBLE);
-//                }
-//                Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-
-//        btnSearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(),SearchWorkerActivity.class);
-//                getActivity().startActivity(intent);
-//            }
-//        });
-//        layout_firstWorker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(),DetailWorkerActivity.class);
-//                getActivity().startActivity(intent);
-//            }
-//        });
-//        scrollViewMainUser.setOnTouchListener(new TranslateAnimationUtil(getActivity(),btnSearch));
         // Inflate the layout for this fragment
         return view;
     }
@@ -540,27 +1032,5 @@ public class MainUserFragment extends Fragment {
         //intent.putExtra("price",price);
         startActivity(intent);
     }
-//    public void getUserInfo(){
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        mDatabase=  FirebaseDatabase.getInstance().getReference("tblUser").child(user.getUid());
-//        mDatabase.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                strUserName=snapshot.child("fullName").getValue().toString();
-//                strPhone=snapshot.child("phone").getValue().toString();
-//
-//                Intent intent = new Intent(getActivity(),AnimationSearchActivity.class);
-//                intent.putExtra("userName",strUserName);
-//                intent.putExtra("phoneUser",strPhone);
-//                //edtVitri.setText(strPhone);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 
 }
