@@ -66,11 +66,11 @@ public class MainUserFragment extends Fragment {
     private  Spinner spinnerMoTaVanDe;
     private Button btnNextToDecriseProblem;
     private Spinner  edtInputThietBi;
-
+    private TextView tvChonHangDen,tvChonLoaiDen;
     private TextView tvrHangMayLanh,tvHangMayGiat,tvInputLoaiMayGiat,tvHangQuat,tvInputChonLoaiQuat;
     private  EditText edtMoTaVanDeKhac,edtVitri,edtInputVanDeChitiet;
     private boolean[] selectedProblem;
-    private LinearLayout ly_inputQuat,ly_inputDen,ly_inputMayLanh,ly_inputMayGiat,ly_inputNoiCom,ly_inputLoNuong,ly_inputMayRuaChen;
+    private LinearLayout ly_inputQuat,ly_inputDen,ly_inputMayLanh,ly_inputMayGiat,ly_inputNoiCom,ly_inputLoNuong,ly_inputMayRuaChen,ly_inputTivi,ly_inputTuLanh;
 
 
 
@@ -124,7 +124,11 @@ public class MainUserFragment extends Fragment {
         ly_inputNoiCom=(LinearLayout) view.findViewById(R.id.ly_inputNoiCom);
         ly_inputLoNuong=(LinearLayout) view.findViewById(R.id.ly_inputLoNuong);
         ly_inputMayRuaChen=(LinearLayout) view.findViewById(R.id.ly_inputMayRuaChen);
+        ly_inputTivi=(LinearLayout) view.findViewById(R.id.ly_inputTivi);
+        ly_inputTuLanh=(LinearLayout) view.findViewById(R.id.ly_inputTuLanh);
         //spinnerHangMayLanh=(TextView) view.findViewById(R.id.spinnerHangMayLanh);
+        tvChonHangDen=(TextView) view.findViewById(R.id.tvChonHangDen);
+        tvChonLoaiDen=(TextView) view.findViewById(R.id.tvChonLoaiDen);
         tvHangQuat=(TextView) view.findViewById(R.id.spinnerHangQuat);
         tvInputChonLoaiQuat=(TextView) view.findViewById(R.id.tvInputChonLoaiQuat);
         tvHangMayGiat=(TextView) view.findViewById(R.id.spinnerHangMayGiat) ;
@@ -146,11 +150,13 @@ public class MainUserFragment extends Fragment {
 
         List<String> list = new ArrayList<>();
         list.add(0,"Chọn thiết bị");
-        list.add("Quạt");
         list.add("Đèn");
+        list.add("Quạt");
+        list.add("Ti Vi");
+        list.add("Nồi cơm");
+        list.add("Tủ lạnh");
         list.add("Máy lạnh");
         list.add("Máy giặt");
-        list.add("Nồi cơm");
         list.add("Lò nướng");
         list.add("Máy rửa chén");
 
@@ -165,24 +171,42 @@ public class MainUserFragment extends Fragment {
                // Toast.makeText(getActivity(), edtInputThietBi.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                 switch (edtInputThietBi.getSelectedItemPosition()){
                     case 0:
-                        ly_inputQuat.setVisibility(View.GONE);
                         ly_inputDen.setVisibility(View.GONE);
+                        ly_inputQuat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
                         ly_inputMayLanh.setVisibility(View.GONE);
                         ly_inputMayGiat.setVisibility(View.GONE);
-                        ly_inputNoiCom.setVisibility(View.GONE);
                         ly_inputLoNuong.setVisibility(View.GONE);
                         ly_inputMayRuaChen.setVisibility(View.GONE);
                         break;
                     case 1:
-                        ly_inputQuat.setVisibility(View.VISIBLE);
-                        ly_inputDen.setVisibility(View.GONE);
+                        ly_inputDen.setVisibility(View.VISIBLE);
+                        ly_inputQuat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
                         ly_inputMayLanh.setVisibility(View.GONE);
                         ly_inputMayGiat.setVisibility(View.GONE);
-                        ly_inputNoiCom.setVisibility(View.GONE);
                         ly_inputLoNuong.setVisibility(View.GONE);
                         ly_inputMayRuaChen.setVisibility(View.GONE);
 
                         //GET BRAND OF QUAT FROM DB AND SET IT TO TEXT VIEW IF CHOOSE
+
+
+                        break;
+
+                    case 2:
+                        ly_inputDen.setVisibility(View.GONE);
+                        ly_inputQuat.setVisibility(View.VISIBLE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
+                        ly_inputMayLanh.setVisibility(View.GONE);
+                        ly_inputMayGiat.setVisibility(View.GONE);
+                        ly_inputLoNuong.setVisibility(View.GONE);
+                        ly_inputMayRuaChen.setVisibility(View.GONE);
                         tvHangQuat.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -308,26 +332,16 @@ public class MainUserFragment extends Fragment {
 
                             }
                         });
-
-                        break;
-
-                    case 2:
-                        ly_inputDen.setVisibility(View.VISIBLE);
-                        ly_inputQuat.setVisibility(View.GONE);
-                        ly_inputMayLanh.setVisibility(View.GONE);
-                        ly_inputMayGiat.setVisibility(View.GONE);
-                        ly_inputNoiCom.setVisibility(View.GONE);
-                        ly_inputLoNuong.setVisibility(View.GONE);
-                        ly_inputMayRuaChen.setVisibility(View.GONE);
-
                         break;
 
                     case 3:
                         ly_inputDen.setVisibility(View.GONE);
                         ly_inputQuat.setVisibility(View.GONE);
-                        ly_inputMayLanh.setVisibility(View.VISIBLE);
-                        ly_inputMayGiat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.VISIBLE);
                         ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
+                        ly_inputMayLanh.setVisibility(View.GONE);
+                        ly_inputMayGiat.setVisibility(View.GONE);
                         ly_inputLoNuong.setVisibility(View.GONE);
                         ly_inputMayRuaChen.setVisibility(View.GONE);
                         break;
@@ -335,13 +349,52 @@ public class MainUserFragment extends Fragment {
                     case 4:
                         ly_inputDen.setVisibility(View.GONE);
                         ly_inputQuat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.VISIBLE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
                         ly_inputMayLanh.setVisibility(View.GONE);
-                        ly_inputMayGiat.setVisibility(View.VISIBLE);
-                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputMayGiat.setVisibility(View.GONE);
                         ly_inputLoNuong.setVisibility(View.GONE);
                         ly_inputMayRuaChen.setVisibility(View.GONE);
 
                         //GET BRAND OF MAY GIAT AND SET IT TO TEXTVIEW
+
+                        break;
+
+                    case 5:
+                        ly_inputDen.setVisibility(View.GONE);
+                        ly_inputQuat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.VISIBLE);
+                        ly_inputMayLanh.setVisibility(View.GONE);
+                        ly_inputMayGiat.setVisibility(View.GONE);
+                        ly_inputLoNuong.setVisibility(View.GONE);
+                        ly_inputMayRuaChen.setVisibility(View.GONE);
+                        break;
+
+                    case 6:
+                        ly_inputDen.setVisibility(View.GONE);
+                        ly_inputQuat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
+                        ly_inputMayLanh.setVisibility(View.VISIBLE);
+                        ly_inputMayGiat.setVisibility(View.GONE);
+                        ly_inputLoNuong.setVisibility(View.GONE);
+                        ly_inputMayRuaChen.setVisibility(View.GONE);
+                        break;
+
+                    case 7:
+                        ly_inputDen.setVisibility(View.GONE);
+                        ly_inputQuat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
+                        ly_inputMayLanh.setVisibility(View.GONE);
+                        ly_inputMayGiat.setVisibility(View.VISIBLE);
+                        ly_inputLoNuong.setVisibility(View.GONE);
+                        ly_inputMayRuaChen.setVisibility(View.GONE);
                         tvHangMayGiat.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -468,33 +521,25 @@ public class MainUserFragment extends Fragment {
                             }
                         });
                         break;
-
-                    case 5:
+                    case 8:
                         ly_inputDen.setVisibility(View.GONE);
                         ly_inputQuat.setVisibility(View.GONE);
-                        ly_inputMayLanh.setVisibility(View.GONE);
-                        ly_inputMayGiat.setVisibility(View.GONE);
-                        ly_inputNoiCom.setVisibility(View.VISIBLE);
-                        ly_inputLoNuong.setVisibility(View.GONE);
-                        ly_inputMayRuaChen.setVisibility(View.GONE);
-                        break;
-
-                    case 6:
-                        ly_inputDen.setVisibility(View.GONE);
-                        ly_inputQuat.setVisibility(View.GONE);
-                        ly_inputMayLanh.setVisibility(View.GONE);
-                        ly_inputMayGiat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
                         ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
+                        ly_inputMayLanh.setVisibility(View.GONE);
+                        ly_inputMayGiat.setVisibility(View.GONE);
                         ly_inputLoNuong.setVisibility(View.VISIBLE);
                         ly_inputMayRuaChen.setVisibility(View.GONE);
                         break;
-
-                    case 7:
+                    case 9:
                         ly_inputDen.setVisibility(View.GONE);
                         ly_inputQuat.setVisibility(View.GONE);
+                        ly_inputTivi.setVisibility(View.GONE);
+                        ly_inputNoiCom.setVisibility(View.GONE);
+                        ly_inputTuLanh.setVisibility(View.GONE);
                         ly_inputMayLanh.setVisibility(View.GONE);
                         ly_inputMayGiat.setVisibility(View.GONE);
-                        ly_inputNoiCom.setVisibility(View.GONE);
                         ly_inputLoNuong.setVisibility(View.GONE);
                         ly_inputMayRuaChen.setVisibility(View.VISIBLE);
                         break;
