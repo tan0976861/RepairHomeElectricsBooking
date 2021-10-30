@@ -47,7 +47,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:text="Thiết bị (*)"
+        android:text="Thông tin thiết bị "
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -61,59 +61,12 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/style_spinner"
         android:textAlignment="center" />
-    <TextView
-        android:id="@+id/tvThietBiHang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edtInputThietBiDaChon"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:text="Hãng"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvInputThietBiHangDaChon"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/tvThietBiHang"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/style_spinner"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/tvThietBiLoai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvInputThietBiHangDaChon"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:text="Loại"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvInputThietBiLoaiDaChon"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/tvThietBiLoai"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/style_spinner"
-        android:textAlignment="center" />
-
-
 
     <TextView
         android:id="@+id/tvChonVanDe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvInputThietBiLoaiDaChon"
+        android:layout_below="@id/edtInputThietBiDaChon"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"

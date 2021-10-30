@@ -33,7 +33,7 @@ import java.util.List;
 public class DecriseProblemActivity extends AppCompatActivity {
     private Button btnBookingRepair;
     private TextView  tvInputThietBi,tvInputThietBiHangDaChon,tvInputThietBiLoaiDaChon;
-    String strThietBi,strHang,strLoai;
+    String strThietBi,strHang,strLoai,strDungTich;
 
     private TextView tvVanDeKhac,tvMotaVande,tvMotaVandechitiet;
     private  EditText edtMoTaVanDeKhac,edtVitri,edtInputVanDeChitiet;
@@ -44,8 +44,8 @@ public class DecriseProblemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decrise_problem);
         tvInputThietBi=(TextView) findViewById(R.id.edtInputThietBiDaChon);
-        tvInputThietBiHangDaChon=(TextView)findViewById(R.id.tvInputThietBiHangDaChon);
-        tvInputThietBiLoaiDaChon=(TextView) findViewById(R.id.tvInputThietBiLoaiDaChon);
+//        tvInputThietBiHangDaChon=(TextView)findViewById(R.id.tvInputThietBiHangDaChon);
+//        tvInputThietBiLoaiDaChon=(TextView) findViewById(R.id.tvInputThietBiLoaiDaChon);
         btnBookingRepair=(Button) findViewById(R.id.btn_BookingRepair);
         tvMotaVande = (TextView) findViewById(R.id.spinnerMoTaVanDe);
         tvMotaVandechitiet=(TextView) findViewById(R.id.tvMoTaVanDe);
@@ -55,9 +55,15 @@ public class DecriseProblemActivity extends AppCompatActivity {
         //TextView=(EditText) view.findViewById(R.id)
         //getUserInfo();
         getDataIntent();
-        tvInputThietBi.setText(strThietBi);
-        tvInputThietBiHangDaChon.setText(strHang);
-        tvInputThietBiLoaiDaChon.setText(strLoai);
+        if(strDungTich == null){
+            strDungTich="Dung tích: N/A";
+        }else{
+            strDungTich = "Dung tích" + strDungTich;
+        }
+        String inputThietBi= strThietBi+ "," + strHang + "," + strLoai + ","+ strDungTich;
+        tvInputThietBi.setText(inputThietBi);
+//        tvInputThietBiHangDaChon.setText(strHang);
+//        tvInputThietBiLoaiDaChon.setText(strLoai);
         if(tvInputThietBi.getText().toString().equals("Máy giặt")){
                 DatabaseReference mDatabase3 = FirebaseDatabase.getInstance().getReference("item");
                 mDatabase3.child("maygiat").addValueEventListener(new ValueEventListener() {
@@ -1144,6 +1150,7 @@ public class DecriseProblemActivity extends AppCompatActivity {
         strThietBi = getIntent().getStringExtra("thietbi");
         strHang = getIntent().getStringExtra("hang");
         strLoai = getIntent().getStringExtra("loai");
+        strDungTich=getIntent().getStringExtra("dungtich");
     }
     private List<Item> getListItem(){
         List<Item> list = new ArrayList<>();
