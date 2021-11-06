@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 public class Worker implements Serializable, Comparable<Worker> {
     public String workerID,email, password, fullName, phone, address, type, image;
-    public boolean status, active;
-     public double fee,distance,ratingPoint;
-     public LocationApp location;
+    public int status;
+    public boolean  active;
+    public double fee,distance,ratingPoint;
+    public LocationApp location;
 
 
 
@@ -14,8 +15,9 @@ public class Worker implements Serializable, Comparable<Worker> {
     public Worker() {
     }
 
-    public Worker(String workerID,String email, String password, String fullName, String phone, String address, String type, String image, boolean status, boolean active, double fee, LocationApp location) {
-        this.workerID=workerID;
+    public Worker(String workerID, String email, String password, String fullName, String phone, String address, String type, String image,
+                  int status, boolean active, double fee, double ratingPoint, LocationApp location) {
+        this.workerID = workerID;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -26,12 +28,14 @@ public class Worker implements Serializable, Comparable<Worker> {
         this.status = status;
         this.active = active;
         this.fee = fee;
-        this.location=location;
-
+        this.ratingPoint = ratingPoint;
+        this.location = location;
     }
-    public Worker(String workerID,String fullName){
+
+    public Worker(String workerID, String fullName,double distance){
         this.workerID=workerID;
         this.fullName=fullName;
+        this.distance=distance;
     }
 
     public String getWorkerID() {
@@ -98,11 +102,11 @@ public class Worker implements Serializable, Comparable<Worker> {
         this.image = image;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

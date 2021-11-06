@@ -56,9 +56,7 @@ public class MainWorkerActivity extends AppCompatActivity {
                     case 2:
                         viewPagerWorker.setCurrentItem(2);
                         break;
-//                    case 3:
-//                        viewPagerWorker.setCurrentItem(3);
-//                        break;
+                    default: viewPagerWorker.setCurrentItem(0);
                 }
                 return true;
             }

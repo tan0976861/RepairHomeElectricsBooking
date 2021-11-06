@@ -84,7 +84,7 @@
             android:layout_below="@id/imgWorkerLocationMapWorker"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:text="0432112322"
+            android:text="0932112322"
             android:textSize="20dp" />
 
         <ImageButton
@@ -150,14 +150,23 @@
 <!--                    android:textAllCaps="false"-->
 <!--                    android:textColor="@color/white" />-->
                 <Button
+                    android:id="@+id/btnStarteddOrderWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:background="@drawable/custom_btnhhoanthanh_worker"
+                    android:text="Bắt đầu"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:visibility="visible" />
+                <Button
                     android:id="@+id/btnArrivedOrderWorker"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:background="@drawable/custom_btnhhoanthanh_worker"
                     android:text="Đã đến"
-                    android:visibility="visible"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_hoanThanhWorker"

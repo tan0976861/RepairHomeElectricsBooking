@@ -1,5 +1,7 @@
 package com.example.repairhomeelectricbooking;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -66,6 +68,12 @@ public class WorkerMainFragment extends Fragment implements OnMapReadyCallback,
     DatabaseReference mDatabaseOrder;
     private GoogleMap mMap;
     //private RelativeLayout layoutSeeFeedback;
+    MainWorkerActivity activity;
+    @Override
+    public void onAttach(@NonNull Activity activity) {
+        super.onAttach(activity);
+        this.activity = (MainWorkerActivity) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -124,7 +132,6 @@ public class WorkerMainFragment extends Fragment implements OnMapReadyCallback,
 
         return view;
     }
-
     private void getOrderPresent(){
         FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
         mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrder");
@@ -133,12 +140,12 @@ public class WorkerMainFragment extends Fragment implements OnMapReadyCallback,
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot postSnapshot: snapshot.getChildren()){
                     Order order= postSnapshot.getValue(Order.class);
-                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus()==1){
-                        Intent intent= new Intent(getActivity(), MainWorkerStatusActivity.class);
-//                        intent.putExtra("userName",order.getUser().getFullName());
-//                        intent.putExtra("fee",order.getWorker().getFee());
-                        startActivity(intent);
-                        return;
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) &&  order.getStatus()==1){
+                        if(isAdded()){
+                            Intent intent= new Intent(activity, MainWorkerStatusActivity.class);
+                            startActivity(intent);
+                            return;
+                        }
                     }
                 }
             }

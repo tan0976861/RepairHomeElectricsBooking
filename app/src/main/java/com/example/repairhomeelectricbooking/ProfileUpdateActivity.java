@@ -114,8 +114,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name=snapshot.child("fullName").getValue().toString();
                 String phone=snapshot.child("phone").getValue().toString();
+                String s= "0"+ phone.substring(3,phone.length());
                 edtCustomerName.setText(name);
-                edtCustomerPhone.setText(phone);
+                edtCustomerPhone.setText(s);
             }
 
             @Override
@@ -129,10 +130,22 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String customerName=edtCustomerName.getText().toString();
                 String customerPhone=edtCustomerPhone.getText().toString();
-//                String workerEmail= edtEmail.getText().toString();
+                if(customerPhone.length() != 10 ){
+                    Toast.makeText(ProfileUpdateActivity.this,"Vui lòng nhập đúng số điện thoại",Toast.LENGTH_SHORT).show();
+                    System.out.println("Test: 135" );
+                    return;
+                }
+                System.out.println("Test: 138" );
+                if(!customerPhone.startsWith("0")){
+                    Toast.makeText(getApplicationContext(),"Vui lòng nhập đúng số điện thoại ",Toast.LENGTH_SHORT).show();
+                    System.out.println("Test: 141" );
+                    return;
+                }
+
+                String phone= "+84" + customerPhone.substring(1,10);
                 HashMap hasMap= new HashMap();
                 hasMap.put("fullName", customerName);
-                hasMap.put("phone", customerPhone);
+                hasMap.put("phone", phone);
 //                hasMap.put("email", workerEmail);
 
                 rootDatabaseref.child(user.getUid()).updateChildren(hasMap).addOnSuccessListener(new OnSuccessListener() {
@@ -146,7 +159,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         imgBackToMainCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               finish();
+                finish();
             }
         });
 
