@@ -36,7 +36,7 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
 
 
     private DatabaseReference rootDatabaseref;
-    private EditText edtWorkerName, edtWorkerPhone;
+    private EditText edtWorkerName, edtWorkerPhone, edtWorkerFee;
     private TextView tv_worker_update, tv_chooseImgWorker, tvUpdateImageWorker;
     private CircleImageView imgAvatarWorker;
     private ImageButton imgBackToMainWorker;
@@ -47,6 +47,7 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_worker_profile);
         edtWorkerName =findViewById(R.id.edtWorkerName);
         edtWorkerPhone =findViewById(R.id.edtWorkerPhone);
+        edtWorkerFee =findViewById(R.id.edtWorkerFee);
         tv_chooseImgWorker =findViewById(R.id.tv_chooseImgWorker);
         tvUpdateImageWorker =findViewById(R.id.tvUpdateImageWorker);
         imgAvatarWorker =findViewById(R.id.imgAvatarWorker);
@@ -114,8 +115,11 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name=snapshot.child("fullName").getValue().toString();
                 String phone=snapshot.child("phone").getValue().toString();
+                String fee=snapshot.child("fee").getValue().toString();
+                String s= "0" + phone.substring(3,phone.length());
                 edtWorkerName.setText(name);
-                edtWorkerPhone.setText(phone);
+                edtWorkerPhone.setText(s);
+                edtWorkerFee.setText(fee);
             }
 
             @Override
@@ -129,10 +133,11 @@ public class UpdateWorkerProfileActivity extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String customerName= edtWorkerName.getText().toString();
                 String customerPhone= edtWorkerPhone.getText().toString();
-//                String workerEmail= edtEmail.getText().toString();
+                String customerFee= edtWorkerFee.getText().toString();
                 HashMap hasMap= new HashMap();
                 hasMap.put("fullName", customerName);
-                hasMap.put("phone", customerPhone);
+                hasMap.put("phone", "+84" + customerPhone);
+                hasMap.put("fee",   Double.parseDouble(customerFee));
 //                hasMap.put("email", workerEmail);
 
                 rootDatabaseref.child(user.getUid()).updateChildren(hasMap).addOnSuccessListener(new OnSuccessListener() {

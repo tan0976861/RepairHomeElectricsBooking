@@ -84,14 +84,24 @@
                     android:text="Phí phụ tùng:"
                     android:textSize="19dp" />
 
-                <TextView
-                    android:id="@+id/tv_giaPhiPhuTung_worker"
+                <EditText
+                    android:id="@+id/edt_giaPhiPhuTung_worker"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_phiphutungWorker_d"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:text="50000"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/tv_phiphutungWorker_d"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:padding="5dp"
-                    android:text="50,000 đ"
+                    android:layout_marginStart="5dp"
+                    android:text="đ"
                     android:textSize="19dp" />
 
             </RelativeLayout>
@@ -113,15 +123,25 @@
                     android:text="Phí di chuyển:"
                     android:textSize="19dp" />
 
-                <TextView
-                    android:id="@+id/tv_giaPhiVeSinh_worker"
+                <EditText
+                    android:id="@+id/edt_giaPhiDiChuyen_worker"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_phidichuyenWorker_d"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:text="15000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_phidichuyenWorker_d"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:padding="5dp"
-                    android:text="15,000 đ"
-                    android:textSize="20dp" />
+                    android:layout_marginStart="5dp"
+                    android:text="đ"
+                    android:textSize="19dp" />
 
             </RelativeLayout>
 
@@ -142,85 +162,95 @@
                     android:text="Phí dịch vụ:"
                     android:textSize="19dp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_giaTienCong_worker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="0dp"
+                    android:layout_toLeftOf="@+id/mmm"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:text="150000"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/mmm"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:padding="5dp"
-                    android:text="150,000 đ"
+                    android:layout_marginStart="5dp"
+                    android:text="đ"
                     android:textSize="19dp" />
 
             </RelativeLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/billWorkerList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/rl_tienCong_worker"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/billWorkerList"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_below="@+id/rl_tienCong_worker"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <View
                 android:id="@+id/vLine2_worker"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/billWorkerList"
+                android:layout_below="@+id/rl_tienCong_worker"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="#80000000" />
 
-            <RelativeLayout
-                android:id="@+id/rl_Total_worker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/vLine2_worker"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp">
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/rl_Total_worker"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/vLine2_worker"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginEnd="20dp">-->
 
-                <TextView
-                    android:id="@+id/tv_Total_worker"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tổng tiền:"
-                    android:textSize="26dp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/tv_TotalCost_worker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:text="215,000 đ"
-                    android:textSize="26dp"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_Total_worker"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Tổng tiền:"-->
+<!--                    android:textSize="26dp"-->
+<!--                    android:textStyle="bold" />-->
 
 
-            </RelativeLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_TotalCost_worker"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:text="215,000 đ"-->
+<!--                    android:textSize="26dp"-->
+<!--                    android:textStyle="bold" />-->
+<!--                <TextView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:text="đ"-->
+<!--                    android:textSize="19dp" />-->
+
+
+<!--            </RelativeLayout>-->
 
             <LinearLayout
-                android:layout_below="@id/rl_Total_worker"
+                android:layout_below="@id/vLine2_worker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btn_themdichvu_worker"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="10dp"
-                    android:alpha="0.7"
-                    android:background="@drawable/bg_khongcamon"
-                    android:text="Thêm dịch vụ"/>
+
                 <Button
                     android:id="@+id/btnAcceptBillToRating_worker"
                     android:layout_width="0dp"

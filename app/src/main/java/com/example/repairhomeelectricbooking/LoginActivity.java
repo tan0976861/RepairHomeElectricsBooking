@@ -3,14 +3,19 @@ package com.example.repairhomeelectricbooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -96,50 +101,41 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     // TODO: handle the post
                                     if(dataSnapshot.child(firebaseUser.getUid()).exists()){
-                                        progressDialog.dismiss();
-                                        FirebaseMessaging.getInstance().getToken()
-                                                .addOnCompleteListener(new OnCompleteListener<String>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<String> task) {
-                                                        if (!task.isSuccessful()) {
-                                                            return;
-                                                        }
+                                        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                                            // TODO: handle the post
+                                            User user = postSnapshot.getValue(User.class);
+                                            if(firebaseUser.getUid().equals(user.userID)){
+                                                if(user.getStatus() == 1){
+                                                    progressDialog.dismiss();
+                                                    FirebaseMessaging.getInstance().getToken()
+                                                            .addOnCompleteListener(new OnCompleteListener<String>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<String> task) {
+                                                                    if (!task.isSuccessful()) {
+                                                                        return;
+                                                                    }
 
-                                                        // Get new FCM registration token
-                                                        String token = task.getResult();
-
-                                                        // Log and toast
-//                                                            FirebaseDatabase.getInstance().getReference("Tokens").addValueEventListener(new ValueEventListener() {
-//                                                                @Override
-//                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                                                    if(snapshot.child(firebaseUser.getUid()).exists()){
-//                                                                        layout_toast("Tài khoản đang có người sử dụng!", LoginActivity.this);
-//                                                                    }else{
-//                                                                        FirebaseDatabase.getInstance().getReference("Tokens").child(firebaseUser.getUid()).setValue(token);
-//                                                                        layout_toast("Đăng nhập thành công", LoginActivity.this);
-//                                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                                                        startActivity(intent);
-//                                                                        finishAffinity();
-//                                                                    }
-//                                                                }
-//                                                                @Override
-//                                                                public void onCancelled(@NonNull DatabaseError error) {
-//                                                                }
-//                                                            });
-                                                        FirebaseDatabase.getInstance().getReference("Tokens").child(firebaseUser.getUid()).setValue(token);
-                                                        layout_toast("Đăng nhập thành công", LoginActivity.this);
-                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                        startActivity(intent);
-                                                        finishAffinity();
-                                                        finish();
-                                                    }
-                                                });
-                                        return;
+                                                                    // Get new FCM registration token
+                                                                    String token = task.getResult();
+                                                                    FirebaseDatabase.getInstance().getReference("Tokens").child(firebaseUser.getUid()).setValue(token);
+                                                                    layout_toast("Đăng nhập thành công", LoginActivity.this);
+                                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                                    startActivity(intent);
+                                                                    finishAffinity();
+                                                                    finish();
+                                                                }
+                                                            });
+                                                }else{
+                                                    progressDialog.dismiss();
+                                                    openDialog(Gravity.CENTER,"Tài khoản của bạn đã bị khóa");
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-                                    layout_toast("Đăng nhập thành công1213", LoginActivity.this);
+                                    layout_toast("Đăng nhập không thành công", LoginActivity.this);
                                     // Getting Post failed, log a message
                                     // ...
                                 }
@@ -150,41 +146,40 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     // TODO: handle the post
                                     if(dataSnapshot.child(firebaseUser.getUid()).exists()){
-                                        progressDialog.dismiss();
-                                        FirebaseMessaging.getInstance().getToken()
-                                                .addOnCompleteListener(new OnCompleteListener<String>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<String> task) {
-                                                        if (!task.isSuccessful()) {
-                                                            return;
-                                                        }
+                                        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                                            // TODO: handle the post
+                                            Worker worker = postSnapshot.getValue(Worker.class);
+                                            if(firebaseUser.getUid().equals(worker.workerID)){
+                                                if(worker.getStatus() == 1){
+                                                    progressDialog.dismiss();
+                                                    FirebaseMessaging.getInstance().getToken()
+                                                            .addOnCompleteListener(new OnCompleteListener<String>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<String> task) {
+                                                                    if (!task.isSuccessful()) {
+                                                                        return;
+                                                                    }
 
-                                                        // Get new FCM registration token
-                                                        String token = task.getResult();
+                                                                    // Get new FCM registration token
+                                                                    String token = task.getResult();
 
-                                                        FirebaseDatabase.getInstance().getReference("Tokens").child(firebaseUser.getUid()).setValue(token);
-                                                        layout_toast("Đăng nhập thành công", LoginActivity.this);
-                                                        Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
-                                                        startActivity(intent);
-                                                        finishAffinity();
-                                                        finish();
-                                                        // Log and toast
-//                                                        FirebaseDatabase.getInstance().getReference("Tokens").addValueEventListener(new ValueEventListener() {
-//                                                            @Override
-//                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                                                if(snapshot.child(firebaseUser.getUid()).exists()){
-//                                                                    layout_toast("Tài khoản đang có người sử dụng!", LoginActivity.this);
-//                                                                }else{
-//
-//                                                                }
-//                                                            }
-//                                                            @Override
-//                                                            public void onCancelled(@NonNull DatabaseError error) {
-//                                                            }
-//                                                        });
-                                                    }
-                                                });
-                                        return;
+                                                                    FirebaseDatabase.getInstance().getReference("Tokens").child(firebaseUser.getUid()).setValue(token);
+                                                                    layout_toast("Đăng nhập thành công", LoginActivity.this);
+                                                                    Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
+                                                                    startActivity(intent);
+                                                                    finishAffinity();
+                                                                    finish();
+                                                                }
+                                                            });
+                                                }else if(worker.getStatus() == 0){
+                                                    progressDialog.dismiss();
+                                                    openDialog(Gravity.CENTER,"Tài khoản của bạn đã bị khóa");
+                                                }else{
+                                                    progressDialog.dismiss();
+                                                    openDialog(Gravity.CENTER,"Tài khoản của bạn đang được ADMIN xét duyệt vui lòng đợi trong 30 phút");
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 @Override
@@ -202,7 +197,36 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void openDialog(int gravity,String title){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_dangdi);
+        TextView tv = dialog.findViewById(R.id.tv_dangdi_dialog);
+        Window window = dialog.getWindow();
+        if(window == null){
+            return;
+        }
+        tv.setText(title);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        WindowManager.LayoutParams winAttributes = window.getAttributes();
+        winAttributes.gravity = gravity;
+        window.setAttributes(winAttributes);
+        if(Gravity.CENTER == gravity){
+            dialog.setCancelable(false);
+        }
+
+        Button btnOK = dialog.findViewById(R.id.btn_ok_dangdi);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
     private void layout_toast(String text,Context context){
         Toast toast = new Toast(context);
         LayoutInflater inflater = getLayoutInflater();

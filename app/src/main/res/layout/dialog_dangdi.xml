@@ -17,23 +17,24 @@
         android:text="Thông báo"/>
 
     <TextView
+        android:id="@+id/tv_dangdi_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="5dp"
         android:padding="12dp"
-        android:text="Tài xế đã chấp nhận đơn và đang đi đến chổ bạn"
+        android:text="Thợ đã bắt đầu đi đến chổ bạn"
         android:textColor="@color/black"
         android:textSize="20dp" />
 
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        android:padding="12dp"-->
-<!--        android:text=""-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="20dp" />-->
+    <!--    <TextView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center"-->
+    <!--        android:padding="12dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20dp" />-->
 
     <Button
         android:id="@+id/btn_ok_dangdi"

@@ -42,9 +42,9 @@ public class EnterOTPWorkerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_otpworker);
 
-        edtOTPWorker = (EditText) findViewById(R.id.edtOTP);
-        btnSentOTPWorker = (Button) findViewById(R.id.btnSentOTP);
-        tvResentOPTWorker = (TextView) findViewById(R.id.tvResentOPT) ;
+        edtOTPWorker = (EditText) findViewById(R.id.edtOTP_worker);
+        btnSentOTPWorker = (Button) findViewById(R.id.btnSentOTP_worker);
+        tvResentOPTWorker = (TextView) findViewById(R.id.tvResentOPT_worker) ;
         getDataIntent();
         mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
         btnSentOTPWorker.setOnClickListener(new View.OnClickListener() {

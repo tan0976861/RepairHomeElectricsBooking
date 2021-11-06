@@ -37,6 +37,7 @@ import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.repairhomeelectricbooking.dto.Order;
+import com.example.repairhomeelectricbooking.dto.OrderCache;
 import com.example.repairhomeelectricbooking.dto.Rating;
 import com.example.repairhomeelectricbooking.dto.User;
 import com.example.repairhomeelectricbooking.fcm.MyFirebaseMessagingService;
@@ -89,10 +90,10 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 
     //polyline object
     private List<Polyline> polylines = null;
-    TextView  tvNameWorker,tvRatingPoint;
+    TextView  tvNameWorker,tvRatingPoint,tvKm;
     ImageButton btnBack;
     String strNameWorker,strPhoneWorker,strUID;
-    Double strRatingPoint;
+    double strRatingPoint,strDistance;
     CircleImageView imgWorkerLocationMap;
     DatabaseReference rootDatabaseref;
 
@@ -112,7 +113,18 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_map);
+        tvKm= findViewById(R.id.km);
         getDataIntent ();
+        System.out.println(strDistance);
+        if(strDistance != 0){
+            double kilometer = (strDistance / 1000);
+            int m = (int) strDistance;
+            if(kilometer < 1){
+                tvKm.setText(m + "m");
+            }else{
+                tvKm.setText((Math.ceil(kilometer * 100)/100) + "km");
+        }
+        }
         tvNameWorker= findViewById(R.id.txtNameWorker);
         tvRatingPoint=findViewById(R.id.txtPointStar);
         btnCallWorker=findViewById(R.id.btnCallWorker);
@@ -124,18 +136,19 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
 //        btnCallWorker.setText(strPhoneWorker);
         //tvRatingPoint.setText(strRatingPoint.toString());
         btnBack=findViewById(R.id.imgBackToMainCustomer);
-
+        tv_PhoneNumber.setText(strPhoneWorker);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickToBackHome();
             }
         });
-        openFeedbackDialog(Gravity.CENTER);
         //request location permission.
         requestPermision();
+        ShowDialogAccept();
+        ShowDialogOnComming();
+        ShowDialogArrived();
         gotoBillReceipt();
-        //gotoRatingWorker();
         gotoMainUserWhenCancel();
         //init google map fragment to show map.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -258,7 +271,9 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 Log.e(TAG,"207");
+                dialog.dismiss();
                 CancelOrder();
+                CancelOrderCache();
             }
         });
 
@@ -277,7 +292,9 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         strNameWorker = getIntent().getStringExtra("full_name");
         // strFee = getIntent().getDoubleExtra("fee",0.0d);
         strRatingPoint= getIntent().getDoubleExtra("ratingPoint",0.0d);
+        strDistance= getIntent().getDoubleExtra("distance",0.0d);
         strUID=getIntent().getStringExtra("uID");
+
 
 
     }
@@ -574,17 +591,35 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot postSnapshot: snapshot.getChildren()){
-                    Log.e(TAG,"515");
                     Order order= postSnapshot.getValue(Order.class);
                     Log.e(TAG,order.getUser().getUserID());
                     Log.e(TAG,userAuth.getUid());
                     if(order.getUser().getUserID().equals(userAuth.getUid()) && order.getStatus() == 1){
                         order.setStatus(0);
-                        Log.e(TAG,"519");
+                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void CancelOrderCache() {
+        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+                    OrderCache order= postSnapshot.getValue(OrderCache.class);
+                    if(order.getUser().getUserID().equals(userAuth.getUid()) && order.getStatus() == 1){
+                        order.setStatus(0);
                         mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
                         Intent intent= new Intent(LocationMapActivity.this, MainActivity.class);
                         startActivity(intent);
-                        finishAffinity();
                         finish();
                     }
                 }
@@ -597,19 +632,22 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         });
     }
     private void gotoBillReceipt(){
-        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrderCache");
         FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
         mDatabaseOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     // TODO: handle the post
-                    Order order = postSnapshot.getValue(Order.class);
+                    OrderCache order = postSnapshot.getValue(OrderCache.class);
                     String date= LocalDate.now().toString();
-                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 2 && order.getWorker().getWorkerID().equals("pI8Mffqvcsfa1HkRuTtKoy4Li2c2") ){
+                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 5 && order.getWorker().getWorkerID().equals(strUID) ){
                         Intent intent = new Intent(LocationMapActivity.this,ShowBillForCustomerActivity.class);
+                       intent.putExtra("workerId",order.getWorker().getWorkerID());
+                        intent.putExtra("date",order.getCreateDate());
+                        intent.putExtra("workerName",order.getWorker().getFullName());
                         startActivity(intent);
-                        finishAffinity();
+                        finish();
                     }
                 }
             }
@@ -621,6 +659,91 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             }
         });
     }
+    private void ShowDialogAccept(){
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    // TODO: handle the post
+                    OrderCache order = postSnapshot.getValue(OrderCache.class);
+                    String date= LocalDate.now().toString();
+                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 2 && order.getWorker().getWorkerID().equals(strUID) ){
+                       // openFeedbackDialog(Gravity.CENTER);
+//                        Intent intent = new Intent(LocationMapActivity.this,ShowBillForCustomerActivity.class);
+//                        // intent.putExtra("workerId",order.getWorker().getWorkerID());
+//                        startActivity(intent);
+//                        finishAffinity();
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void ShowDialogOnComming(){
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    // TODO: handle the post
+                    OrderCache order = postSnapshot.getValue(OrderCache.class);
+                    String date= LocalDate.now().toString();
+                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 3 && order.getWorker().getWorkerID().equals(strUID) ){
+                        //openFeedbackDialog1(Gravity.CENTER);
+//                        Intent intent = new Intent(LocationMapActivity.this,ShowBillForCustomerActivity.class);
+//                        // intent.putExtra("workerId",order.getWorker().getWorkerID());
+//                        startActivity(intent);
+//                        finishAffinity();
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void ShowDialogArrived(){
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    // TODO: handle the post
+                    OrderCache order = postSnapshot.getValue(OrderCache.class);
+                    String date= LocalDate.now().toString();
+                    if(order.getUser().getUserID().equals(mAuth.getCurrentUser().getUid()) && order.getCreateDate().equals(date) && order.getStatus() == 4 && order.getWorker().getWorkerID().equals(strUID) ){
+                        //openFeedbackDialog2(Gravity.CENTER);
+//                        Intent intent = new Intent(LocationMapActivity.this,ShowBillForCustomerActivity.class);
+//                        // intent.putExtra("workerId",order.getWorker().getWorkerID());
+//                        startActivity(intent);
+//                        finishAffinity();
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
+
     private void gotoMainUserWhenCancel(){
         DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
         FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
@@ -648,10 +771,11 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             }
         });
     }
+
     private void openFeedbackDialog(int gravity){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_dangdi);
+        dialog.setContentView(R.layout.dialog_dangchuanbi);
 
         Window window = dialog.getWindow();
         if(window == null){
@@ -666,26 +790,44 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         if(Gravity.CENTER == gravity){
             dialog.setCancelable(false);
         }
-//        ImageView imgCloseDialogWorker=dialog.findViewById(R.id.imgCloseDialogWorker);
-//        imgCloseDialogWorker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-//        dialog.show();
-
-        Button btnOK = dialog.findViewById(R.id.btn_ok_dangdi);
+        Button btnOK = dialog.findViewById(R.id.btn_ok_dangchuanbi);
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFeedbackDialog2(Gravity.CENTER);
                 dialog.dismiss();
             }
         });
 
         dialog.show();
     }
+//    private void openFeedbackDialog1(int gravity){
+//        final Dialog dialog = new Dialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.dialog_dangdi);
+//
+//        Window window = dialog.getWindow();
+//        if(window == null){
+//            return;
+//        }
+//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//        WindowManager.LayoutParams winAttributes = window.getAttributes();
+//        winAttributes.gravity = gravity;
+//        window.setAttributes(winAttributes);
+//        if(Gravity.CENTER == gravity){
+//            dialog.setCancelable(false);
+//        }
+//        Button btnOK = dialog.findViewById(R.id.btn_ok_dangdi);
+//        btnOK.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        dialog.show();
+//    }
     private void openFeedbackDialog2(int gravity){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -704,14 +846,6 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         if(Gravity.CENTER == gravity){
             dialog.setCancelable(false);
         }
-//        ImageView imgCloseDialogWorker=dialog.findViewById(R.id.imgCloseDialogWorker);
-//        imgCloseDialogWorker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-//        dialog.show();
 
         Button btnOK = dialog.findViewById(R.id.btn_ok_dadennoi);
         btnOK.setOnClickListener(new View.OnClickListener() {

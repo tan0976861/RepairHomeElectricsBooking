@@ -32,9 +32,9 @@ import java.util.List;
 
 public class DecriseProblemActivity extends AppCompatActivity {
     private Button btnBookingRepair;
-    private TextView  tvInputThietBi,tvInputThietBiHangDaChon,tvInputThietBiLoaiDaChon;
-    String strThietBi,strHang,strLoai,strDungTich;
-
+    private TextView  tvInputThietBi;
+    String strThietBi,strHang,strLoai,strDungTich= "",strTheTich= "",strKhoiLuong= "",strCongXuat= "",strKichThuoc= "",strNamSanXuat= "",strInverter= "";
+    private  EditText edtAddressUser;
     private TextView tvVanDeKhac,tvMotaVande,tvMotaVandechitiet;
     private  EditText edtMoTaVanDeKhac,edtVitri,edtInputVanDeChitiet;
     private boolean[] selectedProblem;
@@ -44,27 +44,49 @@ public class DecriseProblemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decrise_problem);
         tvInputThietBi=(TextView) findViewById(R.id.edtInputThietBiDaChon);
-//        tvInputThietBiHangDaChon=(TextView)findViewById(R.id.tvInputThietBiHangDaChon);
-//        tvInputThietBiLoaiDaChon=(TextView) findViewById(R.id.tvInputThietBiLoaiDaChon);
         btnBookingRepair=(Button) findViewById(R.id.btn_BookingRepair);
         tvMotaVande = (TextView) findViewById(R.id.spinnerMoTaVanDe);
-        tvMotaVandechitiet=(TextView) findViewById(R.id.tvMoTaVanDe);
-        edtInputVanDeChitiet=(EditText) findViewById(R.id.edtInputVanDe);
+        tvMotaVandechitiet=(TextView) findViewById(R.id.tvMoTaVanDeThemChiTiet);
+        edtInputVanDeChitiet=(EditText) findViewById(R.id.edtInputVanDeChitiet);
         edtVitri=(EditText) findViewById(R.id.edtAddressUser);
-
+        tvVanDeKhac = (TextView) findViewById(R.id.tvVanDeKhac);
+        edtMoTaVanDeKhac = (EditText) findViewById(R.id.edtInputVanDeKhac);
         //TextView=(EditText) view.findViewById(R.id)
         //getUserInfo();
         getDataIntent();
-        if(strDungTich == null){
-            strDungTich="Dung tích: N/A";
-        }else{
-            strDungTich = "Dung tích" + strDungTich;
+        String inputThietBi= strThietBi+ "-" + strHang + "\n" + "Loại: "+ strLoai  ;
+
+        if(!strDungTich.equals("") ){
+            strDungTich = "Dung tích: " + strDungTich ;
+            inputThietBi += "\n" +strDungTich;
         }
-        String inputThietBi= strThietBi+ "," + strHang + "," + strLoai + ","+ strDungTich;
+        if(!strTheTich.equals("")  ){
+            strTheTich = "Thể tích: " + strTheTich;
+            inputThietBi += "\n" + strTheTich;
+        }
+        if(!strInverter.equals("")  ){
+            strInverter = "Công nghệ Inverter: " + strInverter;
+            inputThietBi += "\n" + strInverter;
+        }
+        if(!strKhoiLuong.equals("") ){
+            strKhoiLuong = "Khối lượng: " + strKhoiLuong;
+            inputThietBi += "\n" + strKhoiLuong;
+        }
+        if(!strCongXuat.equals("")  ){
+            strCongXuat = "Công xuất: " + strCongXuat;
+            inputThietBi += "\n" + strCongXuat;
+        }
+        if(!strKichThuoc.equals("")  ){
+            strKichThuoc = "Kích thước: " + strKichThuoc;
+            inputThietBi += "\n" + strKichThuoc;
+        }
+        if(!strNamSanXuat.equals("") ){
+            strNamSanXuat = "Năm sản xuất: " + strNamSanXuat;
+            inputThietBi += "\n" + strNamSanXuat;
+        }
+
         tvInputThietBi.setText(inputThietBi);
-//        tvInputThietBiHangDaChon.setText(strHang);
-//        tvInputThietBiLoaiDaChon.setText(strLoai);
-        if(tvInputThietBi.getText().toString().equals("Máy giặt")){
+        if(tvInputThietBi.getText().toString().contains("Máy giặt")){
                 DatabaseReference mDatabase3 = FirebaseDatabase.getInstance().getReference("item");
                 mDatabase3.child("maygiat").addValueEventListener(new ValueEventListener() {
                     @Override
@@ -184,966 +206,1084 @@ public class DecriseProblemActivity extends AppCompatActivity {
                     }
                 });
 
+        }else if(tvInputThietBi.getText().toString().contains("Máy lạnh")){
+            DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase2.child("maylanh").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Quạt")){
+            DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase2.child("quat").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Đèn")){
+            DatabaseReference mDatabase1 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase1.child("den").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Nồi cơm")){
+            DatabaseReference mDatabase4 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase4.child("noicom").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Lò nướng")){
+            DatabaseReference mDatabase5 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase5.child("lonuong").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Máy rửa chén")){
+            DatabaseReference mDatabase6 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase6.child("mayruachen").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Tủ lạnh")){
+            DatabaseReference mDatabase6 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase6.child("tulanh").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Ti vi")){
+            DatabaseReference mDatabase6 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase6.child("tivi").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if(areaName!=null){
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object= new String[areas.size()];
+                    for(int i=0;i<areas.size();i++){
+                        object[i]=areas.get(i);
+                    }
+                    selectedProblem= new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if(b){
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    }else{
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for(int  j=0  ; j<problemList.size(); j++){
+                                            if(problemList.get(j) == i){
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder= new StringBuilder();
+                                    //use for loop
+                                    for(int j=0;j<problemList.size();j++){
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if(j!= problemList.size()-1){
+                                            stringBuilder.append(",");
+                                        }
+                                        if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else{
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if(stringBuilder.toString().length() > 100){
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
+                                    }else{
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for(int j=0;j<selectedProblem.length;j++){
+                                        //remove all selection
+                                        selectedProblem[j]=false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else if(tvInputThietBi.getText().toString().contains("Ti Vi")) {
+            DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference("item");
+            mDatabase2.child("tivi").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final List<String> areas = new ArrayList<String>();
+                    List<Integer> problemList = new ArrayList<>();
+                    for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.child("1").getValue(String.class);
+                        if (areaName != null) {
+                            areas.add(areaName);
+                        }
+                    }
+
+                    String[] object = new String[areas.size()];
+                    for (int i = 0; i < areas.size(); i++) {
+                        object[i] = areas.get(i);
+                    }
+                    selectedProblem = new boolean[areas.size()];
+                    //tvMotaVande.setHint("Chọn vấn đề");
+                    tvMotaVande.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //intitial dialog
+                            AlertDialog.Builder builder = new AlertDialog.Builder(DecriseProblemActivity.this);
+                            builder.setTitle("Lựa chọn vấn đề");
+                            //set dialog non cancelable
+                            builder.setCancelable(false);
+                            builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                                    if (b) {
+                                        //when checkbox selected
+                                        //add position in day problem
+                                        problemList.add(i);
+                                        Collections.sort(problemList);
+                                    } else {
+                                        //when checkbox unselected
+                                        //remove position from day list
+                                        //
+                                        for (int j = 0; j < problemList.size(); j++) {
+                                            if (problemList.get(j) == i) {
+                                                problemList.remove(j);
+                                                break;
+                                            }
+                                        }
+                                        // problemList.remove(i);
+
+                                    }
+                                }
+                            });
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Initialize string builder
+                                    StringBuilder stringBuilder = new StringBuilder();
+                                    //use for loop
+                                    for (int j = 0; j < problemList.size(); j++) {
+                                        stringBuilder.append(object[problemList.get(j)]);
+                                        //check condition
+                                        if (j != problemList.size() - 1) {
+                                            stringBuilder.append(",");
+                                        }
+                                        if (object[problemList.get(problemList.size() - 1)].equals("Vấn đề khác...")) {
+                                            tvVanDeKhac.setVisibility(view.VISIBLE);
+                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
+                                            tvMotaVandechitiet.setVisibility(view.VISIBLE);
+                                            edtInputVanDeChitiet.setVisibility(view.VISIBLE);
+                                        } else {
+                                            tvVanDeKhac.setVisibility(view.GONE);
+                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                            tvMotaVandechitiet.setVisibility(view.GONE);
+                                            edtInputVanDeChitiet.setVisibility(view.GONE);
+                                        }
+                                    }
+                                    if (stringBuilder.toString().length() > 100) {
+                                        tvMotaVande.setText(stringBuilder.toString().substring(0, 80) + "...");
+                                    } else {
+                                        tvMotaVande.setText(stringBuilder.toString());
+                                    }
+
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Use for loop
+                                    for (int j = 0; j < selectedProblem.length; j++) {
+                                        //remove all selection
+                                        selectedProblem[j] = false;
+                                        //clear prolem list
+                                        problemList.clear();
+                                        //clear text view value
+                                        tvMotaVande.setText("");
+                                        tvVanDeKhac.setVisibility(view.GONE);
+                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
+                                        tvMotaVandechitiet.setVisibility(view.GONE);
+                                        edtInputVanDeChitiet.setVisibility(view.GONE);
+                                    }
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
         btnBookingRepair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String strThietBi = edtInputThietBi.getSelectedItem().toString();
-//                String strVanDe = tvMotaVande.getText().toString();
-//                String StrLocation=edtVitri.getText().toString();
-//                //String strFee = edtFee.getText().toString();
-                gotoSearchAnimation(strThietBi,strHang,strLoai);
+                if(tvMotaVande.getText().toString().equals("")){
+                    Toast.makeText(DecriseProblemActivity.this,"Xin vui lòng chọn vấn đề",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                System.out.println("test edt van de khac: " + edtMoTaVanDeKhac.getText().toString());
+                if(!edtMoTaVanDeKhac.getText().toString().equals("")){
+                    if(!edtInputVanDeChitiet.getText().toString().equals("")){
+                        gotoSearchAnimation2(tvInputThietBi.getText().toString(),tvMotaVande.getText().toString()+ ":" + edtMoTaVanDeKhac.getText().toString() + "-" + edtInputVanDeChitiet.getText().toString(),edtVitri.getText().toString());
+                        return;
+                    }
+                    gotoSearchAnimation2(tvInputThietBi.getText().toString(),tvMotaVande.getText().toString()+ ":" + edtMoTaVanDeKhac.getText().toString(),edtVitri.getText().toString());
+                    return;
+                }
+                gotoSearchAnimation(tvInputThietBi.getText().toString(),tvMotaVande.getText().toString(),edtVitri.getText().toString());
             }
         });
-        tvVanDeKhac = (TextView) findViewById(R.id.tvVanDeKhac);
-        edtMoTaVanDeKhac = (EditText) findViewById(R.id.edtInputVanDeKhac);
-//        tvVanDeKhac.setVisibility(View.GONE);
-//        edtMoTaVanDeKhac.setVisibility(View.GONE);
-//        List<String> list = new ArrayList<>();
-//        list.add(0,"Chọn thiết bị");
-//        list.add("Quạt");
-//        list.add("Đèn");
-//        list.add("Máy lạnh");
-//        list.add("Máy giặt");
-//        list.add("Nồi cơm");
-//        list.add("Lò nướng");
-//        list.add("Máy rửa chén");
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter(this.getApplicationContext(), android.R.layout.simple_spinner_item,list);
-//        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-//
-//        edtInputThietBi.setAdapter(adapter);
-//        edtInputThietBi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                // Toast.makeText(getActivity(), edtInputThietBi.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-//                switch (edtInputThietBi.getSelectedItem().toString()){
-//                    case 0:
-//                        break;
-//                    case 1:
-//                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("item");
-//                        mDatabase.child("quat").addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                final List<String> areas = new ArrayList<String>();
-//                                List<Integer> problemList = new ArrayList<>();
-//                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                    String areaName = areaSnapshot.child("1").getValue(String.class);
-//                                    areas.add(areaName);
-//                                }
-//
-//                                String[] object= new String[areas.size()];
-//                                for(int i=0;i<areas.size();i++){
-//                                    object[i]=areas.get(i);
-//                                }
-//                                selectedProblem= new boolean[areas.size()];
-//                                //tvMotaVande.setHint("Chọn vấn đề");
-//                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        //intitial dialog
-//                                        AlertDialog.Builder builder= new AlertDialog.Builder(getApplicationContext());
-//                                        builder.setTitle("Lựa chọn vấn đề");
-//                                        //set dialog non cancelable
-//                                        builder.setCancelable(false);
-//                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                                                if(b){
-//                                                    //when checkbox selected
-//                                                    //add position in day problem
-//                                                    problemList.add(i);
-//                                                    Collections.sort(problemList);
-//                                                }else{
-//                                                    //when checkbox unselected
-//                                                    //remove position from day list
-//                                                    //
-//                                                    for(int  j=0  ; j<problemList.size(); j++){
-//                                                        if(problemList.get(j) == i){
-//                                                            problemList.remove(j);
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    // problemList.remove(i);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Initialize string builder
-//                                                StringBuilder stringBuilder= new StringBuilder();
-//                                                //use for loop
-//                                                for(int j=0;j<problemList.size();j++){
-//                                                    stringBuilder.append(object[problemList.get(j)]);
-//                                                    //check condition
-//                                                    if(j!= problemList.size()-1){
-//                                                        stringBuilder.append(",");
-//                                                    }
-//                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
-//                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
-//                                                    } else{
-//                                                        tvVanDeKhac.setVisibility(view.GONE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                        tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                    }
-//                                                }
-//                                                if(stringBuilder.toString().length() > 100){
-//                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
-//                                                }else{
-//                                                    tvMotaVande.setText(stringBuilder.toString());
-//                                                }
-//
-//                                            }
-//                                        });
-//                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        });
-//                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Use for loop
-//                                                for(int j=0;j<selectedProblem.length;j++){
-//                                                    //remove all selection
-//                                                    selectedProblem[j]=false;
-//                                                    //clear prolem list
-//                                                    problemList.clear();
-//                                                    //clear text view value
-//                                                    tvMotaVande.setText("");
-//                                                    tvVanDeKhac.setVisibility(view.GONE);
-//                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                    tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.show();
-//                                    }
-//                                });
-////                                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, areas);
-////                                areasAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-////                                spinnerMoTaVanDe.setAdapter(areasAdapter);
-////                                spinnerMoTaVanDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-////                                    @Override
-////                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-////                                        if(spinnerMoTaVanDe.getSelectedItem().toString() == areas.get(areas.size()-1)){
-////                                            tvVanDeKhac.setVisibility(view.VISIBLE);
-////                                            edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-////                                        } else{
-////                                            tvVanDeKhac.setVisibility(view.GONE);
-////                                            edtMoTaVanDeKhac.setVisibility(view.GONE);
-////                                        }
-////                                        Toast.makeText(getActivity(), spinnerMoTaVanDe.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-////                                    }
-////
-////                                    @Override
-////                                    public void onNothingSelected(AdapterView<?> adapterView) {
-////
-////                                    }
-////                                });
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//                        break;
-//
-//                    case 2:
-//                        DatabaseReference mDatabase1 = FirebaseDatabase.getInstance().getReference("item");
-//                        mDatabase1.child("den").addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                final List<String> areas = new ArrayList<String>();
-//                                List<Integer> problemList = new ArrayList<>();
-//                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                    String areaName = areaSnapshot.child("1").getValue(String.class);
-//                                    areas.add(areaName);
-//                                }
-//
-//                                String[] object= new String[areas.size()];
-//                                for(int i=0;i<areas.size();i++){
-//                                    object[i]=areas.get(i);
-//                                }
-//                                selectedProblem= new boolean[areas.size()];
-//                                //tvMotaVande.setHint("Chọn vấn đề");
-//                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        //intitial dialog
-//                                        AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
-//                                        builder.setTitle("Lựa chọn vấn đề");
-//                                        //set dialog non cancelable
-//                                        builder.setCancelable(false);
-//                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                                                if(b){
-//                                                    //when checkbox selected
-//                                                    //add position in day problem
-//                                                    problemList.add(i);
-//                                                    Collections.sort(problemList);
-//                                                }else{
-//                                                    //when checkbox unselected
-//                                                    //remove position from day list
-//                                                    //
-//                                                    for(int  j=0  ; j<problemList.size(); j++){
-//                                                        if(problemList.get(j) == i){
-//                                                            problemList.remove(j);
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    // problemList.remove(i);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Initialize string builder
-//                                                StringBuilder stringBuilder= new StringBuilder();
-//                                                //use for loop
-//                                                for(int j=0;j<problemList.size();j++){
-//                                                    stringBuilder.append(object[problemList.get(j)]);
-//                                                    //check condition
-//                                                    if(j!= problemList.size()-1){
-//                                                        stringBuilder.append(",");
-//                                                    }
-//                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
-//                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
-//                                                    } else{
-//                                                        tvVanDeKhac.setVisibility(view.GONE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                        tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                    }
-//                                                }
-//                                                if(stringBuilder.toString().length() > 100){
-//                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
-//                                                }else{
-//                                                    tvMotaVande.setText(stringBuilder.toString());
-//                                                }
-//
-//                                            }
-//                                        });
-//                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        });
-//                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Use for loop
-//                                                for(int j=0;j<selectedProblem.length;j++){
-//                                                    //remove all selection
-//                                                    selectedProblem[j]=false;
-//                                                    //clear prolem list
-//                                                    problemList.clear();
-//                                                    //clear text view value
-//                                                    tvMotaVande.setText("");
-//                                                    tvVanDeKhac.setVisibility(view.GONE);
-//                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                    tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.show();
-//                                    }
-//                                });
-//                            }
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//                        break;
-//
-//                    case 3:
-//                        DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference("item");
-//                        mDatabase2.child("maylanh").addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                final List<String> areas = new ArrayList<String>();
-//                                List<Integer> problemList = new ArrayList<>();
-//                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                    String areaName = areaSnapshot.child("1").getValue(String.class);
-//                                    areas.add(areaName);
-//                                }
-//
-//                                String[] object= new String[areas.size()];
-//                                for(int i=0;i<areas.size();i++){
-//                                    object[i]=areas.get(i);
-//                                }
-//                                selectedProblem= new boolean[areas.size()];
-//                                //tvMotaVande.setHint("Chọn vấn đề");
-//                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        //intitial dialog
-//                                        AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
-//                                        builder.setTitle("Lựa chọn vấn đề");
-//                                        //set dialog non cancelable
-//                                        builder.setCancelable(false);
-//                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                                                if(b){
-//                                                    //when checkbox selected
-//                                                    //add position in day problem
-//                                                    problemList.add(i);
-//                                                    Collections.sort(problemList);
-//                                                }else{
-//                                                    //when checkbox unselected
-//                                                    //remove position from day list
-//                                                    //
-//                                                    for(int  j=0  ; j<problemList.size(); j++){
-//                                                        if(problemList.get(j) == i){
-//                                                            problemList.remove(j);
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    // problemList.remove(i);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Initialize string builder
-//                                                StringBuilder stringBuilder= new StringBuilder();
-//                                                //use for loop
-//                                                for(int j=0;j<problemList.size();j++){
-//                                                    stringBuilder.append(object[problemList.get(j)]);
-//                                                    //check condition
-//                                                    if(j!= problemList.size()-1){
-//                                                        stringBuilder.append(",");
-//                                                    }
-//                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
-//                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
-//                                                    } else{
-//                                                        tvVanDeKhac.setVisibility(view.GONE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                        tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                    }
-//                                                }
-//                                                if(stringBuilder.toString().length() > 100){
-//                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
-//                                                }else{
-//                                                    tvMotaVande.setText(stringBuilder.toString());
-//                                                }
-//
-//                                            }
-//                                        });
-//                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        });
-//                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Use for loop
-//                                                for(int j=0;j<selectedProblem.length;j++){
-//                                                    //remove all selection
-//                                                    selectedProblem[j]=false;
-//                                                    //clear prolem list
-//                                                    problemList.clear();
-//                                                    //clear text view value
-//                                                    tvMotaVande.setText("");
-//                                                    tvVanDeKhac.setVisibility(view.GONE);
-//                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                    tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.show();
-//                                    }
-//                                });
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//                        break;
 
-//                    case "Máy giặt":
-//                        DatabaseReference mDatabase3 = FirebaseDatabase.getInstance().getReference("item");
-//                        mDatabase3.child("maygiat").addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                final List<String> areas = new ArrayList<String>();
-//                                List<Integer> problemList = new ArrayList<>();
-//                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                    String areaName = areaSnapshot.child("1").getValue(String.class);
-//                                    if(areaName!=null){
-//                                        areas.add(areaName);
-//                                    }
-//
-//                                }
-//
-//                                String[] object= new String[areas.size()];
-//                                for(int i=0;i<areas.size();i++){
-//                                    object[i]=areas.get(i);
-//                                }
-//                                selectedProblem= new boolean[areas.size()];
-//                                //tvMotaVande.setHint("Chọn vấn đề");
-//                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        //intitial dialog
-//                                        AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
-//                                        builder.setTitle("Lựa chọn vấn đề");
-//                                        //set dialog non cancelable
-//                                        builder.setCancelable(false);
-//                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                                                if(b){
-//                                                    //when checkbox selected
-//                                                    //add position in day problem
-//                                                    problemList.add(i);
-//                                                    Collections.sort(problemList);
-//                                                }else{
-//                                                    //when checkbox unselected
-//                                                    //remove position from day list
-//                                                    //
-//                                                    for(int  j=0  ; j<problemList.size(); j++){
-//                                                        if(problemList.get(j) == i){
-//                                                            problemList.remove(j);
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    // problemList.remove(i);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Initialize string builder
-//                                                StringBuilder stringBuilder= new StringBuilder();
-//                                                //use for loop
-//                                                for(int j=0;j<problemList.size();j++){
-//                                                    stringBuilder.append(object[problemList.get(j)]);
-//                                                    //check condition
-//                                                    if(j!= problemList.size()-1){
-//                                                        stringBuilder.append(",");
-//                                                    }
-//                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
-//                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
-//                                                    } else{
-//                                                        tvVanDeKhac.setVisibility(view.GONE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                        tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                    }
-//                                                }
-//                                                if(stringBuilder.toString().length() > 100){
-//                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
-//                                                }else{
-//                                                    tvMotaVande.setText(stringBuilder.toString());
-//                                                }
-//
-//                                            }
-//                                        });
-//                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        });
-//                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Use for loop
-//                                                for(int j=0;j<selectedProblem.length;j++){
-//                                                    //remove all selection
-//                                                    selectedProblem[j]=false;
-//                                                    //clear prolem list
-//                                                    problemList.clear();
-//                                                    //clear text view value
-//                                                    tvMotaVande.setText("");
-//                                                    tvVanDeKhac.setVisibility(view.GONE);
-//                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                    tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.show();
-//                                    }
-//                                });
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//                        break;
-
-//                    case 5:
-//                        DatabaseReference mDatabase4 = FirebaseDatabase.getInstance().getReference("item");
-//                        mDatabase4.child("noicom").addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                final List<String> areas = new ArrayList<String>();
-//                                List<Integer> problemList = new ArrayList<>();
-//                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                    String areaName = areaSnapshot.child("1").getValue(String.class);
-//                                    areas.add(areaName);
-//                                }
-//
-//                                String[] object= new String[areas.size()];
-//                                for(int i=0;i<areas.size();i++){
-//                                    object[i]=areas.get(i);
-//                                }
-//                                selectedProblem= new boolean[areas.size()];
-//                                //tvMotaVande.setHint("Chọn vấn đề");
-//                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        //intitial dialog
-//                                        AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
-//                                        builder.setTitle("Lựa chọn vấn đề");
-//                                        //set dialog non cancelable
-//                                        builder.setCancelable(false);
-//                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                                                if(b){
-//                                                    //when checkbox selected
-//                                                    //add position in day problem
-//                                                    problemList.add(i);
-//                                                    Collections.sort(problemList);
-//                                                }else{
-//                                                    //when checkbox unselected
-//                                                    //remove position from day list
-//                                                    //
-//                                                    for(int  j=0  ; j<problemList.size(); j++){
-//                                                        if(problemList.get(j) == i){
-//                                                            problemList.remove(j);
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    // problemList.remove(i);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Initialize string builder
-//                                                StringBuilder stringBuilder= new StringBuilder();
-//                                                //use for loop
-//                                                for(int j=0;j<problemList.size();j++){
-//                                                    stringBuilder.append(object[problemList.get(j)]);
-//                                                    //check condition
-//                                                    if(j!= problemList.size()-1){
-//                                                        stringBuilder.append(",");
-//                                                    }
-//                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
-//                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
-//                                                    } else{
-//                                                        tvVanDeKhac.setVisibility(view.GONE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                        tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                    }
-//                                                }
-//                                                if(stringBuilder.toString().length() > 100){
-//                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
-//                                                }else{
-//                                                    tvMotaVande.setText(stringBuilder.toString());
-//                                                }
-//
-//                                            }
-//                                        });
-//                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        });
-//                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Use for loop
-//                                                for(int j=0;j<selectedProblem.length;j++){
-//                                                    //remove all selection
-//                                                    selectedProblem[j]=false;
-//                                                    //clear prolem list
-//                                                    problemList.clear();
-//                                                    //clear text view value
-//                                                    tvMotaVande.setText("");
-//                                                    tvVanDeKhac.setVisibility(view.GONE);
-//                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                    tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.show();
-//                                    }
-//                                });
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//                        break;
-//
-//                    case 6:
-//                        DatabaseReference mDatabase5 = FirebaseDatabase.getInstance().getReference("item");
-//                        mDatabase5.child("lonuong").addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                final List<String> areas = new ArrayList<String>();
-//                                List<Integer> problemList = new ArrayList<>();
-//                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                    String areaName = areaSnapshot.child("1").getValue(String.class);
-//                                    areas.add(areaName);
-//                                }
-//
-//                                String[] object= new String[areas.size()];
-//                                for(int i=0;i<areas.size();i++){
-//                                    object[i]=areas.get(i);
-//                                }
-//                                selectedProblem= new boolean[areas.size()];
-//                                //tvMotaVande.setHint("Chọn vấn đề");
-//                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        //intitial dialog
-//                                        AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
-//                                        builder.setTitle("Lựa chọn vấn đề");
-//                                        //set dialog non cancelable
-//                                        builder.setCancelable(false);
-//                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                                                if(b){
-//                                                    //when checkbox selected
-//                                                    //add position in day problem
-//                                                    problemList.add(i);
-//                                                    Collections.sort(problemList);
-//                                                }else{
-//                                                    //when checkbox unselected
-//                                                    //remove position from day list
-//                                                    //
-//                                                    for(int  j=0  ; j<problemList.size(); j++){
-//                                                        if(problemList.get(j) == i){
-//                                                            problemList.remove(j);
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    // problemList.remove(i);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Initialize string builder
-//                                                StringBuilder stringBuilder= new StringBuilder();
-//                                                //use for loop
-//                                                for(int j=0;j<problemList.size();j++){
-//                                                    stringBuilder.append(object[problemList.get(j)]);
-//                                                    //check condition
-//                                                    if(j!= problemList.size()-1){
-//                                                        stringBuilder.append(",");
-//                                                    }
-//                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
-//                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
-//                                                    } else{
-//                                                        tvVanDeKhac.setVisibility(view.GONE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                        tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                    }
-//                                                }
-//                                                if(stringBuilder.toString().length() > 100){
-//                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
-//                                                }else{
-//                                                    tvMotaVande.setText(stringBuilder.toString());
-//                                                }
-//
-//                                            }
-//                                        });
-//                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        });
-//                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Use for loop
-//                                                for(int j=0;j<selectedProblem.length;j++){
-//                                                    //remove all selection
-//                                                    selectedProblem[j]=false;
-//                                                    //clear prolem list
-//                                                    problemList.clear();
-//                                                    //clear text view value
-//                                                    tvMotaVande.setText("");
-//                                                    tvVanDeKhac.setVisibility(view.GONE);
-//                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                    tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.show();
-//                                    }
-//                                });
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//                        break;
-//
-
-
-//                    case 7:
-//                        DatabaseReference mDatabase6 = FirebaseDatabase.getInstance().getReference("item");
-//                        mDatabase6.child("mayruachen").addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                final List<String> areas = new ArrayList<String>();
-//                                List<Integer> problemList = new ArrayList<>();
-//                                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                    String areaName = areaSnapshot.child("1").getValue(String.class);
-//                                    areas.add(areaName);
-//                                }
-//
-//                                String[] object= new String[areas.size()];
-//                                for(int i=0;i<areas.size();i++){
-//                                    object[i]=areas.get(i);
-//                                }
-//                                selectedProblem= new boolean[areas.size()];
-//                                //tvMotaVande.setHint("Chọn vấn đề");
-//                                tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        //intitial dialog
-//                                        AlertDialog.Builder builder= new AlertDialog.Builder(DecriseProblemActivity.this);
-//                                        builder.setTitle("Lựa chọn vấn đề");
-//                                        //set dialog non cancelable
-//                                        builder.setCancelable(false);
-//                                        builder.setMultiChoiceItems(object, selectedProblem, new DialogInterface.OnMultiChoiceClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                                                if(b){
-//                                                    //when checkbox selected
-//                                                    //add position in day problem
-//                                                    problemList.add(i);
-//                                                    Collections.sort(problemList);
-//                                                }else{
-//                                                    //when checkbox unselected
-//                                                    //remove position from day list
-//                                                    //
-//                                                    for(int  j=0  ; j<problemList.size(); j++){
-//                                                        if(problemList.get(j) == i){
-//                                                            problemList.remove(j);
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    // problemList.remove(i);
-//
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Initialize string builder
-//                                                StringBuilder stringBuilder= new StringBuilder();
-//                                                //use for loop
-//                                                for(int j=0;j<problemList.size();j++){
-//                                                    stringBuilder.append(object[problemList.get(j)]);
-//                                                    //check condition
-//                                                    if(j!= problemList.size()-1){
-//                                                        stringBuilder.append(",");
-//                                                    }
-//                                                    if(object[problemList.get(problemList.size()-1)].equals("Vấn đề khác...")){
-//                                                        tvVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.VISIBLE);
-//                                                        tvMotaVandechitiet.setVisibility(view.VISIBLE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.VISIBLE);
-//                                                    } else{
-//                                                        tvVanDeKhac.setVisibility(view.GONE);
-//                                                        edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                        tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                        edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                    }
-//                                                }
-//                                                if(stringBuilder.toString().length() > 100){
-//                                                    tvMotaVande.setText(stringBuilder.toString().substring(0,80)+ "...");
-//                                                }else{
-//                                                    tvMotaVande.setText(stringBuilder.toString());
-//                                                }
-//
-//
-//                                            }
-//                                        });
-//                                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                dialogInterface.dismiss();
-//                                            }
-//                                        });
-//                                        builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                                //Use for loop
-//                                                for(int j=0;j<selectedProblem.length;j++){
-//                                                    //remove all selection
-//                                                    selectedProblem[j]=false;
-//                                                    //clear prolem list
-//                                                    problemList.clear();
-//                                                    //clear text view value
-//                                                    tvMotaVande.setText("");
-//                                                    tvVanDeKhac.setVisibility(view.GONE);
-//                                                    edtMoTaVanDeKhac.setVisibility(view.GONE);
-//                                                    tvMotaVandechitiet.setVisibility(view.GONE);
-//                                                    edtInputVanDeChitiet.setVisibility(view.GONE);
-//                                                }
-//                                            }
-//                                        });
-//                                        builder.show();
-//                                    }
-//                                });
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//
-//                            }
-//                        });
-
-                        //get and search Brand of quat
-//                        tvMotaVande.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("item");
-//                                mDatabase.child("quat").addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                                        final List<String> list22 = new ArrayList<>();
-//                                        for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                                            String areaName = areaSnapshot.child("2").getValue(String.class);
-//                                            if(areaName != null){
-//                                                list22.add(areaName);
-//                                            }
-//                                        }
-//                                        List<String> listTest= new ArrayList<String>();
-//                                        for(String test: list22){
-//                                            listTest.add(test);
-//                                        }
-//
-//                                        //intitial dialog
-//                                        Dialog dialog = new Dialog(getApplicationContext());
-//                                        dialog.setContentView(R.layout.dialog_searchable_spinner);
-//                                        dialog.getWindow().setLayout(750,1100);
-////                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                                        dialog.show();
-//                                        EditText editText = dialog.findViewById(R.id.edt_dialog_searchable_spinner);
-//                                        ListView listView = dialog.findViewById(R.id.list_view_dialog_searchable_spinner);
-//                                        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,listTest);
-//                                            listView.setAdapter(adapter2);
-//                                            editText.addTextChangedListener(new TextWatcher() {
-//                                                @Override
-//                                                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//                                                }
-//
-//                                                @Override
-//                                                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                                                    adapter2.getFilter().filter(charSequence);
-//                                                }
-//
-//                                                @Override
-//                                                public void afterTextChanged(Editable editable) {
-//
-//                                                }
-//                                            });
-//
-//                                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                                                @Override
-//                                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                                                    tvMotaVande.setText(adapter2.getItem(i));
-//                                                    dialog.dismiss();
-//                                                }
-//                                            });
-//                                    }
-//                                    @Override
-//                                    public void onCancelled(DatabaseError databaseError) {
-//
-//                                    }
-//                                });
-//
-//                            }
-//                        });
-//                        break;
-//             }
-//          }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//
-//        // Inflate the layout for this fragment
     }
     private void getDataIntent()
     {
@@ -1151,6 +1291,41 @@ public class DecriseProblemActivity extends AppCompatActivity {
         strHang = getIntent().getStringExtra("hang");
         strLoai = getIntent().getStringExtra("loai");
         strDungTich=getIntent().getStringExtra("dungtich");
+        System.out.println("dung tich:12121"+ strDungTich+ "dsa");
+        strTheTich=getIntent().getStringExtra("thetich");
+        strKhoiLuong=getIntent().getStringExtra("khoiluong");
+        strCongXuat=getIntent().getStringExtra("congsuat");
+        strKichThuoc=getIntent().getStringExtra("kichthuoc");
+        System.out.println("Kích thước:12121"+ strKichThuoc+ "dsa");
+        strNamSanXuat=getIntent().getStringExtra("namramat");
+        strInverter=getIntent().getStringExtra("congngheinverter");
+
+        if(strDungTich ==null ){
+            strDungTich = "";
+        }
+        if(strTheTich ==null ){
+            strTheTich = "";
+
+        }
+        if(strInverter ==null ){
+            strInverter = "";
+
+        }
+        if(strKhoiLuong ==null){
+            strKhoiLuong ="";
+
+        }
+        if(strCongXuat ==null ){
+            strCongXuat = "";
+
+        }
+        if(strKichThuoc  ==null ){
+            strKichThuoc = "";
+
+        }
+        if(strNamSanXuat ==null ){
+            strNamSanXuat = "";
+        }
     }
     private List<Item> getListItem(){
         List<Item> list = new ArrayList<>();
@@ -1174,6 +1349,26 @@ public class DecriseProblemActivity extends AppCompatActivity {
         intent.putExtra("locationUser",strLocation);
         //intent.putExtra("price",price);
         startActivity(intent);
+        finish();
+    }
+    public void gotoSearchAnimation2(String thietbi, String problemKhac,String strLocation){
+        Intent intent = new Intent(DecriseProblemActivity.this,AnimationSearchActivity.class);
+        intent.putExtra("thietbi",thietbi);
+        intent.putExtra("problem",problemKhac);
+        intent.putExtra("locationUser",strLocation);
+        //intent.putExtra("price",price);
+        startActivity(intent);
+        finish();
+    }
+    public void gotoSearchAnimation3(String thietbi, String problemKhac,String prolemKhacDetails,String strLocation){
+        Intent intent = new Intent(DecriseProblemActivity.this,AnimationSearchActivity.class);
+        intent.putExtra("thietbi",thietbi);
+        intent.putExtra("problem",problemKhac);
+        intent.putExtra("problemDetail",prolemKhacDetails);
+        intent.putExtra("locationUser",strLocation);
+        //intent.putExtra("price",price);
+        startActivity(intent);
+        finish();
     }
 
 }

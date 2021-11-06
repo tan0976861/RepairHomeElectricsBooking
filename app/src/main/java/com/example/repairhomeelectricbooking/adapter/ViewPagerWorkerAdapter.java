@@ -27,15 +27,12 @@ public class ViewPagerWorkerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 //return new NotificationFragment();
                 return new WorkerProfileFragment();
-//            case 3:
-//                return new WorkerProfileFragment();
-            default:
-                return new WorkerMainFragment();
         }
+        return null;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 }

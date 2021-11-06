@@ -84,7 +84,7 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
 
     //polyline object
     private List<Polyline> polylines = null;
-    TextView  tvNameWorker,tvRatingPoint;
+    TextView  tvNameWorker,tvRatingPoint,tv_PhoneNumberWorker;
     ImageButton btnBack;
     String strNameWorker,strPhoneWorker,strUID;
     Double strRatingPoint;
@@ -93,14 +93,15 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
     Button btn_hoanThanhWorker,btnGoOfWorker;
 
     //phone
-    private TextView tv_PhoneNumber;
+    private TextView tv_PhoneNumber,kmWorker;
     private ImageButton btnCallWorker;
     private static final int MY_PERMISSION_REQUEST_CODE_CALL_PHONE = 555;
     private static final String LOG_TAG = "AndroidExample";
 
     //dialog
-    private Button btnCancelOrderCustomer,btnArrivedOrderWorker,btn_CancelOrderWorker2, btnCancelRealOrderofWorker,btnCancelRealOrderofWorker2;
+    private Button btnCancelOrderCustomer,btnStarteddOrderWorker,btnArrivedOrderWorker,btn_CancelOrderWorker2, btnCancelRealOrderofWorker,btnCancelRealOrderofWorker2;
     RadioButton rb_lydokhac2, rb_lydokhac1;
+    double strDistance;
     EditText edtlydohuy2, edtlydohuy1;
     private ImageView imgCloseDialog;
     SupportMapFragment mapFragment;
@@ -117,33 +118,40 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         //btnCancelOrderWorker=findViewById(R.id.btnCancelOrderWorker);
         btnCancelOrderCustomer=findViewById(R.id.btnCancelOrderWorker);
         btn_CancelOrderWorker2=findViewById((R.id.btn_CancelOrderWorker2));
+        btnStarteddOrderWorker=findViewById(R.id.btnStarteddOrderWorker);
         btnArrivedOrderWorker=findViewById(R.id.btnArrivedOrderWorker);
         imgWorkerLocationMap= findViewById(R.id.imgWorkerLocationMapWorker);
         imgCloseDialog= findViewById(R.id.imgCloseDialogWorker);
         btn_hoanThanhWorker= findViewById(R.id.btn_hoanThanhWorker);
-       // btnGoOfWorker=findViewById(R.id.btnGoOfWorker);
-//        tvNameWorker.setText(strNameWorker);
-//        btnCallWorker.setText(strPhoneWorker);
-        //tvRatingPoint.setText(strRatingPoint.toString());
-//        btnBack=findViewById(R.id.imgBackToMainCustomer);
-//
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                clickToBackHome();
-//            }
-//        });
-        //request location permission.
+        tv_PhoneNumberWorker=findViewById(R.id.tv_PhoneNumberWorker);
+        tv_PhoneNumberWorker.setText(strPhoneWorker);
+        kmWorker=findViewById(R.id.kmWorker);
         requestPermision();
-        gotoBillReceipt();
-        //gotoRatingWorker();
+       // gotoBillReceipt();
         gotoMainUserWhenCancel();
-//        btnGoOfWorker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        if(strDistance != 0){
+            double kilometer = (strDistance / 1000);
+            int m = (int) strDistance;
+            if(kilometer < 1){
+                kmWorker.setText(m + "m");
+            }else{
+                kmWorker.setText((Math.ceil(kilometer * 100)/100) + "km");
+            }
+        }
+        btnStarteddOrderWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(btnArrivedOrderWorker.getVisibility()== View.GONE){
+                    btnArrivedOrderWorker.setVisibility(View.VISIBLE);
+                    btnStarteddOrderWorker.setVisibility(View.GONE);
+                    StartOrder();
+                    StartOrderCache();
+
+                }else{
+                    btnArrivedOrderWorker.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         btnArrivedOrderWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,6 +160,9 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
                     btnArrivedOrderWorker.setVisibility(View.GONE);
                     btn_CancelOrderWorker2.setVisibility(View.VISIBLE);
                     btnCancelOrderCustomer.setVisibility(View.GONE);
+                    Arrived();
+                    ArrivedCache();
+
                 }else {
                     btn_hoanThanhWorker.setVisibility(View.VISIBLE);
                 }
@@ -174,8 +185,7 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
             public void onClick(View view) {
                 Intent intent= new Intent(LocationMapWorkerActivity.this, ShowBillForWorkerActivity.class);
                 startActivity(intent);
-               // DoneOrder();
-
+                finish();
             }
         });
 
@@ -183,26 +193,6 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-//        rootDatabaseref= FirebaseDatabase.getInstance().getReference().child("tblWorker");
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-//        rootDatabaseref.child(strUID).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String link = snapshot.child("image").getValue().toString();
-//                if(link.equals("")){
-//                    Glide.with(LocationMapWorkerActivity.this).load(snapshot.getValue().toString()).error(R.drawable.avatar_default).into(imgWorkerLocationMap);
-//                }else{
-//                    Picasso.get().load(link).into(imgWorkerLocationMap);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(LocationMapWorkerActivity.this, "Chưa thêm hình ảnh", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
         btnCallWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -212,6 +202,106 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
 
 
 
+    }
+    private void StartOrder() {
+        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrder");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+                    Order order= postSnapshot.getValue(Order.class);
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 2 ){
+
+//                        intent.putExtra("userName",order.getUser().getFullName());
+//                        intent.putExtra("fee",order.getWorker().getFee());
+                        order.setStatus(3);
+                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void StartOrderCache() {
+        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+                    Order order= postSnapshot.getValue(Order.class);
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 2 ){
+
+//                        intent.putExtra("userName",order.getUser().getFullName());
+//                        intent.putExtra("fee",order.getWorker().getFee());
+                        order.setStatus(3);
+                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void Arrived() {
+        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrder");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+                    Order order= postSnapshot.getValue(Order.class);
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 3 ){
+
+//                        intent.putExtra("userName",order.getUser().getFullName());
+//                        intent.putExtra("fee",order.getWorker().getFee());
+                        order.setStatus(4);
+                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void ArrivedCache() {
+        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+                    Order order= postSnapshot.getValue(Order.class);
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 3 ){
+
+//                        intent.putExtra("userName",order.getUser().getFullName());
+//                        intent.putExtra("fee",order.getWorker().getFee());
+                        order.setStatus(4);
+                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void showDialogCallPhone(int gravity){
@@ -282,7 +372,9 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         btnCancelRealOrderofWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 CancelOrder();
+                CancelOrderCache();
             }
         });
 
@@ -337,7 +429,9 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         btnCancelRealOrderofWorker2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 CancelOrder();
+                CancelOrderCache();
             }
         });
 
@@ -382,7 +476,7 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
     private void getDataIntent (){
         strPhoneWorker = getIntent().getStringExtra("phoneNumber");
         strNameWorker = getIntent().getStringExtra("full_name");
-        // strFee = getIntent().getDoubleExtra("fee",0.0d);
+         strDistance = getIntent().getDoubleExtra("distance",0.0d);
         strRatingPoint= getIntent().getDoubleExtra("ratingPoint",0.0d);
         strUID=getIntent().getStringExtra("uID");
 
@@ -685,6 +779,28 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
                     if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 1 ){
                         order.setStatus(0);
                         mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void CancelOrderCache() {
+        FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseOrder= FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        mDatabaseOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot postSnapshot: snapshot.getChildren()){
+                    Order order= postSnapshot.getValue(Order.class);
+                    if(order.getWorker().getWorkerID().equals(userAuth.getUid()) && order.getStatus() == 1 ){
+                        order.setStatus(0);
+                        mDatabaseOrder.child(String.valueOf(order.getOrderID())).setValue(order);
                         Intent intent= new Intent(LocationMapWorkerActivity.this, MainWorkerActivity.class);
                         startActivity(intent);
                         finishAffinity();
@@ -701,7 +817,7 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         });
     }
     private void gotoBillReceipt(){
-        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrderCache");
         FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
         mDatabaseOrder.addValueEventListener(new ValueEventListener() {
             @Override
@@ -726,7 +842,7 @@ public class LocationMapWorkerActivity extends FragmentActivity implements OnMap
         });
     }
     private void gotoMainUserWhenCancel(){
-        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrder");
+        DatabaseReference mDatabaseOrder = FirebaseDatabase.getInstance().getReference("tblOrderCache");
         FirebaseAuth  mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
         mDatabaseOrder.addValueEventListener(new ValueEventListener() {
             @Override

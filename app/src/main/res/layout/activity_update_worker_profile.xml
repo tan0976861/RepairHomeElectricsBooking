@@ -174,8 +174,33 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:drawableLeft="@drawable/icon_contact"
-                    android:inputType="phone"
-                    android:drawablePadding="10dp"/>
+                    android:drawablePadding="10dp"
+                    android:inputType="phone" />
+
+                <TextView
+                    android:id="@+id/tvWorkerFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edtWorkerPhone"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/font5"
+                    android:text="Giá cho / công việc"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtWorkerFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/tvWorkerFee"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:drawableLeft="@drawable/icon_contact"
+                    android:drawablePadding="10dp"
+                    android:inputType="phone" />
 
 
             </RelativeLayout>

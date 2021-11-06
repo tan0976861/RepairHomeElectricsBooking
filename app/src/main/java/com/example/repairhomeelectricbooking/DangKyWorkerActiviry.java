@@ -3,7 +3,9 @@ package com.example.repairhomeelectricbooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.repairhomeelectricbooking.dto.LocationApp;
@@ -29,13 +32,20 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DangKyWorkerActiviry extends AppCompatActivity {
     public static final String TAG = DangKyActivity.class.getName();
-    EditText email_worker,password_worker,repassword_worker,phonenumber_worker, type_worker;
+    EditText email_worker,password_worker,repassword_worker,phonenumber_worker ;
+    TextView type_worker;
     Button signup_worker,signin_worker;
     FirebaseAuth mAuth;
+    String[] typeArray= {"Đèn","Quạt","Ti Vi","Nồi cơm","Tủ lạnh","Máy lạnh","Máy giặt","Lò nướng","Máy rửa chén"};
+    private boolean[] selectedType;
+    List<Integer> typeList = new ArrayList<>();
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +56,87 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
         password_worker = (EditText) findViewById(R.id.tv_password_worker);
         repassword_worker = (EditText) findViewById(R.id.tv_repassword_worker);
         phonenumber_worker = (EditText) findViewById(R.id.tv_phone_worker);
-        type_worker=(EditText) findViewById(R.id.tv_type_worker);
+        type_worker=(TextView) findViewById(R.id.tv_type_worker);
         signup_worker = (Button) findViewById(R.id.btn_signup_worker);
         signin_worker = (Button) findViewById(R.id.btn_signin_worker);
         mAuth = (FirebaseAuth) FirebaseAuth.getInstance();
+        selectedType = new boolean[typeArray.length];
         progressDialog = new ProgressDialog(this);
+        type_worker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //intitial dialog
+                AlertDialog.Builder builder= new AlertDialog.Builder(DangKyWorkerActiviry.this);
+                builder.setTitle("Thiệt bị sửa (Bắt buộc)");
+                //set dialog non cancelable
+                builder.setCancelable(false);
+                builder.setMultiChoiceItems(typeArray, selectedType, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        if(b){
+                            //when checkbox selected
+                            //add position in day problem
+                            typeList.add(i);
+                            Collections.sort(typeList);
+                        }else{
+                            //when checkbox unselected
+                            //remove position from day list
+                            //
+                            for(int  j=0  ; j<typeList.size(); j++){
+                                if(typeList.get(j) == i){
+                                    typeList.remove(j);
+                                    break;
+                                }
+                            }
+                            // problemList.remove(i);
+
+                        }
+                    }
+                });
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Initialize string builder
+                        StringBuilder stringBuilder= new StringBuilder();
+                        //use for loop
+                        for(int j=0;j<typeList.size();j++){
+                            stringBuilder.append(typeArray[typeList.get(j)]);
+                            //check condition
+                            if(j!= typeList.size()-1){
+                                stringBuilder.append(",");
+                            }
+                        }
+                        if(stringBuilder.toString().length() > 100){
+                            type_worker.setText(stringBuilder.toString().substring(0,80)+ "...");
+                        }else{
+                            type_worker.setText(stringBuilder.toString());
+                        }
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Use for loop
+                        for(int j=0;j<selectedType.length;j++){
+                            //remove all selection
+                            selectedType[j]=false;
+                            //clear prolem list
+                            typeList.clear();
+                            //clear text view value
+                            type_worker.setText("");
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
         signup_worker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,8 +156,6 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                     }
                 }
             }
-
-
         });
 
 
@@ -94,7 +178,7 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             LocationApp location= new LocationApp(10.13121212,103.12312313);
-                            Worker worker = new Worker(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"",strType,"",false,false,0, location);
+                            Worker worker = new Worker(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"",strType,"",2,false,0,2.5, location);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
 
                             mDatabase.child(firebaseUser.getUid()).setValue(worker).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -114,7 +198,7 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                 });
     }
 
-    private void onClickSignUp(String strEmail,String strPass,String strPhone){
+    private void onClickSignUp(String strEmail,String strPass,String strPhone, String strType){
         progressDialog.show();
         mAuth.createUserWithEmailAndPassword(strEmail, strPass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -123,7 +207,17 @@ public class DangKyWorkerActiviry extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            onClickVerifyPhoneNumber(strPhone);
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            LocationApp location= new LocationApp(10.13121212,103.12312313);
+                            Worker worker = new Worker(firebaseUser.getUid(),strEmail,strPass,"",strPhone,"",strType,"",2,false,0,2.5, location);
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
+
+                            mDatabase.child(firebaseUser.getUid()).setValue(worker).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    onClickVerifyPhoneNumber(strPhone);
+                                }
+                            });
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(DangKyWorkerActiviry.this, "Tài khoản đã tồn tại.",

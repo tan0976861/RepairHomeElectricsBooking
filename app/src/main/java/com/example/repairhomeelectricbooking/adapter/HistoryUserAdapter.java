@@ -44,8 +44,9 @@ public class HistoryUserAdapter extends RecyclerView.Adapter<HistoryUserAdapter.
         holder.nameUser.setText(order.getWorker().getFullName());
         NumberFormat format = new DecimalFormat("0.#");
         holder.fee.setText(""+format.format(order.getFee()));
-        holder.thietbi.setText(order.getProblem());
-        if(order.getStatus() == 2){
+        String[] info= order.getProblem().split("-");
+        holder.thietbi.setText(info[0]);
+        if(order.getStatus() == 5){
             holder.status.setText("Đã hoàn thành");
             holder.status.setTextColor(Color.GREEN);
         }else if(order.getStatus() == 1) {

@@ -54,7 +54,22 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String strTvForgotPassword = tvForgotPassword.getText().toString();
-                checkPhoneExist(strTvForgotPassword);
+                System.out.println("Test: 57" );
+                if(strTvForgotPassword.length() != 10 ){
+                    Toast.makeText(getApplicationContext(),"Vui lòng nhập đúng số điện thoại",Toast.LENGTH_SHORT).show();
+                    System.out.println("Test: 60" );
+                    return;
+                }
+                System.out.println("Test: 62" );
+                if(!strTvForgotPassword.startsWith("0")){
+                    Toast.makeText(getApplicationContext(),"Vui lòng nhập đúng số điện thoại ",Toast.LENGTH_SHORT).show();
+                    System.out.println("Test: 65" );
+                    return;
+                }
+
+                String phone= "+84" + strTvForgotPassword.substring(1,10);
+                System.out.println("Test Phone: " + phone);
+                checkPhoneExist(phone);
             }
         });
     }
@@ -87,11 +102,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     // TODO: handle the post
-                    Worker user = postSnapshot.getValue(Worker.class);
-                    if(user.getPhone().equals(phone)){
-//                        Intent intent= new Intent(ForgotPasswordActivity.this, EnterOTPActivity.class);
-//                        startActivity(intent);
-                        onClickVerifyPhoneNumber(phone,user.email,user.password);
+                    Worker worker = postSnapshot.getValue(Worker.class);
+                    if(worker.getPhone().equals(phone)){
+                        onClickVerifyPhoneNumber(phone,worker.email,worker.password);
                         return;
                     }
                 }
@@ -99,8 +112,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                // ...
             }
         });
 
@@ -148,7 +159,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 goToMainUserActivity(userEmail);
 
-                                                //System.out.println("Luongdeptrai");
                                             } else {
                                                 // If sign in fails, display a message to the user.
                                                 Toast.makeText(getApplicationContext(), "Authentication failed.",
@@ -156,15 +166,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
-//                            FirebaseUser user = task.getResult().getUser();
-//                            // Update UI
-//                            goToMainUserActivity(user.getPhoneNumber());
                         } else {
                             // Sign in failed, display a message and update the UI
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
-                                Toast.makeText(getApplicationContext(),"Mã OTP của bạn không hợp lệ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ForgotPasswordActivity.this,"Mã OTP của bạn không hợp lệ",Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

@@ -3,10 +3,11 @@ package com.example.repairhomeelectricbooking.dto;
 public class User {
     public String userID,email,password,fullName,phone,adress,image;
     public LocationApp location;
+    int status;
 
     public User() { }
 
-    public User(String userID, String email, String password, String fullName, String phone, String adress, String image, LocationApp location) {
+    public User(String userID, String email, String password, String fullName, String phone, String adress, String image, LocationApp location, int status) {
         this.userID = userID;
         this.email = email;
         this.password = password;
@@ -15,12 +16,22 @@ public class User {
         this.adress = adress;
         this.image = image;
         this.location = location;
+        this.status = status;
     }
 
-    public User(String userID, String fullName, String adress){
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public User(String userID, String fullName, String adress,String phone){
         this.userID=userID;
         this.fullName=fullName;
         this.adress=adress;
+        this.phone=phone;
     }
 
     public String getImage() {

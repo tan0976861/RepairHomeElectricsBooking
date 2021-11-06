@@ -1,36 +1,26 @@
 package com.example.repairhomeelectricbooking.dto;
 
-import java.util.Date;
 import java.util.List;
 
-public class Order {
+public class OrderCache {
     Worker worker;
     User user;
     List<Service> listService;
     public long orderID;
-    public String problem, problemDetails;
+    public String problem;
     public Double fee;
     public String createDate;
     public int status;
 
-    public Order(Worker worker, User user, List<Service> listService, long orderID, String problem, String problemDetails, Double fee, String createDate, int status) {
+    public OrderCache(Worker worker, User user, List<Service> listService, long orderID, String problem, Double fee, String createDate, int status) {
         this.worker = worker;
         this.user = user;
         this.listService = listService;
         this.orderID = orderID;
         this.problem = problem;
-        this.problemDetails = problemDetails;
         this.fee = fee;
         this.createDate = createDate;
         this.status = status;
-    }
-
-    public String getProblemDetails() {
-        return problemDetails;
-    }
-
-    public void setProblemDetails(String problemDetails) {
-        this.problemDetails = problemDetails;
     }
 
     public List<Service> getListService() {
@@ -65,7 +55,7 @@ public class Order {
         this.user = user;
     }
 
-    public Order() {
+    public OrderCache() {
     }
 
     public long getOrderID() {

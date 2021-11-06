@@ -87,10 +87,19 @@
             android:id="@+id/tv_giaPhiPhuTung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_phiphutungCustomer_d"
+            android:padding="5dp"
+            android:text="50000"
+            android:textSize="19dp" />
+
+        <TextView
+            android:id="@+id/tv_phiphutungCustomer_d"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="5dp"
-            android:text="50,000 đ"
+            android:layout_marginStart="5dp"
+            android:text="đ"
             android:textSize="19dp" />
 
     </RelativeLayout>
@@ -116,11 +125,20 @@
             android:id="@+id/tv_giaPhiVeSinh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_phidichuyenCustomer_d"
+            android:padding="5dp"
+            android:text="15000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tv_phidichuyenCustomer_d"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="5dp"
-            android:text="15,000 đ"
-            android:textSize="20dp" />
+            android:layout_marginStart="5dp"
+            android:text="đ"
+            android:textSize="19dp" />
 
     </RelativeLayout>
 
@@ -145,10 +163,19 @@
             android:id="@+id/tv_giaTienCong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_phidichvuCustomer_d"
+            android:padding="5dp"
+            android:text="150000"
+            android:textSize="19dp" />
+
+        <TextView
+            android:id="@+id/tv_phidichvuCustomer_d"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="5dp"
-            android:text="150,000 đ"
+            android:layout_marginStart="5dp"
+            android:text="đ"
             android:textSize="19dp" />
 
     </RelativeLayout>
@@ -185,11 +212,20 @@
             android:id="@+id/tv_TotalCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="215,000 đ"
+            android:layout_toLeftOf="@+id/tv_TotalCustomer_d"
+            android:text="215,000"
             android:textSize="26dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_TotalCustomer_d"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:text="đ"
+            android:textSize="19dp" />
 
     </RelativeLayout>
 

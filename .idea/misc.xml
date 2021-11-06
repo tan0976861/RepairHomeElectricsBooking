@@ -24,6 +24,7 @@
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_dialog.xml" value="0.21875" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_dialog_rating_success.xml" value="0.23697916666666666" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_feedbackreview.xml" value="0.3828125" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_header_mainuserfragment.xml" value="0.37864583333333335" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_input_problem.xml" value="0.3828125" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_changeregister.xml" value="0.21875" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_commentRating.xml" value="0.22083333333333333" />
@@ -38,6 +39,8 @@
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_rating.xml" value="0.16979166666666667" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_layout_searchworkersuccess.xml" value="0.37864583333333335" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_nav_profileupdate.xml" value="0.37864583333333335" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_search.xml" value="0.37864583333333335" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_searchable_spinner.xml" value="0.37864583333333335" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custom_spinner.xml" value="0.3828125" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custome_btncancel_animationsearch.xml" value="0.3828125" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/drawable/custome_btndone_rating.xml" value="0.22083333333333333" />
@@ -55,7 +58,7 @@
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_change_register.xml" value="0.20380434782608695" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_dang_ky.xml" value="0.2164855072463768" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_dang_ky_worker_activiry.xml" value="0.3625" />
-        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_decrise_problem.xml" value="0.3625" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_decrise_problem.xml" value="0.33" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_detail_worker.xml" value="0.2223731884057971" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_enter_otpactivity.xml" value="0.21240942028985507" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_enter_otpnew_password.xml" value="0.18072916666666666" />
@@ -76,8 +79,8 @@
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_search_worker.xml" value="0.1953125" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_search_worker_succesfull.xml" value="0.25052083333333336" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_see_feed_back.xml" value="0.36666666666666664" />
-        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_show_bill_for_customer.xml" value="0.3625" />
-        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_show_bill_for_worker.xml" value="0.36666666666666664" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_show_bill_for_customer.xml" value="0.25" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_show_bill_for_worker.xml" value="0.33" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_splash.xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_update_worker_profile.xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/activity_worker_main_status.xml" value="0.3625" />
@@ -91,11 +94,13 @@
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_callphone_customer.xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_callphone_worker.xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_dadennoi.xml" value="0.3625" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_dangchuanbi.xml" value="0.196875" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_dangden..xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_dangdi.xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_hotro_worker.xml" value="0.3640625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_hotrokhachhang.xml" value="0.36666666666666664" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_hotrokkhachhang.xml" value="0.3640625" />
+        <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_nosearchable_spinner.xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_rating_success.xml" value="0.22083333333333333" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/dialog_searchable_spinner.xml" value="0.3625" />
         <entry key="..\:/Subject(lab)/CaptonsProjectMini/RepairHomeElectricsBooking/app/src/main/res/layout/feedbacklist.xml" value="0.36666666666666664" />
@@ -190,7 +195,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.1" />
+        <option name="scale" value="0.33" />
       </ProjectState>
     </option>
   </component>

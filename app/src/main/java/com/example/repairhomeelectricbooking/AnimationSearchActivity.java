@@ -14,6 +14,7 @@ import android.widget.Button;
 
 import com.example.repairhomeelectricbooking.dto.LocationApp;
 import com.example.repairhomeelectricbooking.dto.Order;
+import com.example.repairhomeelectricbooking.dto.OrderCache;
 import com.example.repairhomeelectricbooking.dto.Rating;
 import com.example.repairhomeelectricbooking.dto.Service;
 import com.example.repairhomeelectricbooking.dto.User;
@@ -38,8 +39,8 @@ import java.util.List;
 public class AnimationSearchActivity extends AppCompatActivity {
     public static final String TAG = AnimationSearchActivity.class.getName();
 
-    String strThietBi, strVanDe, strFee,strLocationUser,strUserName,strPhoneUser;
-    DatabaseReference mDatabase,mDatabaseUser,mDatabaseRating,mDatabaseOrder,mDatabaseToken;
+    String strThietBi, strVanDe, strFee,strLocationUser,strUserName,strPhoneUser,strMotathemchitiet;
+    DatabaseReference mDatabase,mDatabaseUser,mDatabaseRating,mDatabaseOrder,mDatabaseToken,mDatabaseUser2;
     List<Worker> listWorkers;
     LocationApp locationUser;
     Button cancelSearchWorker;
@@ -55,7 +56,15 @@ public class AnimationSearchActivity extends AppCompatActivity {
         getDataIntent();
         String date= LocalDate.now().toString();
         mDatabase = FirebaseDatabase.getInstance().getReference("tblWorker");
-        listWorkers = searchWorker(strThietBi);
+        listWorkers=null;
+        System.out.println("testinfothietbi: " +strThietBi);
+        String replaceStrThietBi= strThietBi.replace("\n", "-");
+        System.out.println("Test replace Thiet bi: 12333 " +replaceStrThietBi);
+        String[] info= replaceStrThietBi.split("-");
+        System.out.println("tesst info: " +  info);
+        String[] loai= replaceStrThietBi.split("\n");
+        listWorkers = searchWorker(info[0]);
+        System.out.println("65: + " + info[1]);
         mDatabaseOrder=FirebaseDatabase.getInstance().getReference("tblOrder");
         cancelSearchWorker = findViewById(R.id.btnCancelSearchWorker);
         mDatabaseOrder.addValueEventListener(new ValueEventListener() {
@@ -73,14 +82,29 @@ public class AnimationSearchActivity extends AppCompatActivity {
             }
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseUser2=FirebaseDatabase.getInstance().getReference("tblUser").child(user.getUid());
+        mDatabaseUser2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User mainUser= snapshot.getValue(User.class);
+                strUserName= mainUser.getFullName();
+                strPhoneUser=mainUser.getPhone();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         handler = new Handler();
         Runnable myRunnable = new Runnable() {
             public void run() {
                 if (listWorkers != null && !listWorkers.isEmpty()) {
-                    createOrder(new Worker(listWorkers.get(0).getWorkerID(),listWorkers.get(0).getFullName()),new User(user.getUid(),"Công Liêm Trần",strLocationUser),strThietBi,listWorkers.get(0).getFee(),date,1);
-                    gotoUpdateProfile(listWorkers,strThietBi);
+                    createOrder(new Worker(listWorkers.get(0).getWorkerID(),listWorkers.get(0).getFullName(),listWorkers.get(0).getDistance()),new User(user.getUid(),strUserName,strLocationUser,strPhoneUser),replaceStrThietBi,strVanDe,listWorkers.get(0).getFee(),date,1);
+                    createOrderCache(new Worker(listWorkers.get(0).getWorkerID(),listWorkers.get(0).getFullName(),listWorkers.get(0).getDistance()),new User(user.getUid(),strUserName,strLocationUser,strPhoneUser),replaceStrThietBi,listWorkers.get(0).getFee(),date,1);
                     sendNotiToWorker(listWorkers);
-
+                    gotoUpdateProfile(listWorkers,strThietBi);
                 }
                 else {
                     gotoNoti();
@@ -107,9 +131,7 @@ public class AnimationSearchActivity extends AppCompatActivity {
         strVanDe = getIntent().getStringExtra("problem");
         strFee = getIntent().getStringExtra("price");
         strLocationUser=getIntent().getStringExtra("locationUser");
-
-
-
+        strMotathemchitiet=getIntent().getStringExtra("problemDetail");
     }
 
 
@@ -204,11 +226,6 @@ public class AnimationSearchActivity extends AppCompatActivity {
         double distance = result[0];
         double kilometer = (distance / 1000);
         int m = (int) distance;
-//        if(kilometer < 1){
-//            textView1.setText(m + "m");
-//        }else{
-//            textView1.setText((Math.ceil(kilometer * 100)/100) + "km");
-//        }
         return distance;
     }
     private double getRatingPointForWorker(String WorkerId){
@@ -251,23 +268,38 @@ public class AnimationSearchActivity extends AppCompatActivity {
         intent.putExtra("ratingPoint", listWorkers.get(0).getRatingPoint());
         intent.putExtra("thietbi",strThietBi);
         intent.putExtra("uID",listWorkers.get(0).getWorkerID());
+        intent.putExtra("distance",listWorkers.get(0).getDistance());
         startActivity(intent);
+        finish();
     }
 
-    private void createOrder(Worker worker, User user, String problem, Double fee, String createDate, int status){
+    private void createOrder(Worker worker, User user, String problem,String probemDetaoils,Double fee, String createDate, int status){
         //FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
 
-        getG(worker,user, maxId,problem,fee,createDate,1);
+        getG(worker,user, maxId,problem,probemDetaoils,fee,createDate,1);
         Log.e(TAG,"376"+maxId);
     }
 
-    public void getG(Worker worker, User user,long maxId, String problem, Double fee, String createDate, int status){
+
+
+    public void getG(Worker worker, User user,long maxId, String problem,String probemDetaoils,Double fee, String createDate, int status){
         DatabaseReference mDatabaseOrder2=FirebaseDatabase.getInstance().getReference("tblOrder");
         Service service= new Service("Phí dịch vụ: ", fee);
-        // list = new List<Service>();
 
         list.add(service);
-        Order order = new Order(worker,user,list, maxId + 1,problem,fee,createDate,1);
+        Order order = new Order(worker,user,list, maxId + 1,problem,probemDetaoils,fee,createDate,1);
+        mDatabaseOrder2.child(String.valueOf(maxId + 1)).setValue(order);
+    }
+    private void createOrderCache(Worker worker, User user, String problem, Double fee, String createDate, int status){
+        //FirebaseUser userAuth= FirebaseAuth.getInstance().getCurrentUser();
+
+        getG2(worker,user, maxId,problem,fee,createDate,1);
+    }
+    public void getG2(Worker worker, User user,long maxId, String problem, Double fee, String createDate, int status){
+        DatabaseReference mDatabaseOrder2=FirebaseDatabase.getInstance().getReference("tblOrderCache");
+        Service service= new Service("Phí dịch vụ: ", fee);
+        list.add(service);
+        OrderCache order = new OrderCache(worker,user,list, maxId + 1,problem,fee,createDate,1);
         mDatabaseOrder2.child(String.valueOf(maxId + 1)).setValue(order);
     }
     private void sendNotiToWorker(List<Worker> listWorkers){
@@ -292,6 +324,7 @@ public class AnimationSearchActivity extends AppCompatActivity {
     private void gotoNoti() {
         Intent intent = new Intent(this,SearchWorkerActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }
